@@ -4,7 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f903251-6c94-4586-96f0-9eb86a3aa13d" name="Changes" comment="" />
+    <list default="true" id="1f903251-6c94-4586-96f0-9eb86a3aa13d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/EasyEats.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/EasyEats.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/angular.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/app/app.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/app/app.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/app/app.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/assets/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/src/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/Frontend/EasyEats/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/kotlin/com/sorsix/finalproject/easyeats/EasyEatsApplication.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/EasyEats/src/test/kotlin/com/sorsix/finalproject/easyeats/EasyEatsApplicationTests.kt" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +60,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="EasyEats" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -48,14 +93,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Marija Anakieva/Desktop/easyEats1/EasyEats/EasyEats",
+    "last_opened_file_path": "C:/Users/Mateja/Desktop/praksa/Final project/EasyEats/EasyEats",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "spring.configuration.checksum": "7d568ababe0ec8686bfd09aa5279b3e1",
+    "spring.configuration.checksum": "8757067bb5f7ee001aa65acd44279586",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -103,7 +148,8 @@
       <workItem from="1689678205760" duration="34000" />
       <workItem from="1689678277490" duration="111000" />
       <workItem from="1689678411876" duration="983000" />
-      <workItem from="1689700693448" duration="17000" />
+      <workItem from="1689679425190" duration="1292000" />
+      <workItem from="1689697863715" duration="393000" />
     </task>
     <servers />
   </component>
@@ -120,5 +166,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
   </component>
 </project>
