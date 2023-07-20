@@ -13,3 +13,11 @@ values ('Breakfast', 'Recipes to kickstart the day with nourishing and flavorful
        ('Dinner', 'Hearty and delicious recipes to enjoy as the main meal of the evening.'),
        ('Soups and Salads', 'Light and nutritious recipes for comforting soups and refreshing salads.'),
        ('Desserts', 'Sweet treats and indulgent desserts to satisfy cravings.');
+
+insert into categories_sub_categories(category_id, sub_categories_id)
+values (2, 1),
+       (2, 2),
+       (2, 3),
+       (2, 4),
+       (2, 5),
+       (2, 6);
