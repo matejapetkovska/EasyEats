@@ -12,4 +12,4 @@ values ('Breakfast', 'Recipes to kickstart the day with nourishing and flavorful
        ('Lunch', 'Quick and satisfying recipes ideal for the midday meal.'),
        ('Dinner', 'Hearty and delicious recipes to enjoy as the main meal of the evening.'),
        ('Soups and Salads', 'Light and nutritious recipes for comforting soups and refreshing salads.'),
-       ('Desserts', ' Sweet treats and indulgent desserts to satisfy cravings.');
+       ('Desserts', 'Sweet treats and indulgent desserts to satisfy cravings.');
