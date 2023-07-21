@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../userInterface';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +20,7 @@ export class SignupComponent {
     username: ''
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   errorMessage: string = '';
 
@@ -37,7 +38,7 @@ export class SignupComponent {
       this.http.post<User>(url, this.user, { headers }).subscribe(
         (response) => {
           console.log('User registered successfully!', response);
-          this.errorMessage = ''; // Clear the error message if it was previously set
+          this.router.navigate(['/home']);
         },
         (error: HttpErrorResponse) => {
           console.error('Error during user registration', error);
@@ -66,7 +67,7 @@ export class SignupComponent {
     return emailRegex.test(email);
   }
 
-  // Utility function to validate username format (alphanumeric characters only)
+
   isValidUsername(username: string): boolean {
     const usernameRegex = /^[a-zA-Z0-9.,'\-?]+$/;
     return usernameRegex.test(username);
