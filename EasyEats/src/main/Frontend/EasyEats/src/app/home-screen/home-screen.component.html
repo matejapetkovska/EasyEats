@@ -1,2 +1,5 @@
-<p>home-screen works!</p>
-<p *ngFor="let category of categories">{{category.name}}</p>
+<div *ngFor="let category of categories">
+    <h1>{{category.name}}</h1>
+    <h3>{{category.description}}</h3>
+    <p *ngFor="let sub_category of category.sub_categories">{{sub_category.name}}</p>
+</div>
