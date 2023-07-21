@@ -6,17 +6,21 @@ import { HeaderComponent } from './header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import { WelcomeScreenComponent } from './welcome-screen/welcome-screen.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    WelcomeScreenComponent
+    WelcomeScreenComponent,
+    HomeScreenComponent
   ],
     imports: [
         BrowserModule,
         NgOptimizedImage,
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]
