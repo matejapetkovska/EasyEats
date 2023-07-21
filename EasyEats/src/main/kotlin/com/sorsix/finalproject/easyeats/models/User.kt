@@ -17,6 +17,7 @@ class User (
 
     val email: String,
 
+    @Column(unique = true)
     val username: String,
 
     val password: String,
