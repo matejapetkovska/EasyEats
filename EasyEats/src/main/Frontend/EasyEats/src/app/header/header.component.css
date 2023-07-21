@@ -1,11 +1,10 @@
-* {
-  --background-color: #191825;
-}
-
 .header {
-  background-color: var(--background-color);
   display: flex;
   justify-content: space-between;
+}
+
+.left-corner {
+  margin-left: 15px;
 }
 
 .right-corner {
@@ -18,8 +17,11 @@
 button {
   height: 3em;
   width: 5em;
-  border: none;
+  font-size: 15px;
   border-radius: 5px;
+  border: 2px solid var(--red-color);
+  background-color: var(--white);
+  color: var(--red-color);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
   transition: transform 300ms ease-in-out;
 }
@@ -27,7 +29,9 @@ button {
 button:hover {
   cursor: pointer;
   transform: scale(1.1);
-  font-weight: bold;
+  border: 2px solid var(--white);
+  background-color: var(--red-color);
+  color: var(--white);
 }
 
 
