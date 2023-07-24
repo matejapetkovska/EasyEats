@@ -1,7 +1,7 @@
 <main>
   <img ngSrc="../../assets/images/signup.png" height="500" width="500">
   <div class="right-corner">
-    <span class="phrase">Welcome to EasyEats!</span>
+    <span class="phrase">Welcome to <a routerLink="/welcome">EasyEats!</a></span>
     <form class="signup-form">
       <label for="first_name">
         First name:
@@ -32,6 +32,7 @@
 
       <button (click)="onSignUp()">Sign Up</button>
     </form>
+    <span>Already have an account? <a routerLink="/login">Log in</a></span>
   </div>
 </main>
 

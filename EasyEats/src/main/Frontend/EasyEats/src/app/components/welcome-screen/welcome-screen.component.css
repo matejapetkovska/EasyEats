@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-* {
-  --red-color: #c62a2a;
-  --white: #FFF3E2;
-}
-
 body {
   display: flex;
   flex-direction: column;
