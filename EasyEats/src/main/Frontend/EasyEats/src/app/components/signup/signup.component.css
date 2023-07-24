@@ -1,0 +1,38 @@
+main {
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: space-around;
+  margin: 80px 50px;
+  border-radius: 20px;
+}
+
+.right-corner {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.phrase {
+  font-size: 35px;
+  font-weight: bold;
+  color: #215c44;
+  margin-bottom: 50px;
+}
+
+label {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  line-height: 25px;
+  margin-bottom: 10px;
+}
+
+input {
+  flex: 0 0 200px;
+  margin-left: 10px;
+}
+
+button {
+  margin: 50px;
+}
+
