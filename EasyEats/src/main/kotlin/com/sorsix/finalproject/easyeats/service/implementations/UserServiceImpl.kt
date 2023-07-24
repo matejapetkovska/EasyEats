@@ -2,7 +2,8 @@ package com.sorsix.finalproject.easyeats.service.implementations
 
 import com.sorsix.finalproject.easyeats.models.User
 import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
-import com.sorsix.finalproject.easyeats.models.exception.InvalidUser
+import com.sorsix.finalproject.easyeats.models.exception.InvalidPasswordException
+import com.sorsix.finalproject.easyeats.models.exception.UsernameNotFoundException
 import com.sorsix.finalproject.easyeats.repository.SignUpRepository
 import com.sorsix.finalproject.easyeats.service.UserService
 import org.springframework.stereotype.Service
@@ -11,14 +12,19 @@ import org.springframework.stereotype.Service
 class UserServiceImpl(private val repository: SignUpRepository): UserService {
 
     override fun login(username: String?, password: String?): User? {
-        if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
+        if (username.isNullOrBlank() || password.isNullOrBlank()) {
             throw InvalidArgumentsException()
         }
-        val user = repository.findByUsername(username).orElseThrow { InvalidArgumentsException() }
-        if (password == user.password) {
-            return user
+
+        val user = repository.findByUsername(username)
+        if (!user.isPresent) {
+            throw UsernameNotFoundException()
+        }
+
+        if (password == user.get().password) {
+            return user.get()
         } else {
-            throw InvalidUser()
+            throw InvalidPasswordException()
         }
     }
 
