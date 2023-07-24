@@ -5,4 +5,5 @@ export interface Category{
     name: String;
     description: String;
     sub_categories: SubCategory[];
+    image: String;
 }

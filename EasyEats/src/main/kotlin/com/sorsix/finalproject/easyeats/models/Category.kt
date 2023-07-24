@@ -15,7 +15,9 @@ class Category (
     val description: String,
 
     @ManyToMany
-    val sub_categories: List<SubCategory>?
+    val sub_categories: List<SubCategory>?,
 
-){ constructor() : this(0, "", "", null) {}
+    val image: String,
+
+){ constructor() : this(0, "", "", null, "") {}
 }
