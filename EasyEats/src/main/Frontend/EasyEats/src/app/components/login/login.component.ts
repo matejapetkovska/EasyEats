@@ -30,9 +30,13 @@ export class LoginComponent {
       },
       (error: HttpErrorResponse) => {
         if (error.error instanceof ErrorEvent) {
-          this.errorMessage = 'An error occurred: ' + error.error.message; //client-side error
+          this.errorMessage = 'An error occurred: ' + error.error.message;
+        } else if (error.status === 401) {
+          this.errorMessage = 'Error: Invalid credentials';
+        } else if (error.status === 400) {
+          this.errorMessage = 'Error: Invalid input arguments';
         } else {
-          this.errorMessage = 'Error: ' + error.error.message; //server-side error
+          this.errorMessage = 'Error: Unknown error occurred';
         }
       }
     );

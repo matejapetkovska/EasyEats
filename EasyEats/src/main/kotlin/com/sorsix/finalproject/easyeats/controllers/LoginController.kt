@@ -17,17 +17,18 @@ class LoginController(val service: UserService) {
     data class LoginRequest(val username: String, val password: String)
     data class ErrorResponse(val message: String)
 
+
     @PostMapping("/login")
     fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<Any> {
         return try {
             val user: User? = service.login(loginRequest.username, loginRequest.password)
             ResponseEntity.ok(user)
-        } catch (e: InvalidArgumentsException) {
-            val errorResponse = ErrorResponse("Invalid input arguments")
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse)
-        } catch (e: InvalidUser) {
+        } catch (exception: InvalidUser) {
             val errorResponse = ErrorResponse("Invalid credentials")
             ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse)
+        } catch (exception: InvalidArgumentsException) {
+            val errorResponse = ErrorResponse("Invalid input arguments")
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse)
         }
     }
 }
