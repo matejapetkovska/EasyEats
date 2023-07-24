@@ -1,7 +1,7 @@
 package com.sorsix.finalproject.easyeats.controllers
 
 import com.sorsix.finalproject.easyeats.models.User
-import com.sorsix.finalproject.easyeats.configurations.Error
+import com.sorsix.finalproject.easyeats.models.exception.Error
 import com.sorsix.finalproject.easyeats.repository.SignUpRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -39,7 +39,7 @@ class SignUpController(val userRepository: SignUpRepository) {
         }
 
         if (!isValidUsername(user.username)) {
-            return ResponseEntity.badRequest().body(Error("Please enter a valid username (alphanumeric characters only)."))
+            return ResponseEntity.badRequest().body(Error("Please enter a valid username."))
         }
 
         val existingUserByUsername: Optional<User> = userRepository.findByUsername(user.username)

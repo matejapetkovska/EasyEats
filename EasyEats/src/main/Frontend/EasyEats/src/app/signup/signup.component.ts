@@ -30,7 +30,7 @@ export class SignupComponent {
     } else if (this.user.password.length < 6) {
       this.errorMessage = 'Password must be at least 6 characters long.';
     } else if (!this.isValidUsername(this.user.username)) {
-      this.errorMessage = 'Please enter a valid username';
+      this.errorMessage = 'Please enter a valid username.';
     } else {
       const url = 'http://localhost:8081/api/signup';
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
