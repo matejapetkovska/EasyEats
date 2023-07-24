@@ -1,0 +1,50 @@
+.header {
+  display: grid;
+  grid-template-columns: auto 2fr auto;
+}
+
+.left-corner {
+  margin-left: 15px;
+}
+
+.links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  font-size: 23px;
+  color: black;
+}
+
+.right-corner {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  margin-right: 2em;
+}
+
+button {
+  height: 3em;
+  width: 5em;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 2px solid var(--red-color);
+  background-color: var(--white);
+  color: var(--red-color);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 300ms ease-in-out;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  border: 2px solid var(--white);
+  background-color: var(--red-color);
+  color: var(--white);
+}
+
+
+

@@ -1,0 +1,21 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<main>
+  <div class="header">
+    <div class="left-corner">
+      <a routerLink="/welcome">
+        <img ngSrc="../../assets/images/logo2.png" height="100" width="200">
+      </a>
+    </div>
+    <div class="links">
+      <a routerLink="/welcome">Homepage</a>
+      <a routerLink="/home">Categories</a>
+      <a>Recipes</a>
+    </div>
+    <div class="right-corner">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <button (click)="onLogOut()"><i class="fa-solid fa-right-from-bracket" title="Logout"></i></button>
+    </div>
+  </div>
+</main>
