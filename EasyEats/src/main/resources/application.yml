@@ -11,6 +11,8 @@ spring:
     locations:
       - classpath:db/migration
     baselineOnMigrate: true
+
 server:
   port: 8081
+
 
