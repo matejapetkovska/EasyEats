@@ -6,6 +6,7 @@ body {
   height: 80vh;
   margin: 0;
   z-index: 1;
+  background-color: transparent;
 }
 
 .background>img {
