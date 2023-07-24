@@ -1,5 +1,17 @@
-<div *ngFor="let category of categories">
-    <h1>{{category.name}}</h1>
-    <h3>{{category.description}}</h3>
-    <p *ngFor="let sub_category of category.sub_categories">{{sub_category.name}}</p>
+<div class="container">
+    <div class="header">
+        <h1>Popular categories</h1>
+    </div>
+    <div class="row row-cols-3">
+        <div class="col" *ngFor="let category of categories" class="col">
+        <div class="card">
+            <a href="#">
+                <img src="{{category.image}}" class="card-img-top" alt="image">
+                <div class="card-body">
+                    <p class="card-text">{{category.description}}</p>
+                </div>
+            </a>
+          </div> 
+        </div>         
+    </div>
 </div>

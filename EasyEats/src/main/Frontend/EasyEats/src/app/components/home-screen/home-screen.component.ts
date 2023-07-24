@@ -20,10 +20,17 @@ export class HomeScreenComponent implements OnInit {
       .subscribe({
         next: (categories) => {
           this.categories = categories;
+          this.addPathToImages(categories);
         },
         error: () => {
           console.log('error in getting categories');
         }
       });
+  }
+
+  addPathToImages(list: Category[]){
+    for(let i=0; i<list.length; i++){
+      list[i].image="../../assets/images/"+list[i].image;
+    }
   }
 }
