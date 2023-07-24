@@ -29,14 +29,6 @@ class SignUpController(val userRepository: SignUpRepository, val signUpService: 
             return ResponseEntity.badRequest().body(Error("Password must be at least 6 characters long."))
         }
 
-<<<<<<< HEAD
-        if (!isValidUsername(user.username)) {
-            return ResponseEntity.badRequest().body(Error("Please enter a valid username."))
-=======
-        if (!signUpService.isValidUsername(user.username)) {
-            return ResponseEntity.badRequest().body(Error("Please enter a valid username (alphanumeric characters only)."))
->>>>>>> e858a95429c1b7ad25a6b2a8ccc1b4453913d7b8
-        }
 
         val existingUserByUsername: Optional<User> = userRepository.findByUsername(user.username)
         if (existingUserByUsername.isPresent) {

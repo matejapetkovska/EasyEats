@@ -20,6 +20,7 @@ export class LoginComponent {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+
   onSubmit() {
     const loginRequest: LoginRequest = { username: this.username, password: this.password };
 
@@ -29,9 +30,9 @@ export class LoginComponent {
       },
       (error: HttpErrorResponse) => {
         if (error.error instanceof ErrorEvent) {
-          this.errorMessage = 'An error occurred: ' + error.error.message;  //client-side error
+          this.errorMessage = 'An error occurred: ' + error.error.message; //client-side error
         } else {
-          this.errorMessage = 'Error: ' + error.error;  //server-side error
+          this.errorMessage = 'Error: ' + error.error.message; //server-side error
         }
       }
     );

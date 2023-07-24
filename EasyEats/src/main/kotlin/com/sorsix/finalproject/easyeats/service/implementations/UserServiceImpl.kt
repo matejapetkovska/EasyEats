@@ -14,10 +14,7 @@ class UserServiceImpl(private val repository: SignUpRepository): UserService {
         if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
             throw InvalidArgumentsException()
         }
-
-        val user = repository.findByUsername(username)
-            .orElseThrow { InvalidUser() }
-
+        val user = repository.findByUsername(username).orElseThrow { InvalidArgumentsException() }
         if (password == user.password) {
             return user
         } else {
