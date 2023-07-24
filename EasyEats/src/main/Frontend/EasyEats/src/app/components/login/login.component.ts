@@ -29,15 +29,7 @@ export class LoginComponent {
         this.router.navigate(['/home']);
       },
       (error: HttpErrorResponse) => {
-        if (error.error instanceof ErrorEvent) {
-          this.errorMessage = 'An error occurred: ' + error.error.message;
-        } else if (error.status === 401) {
-          this.errorMessage = 'Error: Invalid credentials';
-        } else if (error.status === 400) {
-          this.errorMessage = 'Error: Invalid input arguments';
-        } else {
-          this.errorMessage = 'Error: Unknown error occurred';
-        }
+        this.errorMessage = error.error.message;
       }
     );
   }
