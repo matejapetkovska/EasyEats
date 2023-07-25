@@ -15,4 +15,10 @@ class RecipesController(private val recipeService: RecipeService) {
     fun getRecipesByCategory(@PathVariable category_id: String) : List<Recipe>? {
         return recipeService.getAllRecipesByCategory(category_id)
     }
+
+    @GetMapping("/{category_id}/{subCategory_id}")
+    fun getRecipesByCategoryAndSubCategory(@PathVariable category_id: String,
+                                           @PathVariable subCategory_id: String): List<Recipe>?{
+        return recipeService.getAllRecipesByCategoryAndSubCategory(category_id, subCategory_id)
+    }
 }
