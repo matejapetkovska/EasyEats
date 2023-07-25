@@ -23,10 +23,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter:2.5.5") // Replace with the desired version
+    implementation("org.springframework.boot:spring-boot-starter-security:2.5.5") // Replace with the desired version
+    implementation ("javax.xml.bind:jaxb-api:2.3.0")
     implementation("io.jsonwebtoken:jjwt-api:0.11.2")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2")
+    implementation("org.projectlombok:lombok:1.18.20")
+    implementation("com.auth0:java-jwt:3.18.1")
     runtimeOnly("org.postgresql:postgresql:42.6.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")

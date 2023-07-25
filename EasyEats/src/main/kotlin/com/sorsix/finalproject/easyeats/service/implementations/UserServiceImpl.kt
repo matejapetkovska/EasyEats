@@ -6,6 +6,7 @@ import com.sorsix.finalproject.easyeats.models.exception.InvalidPasswordExceptio
 import com.sorsix.finalproject.easyeats.models.exception.UsernameNotFoundException
 import com.sorsix.finalproject.easyeats.repository.SignUpRepository
 import com.sorsix.finalproject.easyeats.service.UserService
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
 
 @Service
@@ -26,6 +27,10 @@ class UserServiceImpl(private val repository: SignUpRepository): UserService {
         } else {
             throw InvalidPasswordException()
         }
+    }
+
+    override fun loadUserByUsername(username: String?): UserDetails {
+        TODO("Not yet implemented")
     }
 
 }
