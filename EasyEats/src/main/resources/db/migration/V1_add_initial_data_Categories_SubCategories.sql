@@ -1,10 +1,10 @@
-insert into categories(name, description)
-values ('Vegan', 'Plant-based recipes excluding all animal products.'),
-       ('Vegetarian', 'Recipes excluding meat and fish but may include dairy and eggs'),
-       ('Carnivore', 'Meat-based recipes suitable for those following a carnivore diet.'),
-       ('High-Protein', 'Recipes with an emphasis on protein-rich ingredients, ideal for muscle building and active individuals.'),
-       ('Mediterranean', 'Recipes inspired by the Mediterranean diet, rich in fruits, vegetables, olive oil, whole grains, and lean proteins'),
-       ('Low-Calorie', 'Recipes with reduced calorie content, ideal for weight management.');
+insert into categories(name, description, image)
+values ('Vegan', 'Plant-based recipes excluding all animal products.', 'vegan.png'),
+       ('Vegetarian', 'Recipes excluding meat and fish but may include dairy and eggs', 'vegetarian.png'),
+       ('Carnivore', 'Meat-based recipes suitable for those following a carnivore diet.', 'carnivore.png'),
+       ('High-Protein', 'Recipes with an emphasis on protein-rich ingredients, ideal for muscle building and active individuals.', 'high-protein.png'),
+       ('Mediterranean', 'Recipes inspired by the Mediterranean diet, rich in fruits, vegetables, olive oil, whole grains, and lean proteins', 'mediterranean.png'),
+       ('Low-Calorie', 'Recipes with reduced calorie content, ideal for weight management.', 'low-calorie.png');
 
 insert into sub_categories(name, description)
 values ('Breakfast', 'Recipes to kickstart the day with nourishing and flavorful morning meals.'),

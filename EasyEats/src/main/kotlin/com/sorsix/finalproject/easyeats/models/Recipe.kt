@@ -23,7 +23,10 @@ class Recipe (
     val date: LocalDateTime?,
 
     @ManyToOne
+    val category: Category?,
+
+    @ManyToOne
     val subCategory: SubCategory?
 
-) { constructor() : this(0, "", "", null, "", null, null) {}
+) { constructor() : this(0, "", "", null, "", null, null, null) {}
 }
