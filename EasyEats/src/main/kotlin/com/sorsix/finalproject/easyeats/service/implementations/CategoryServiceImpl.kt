@@ -12,4 +12,8 @@ class CategoryServiceImpl(private val categoryRepository: CategoryRepository): C
     override fun getAllCategories(): List<Category> {
         return categoryRepository.findAll()
     }
+
+    override fun getCategoryById(id: Long): Category? {
+        return categoryRepository.findById(id).orElse(null);
+    }
 }

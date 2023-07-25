@@ -44,3 +44,8 @@ main {
   filter: brightness(120%);
   cursor: pointer;
 }
+
+a{
+  text-decoration: none;
+  color: black;
+}

@@ -11,6 +11,7 @@ import {SignupComponent} from "./components/signup/signup.component";
 import {FormsModule} from '@angular/forms';
 import {LoginComponent} from './components/login/login.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
+import { SingleCategoryComponent } from './components/single-category/single-category.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MainHeaderComponent } from './components/main-header/main-header.compon
     SignupComponent,
     LoginComponent,
     MainHeaderComponent,
+    SingleCategoryComponent,
   ],
   imports: [
     BrowserModule,
