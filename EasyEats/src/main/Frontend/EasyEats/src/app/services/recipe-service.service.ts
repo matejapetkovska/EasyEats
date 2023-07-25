@@ -8,9 +8,16 @@ import { Recipe } from '../models/recipe';
 })
 export class RecipeService {
 
+  url = "http://localhost:8081/recipes"
+
   constructor(private httpClient : HttpClient) {}
   
   getAllRecipesByCategoryId(category_id: String): Observable<Recipe[]>{
-    return this.httpClient.get<Recipe[]>(`http://localhost:8081/recipes/${category_id}`)
+    return this.httpClient.get<Recipe[]>(`${this.url}/${category_id}`)
+  }
+
+  getAllRecipesByCategoryIdAndSubCategoryId(category_id: String,
+                                            subCategory_id: Number): Observable<Recipe[]>{
+    return this.httpClient.get<Recipe[]>(`${this.url}/${category_id}/${subCategory_id}`)
   }
 }
