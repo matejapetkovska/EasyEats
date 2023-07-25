@@ -1,19 +1,21 @@
-<div>
-  <h2>Login</h2>
-  <form (ngSubmit)="onSubmit()">
-    <div>
+<main>
+  <img ngSrc="../../assets/images/login.png" height="500" width="500">
+  <div class="right-corner">
+    <span class="phrase">Welcome back!</span>
+    <form (ngSubmit)="onSubmit()" class="signup-form">
       <label for="username">Username:</label>
       <input type="text" id="username" [(ngModel)]="username" name="username" required>
-    </div>
-    <div>
       <label for="password">Password:</label>
       <input type="password" id="password" [(ngModel)]="password" name="password" required>
-    </div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</main>
 
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-    <button type="submit">Login</button>
-  </form>
-</div>
+
+
+
 
 
