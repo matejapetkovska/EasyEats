@@ -1,0 +1,50 @@
+/*main {*/
+/*  display: grid;*/
+/*  grid-template-rows: 1fr auto;*/
+/*  margin: 50px;*/
+/*}*/
+
+/*.subcategories {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  justify-content: space-around;*/
+/*}*/
+
+/*.recipe {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  !*margin: 50px;*!*/
+/*}*/
+
+/*.recipe-title {*/
+/*  font-size: 60px;*/
+/*  color: var(--red-color);*/
+/*  text-shadow: 2px 2px #000000;*/
+/*  font-family: 'Pacifico', cursive;*/
+/*  margin: 30px;*/
+/*}*/
+
+/*.recipe-info {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*}*/
+
+/*img {*/
+/*  border-radius: 15px;*/
+/*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+/*  margin-bottom: 40px;*/
+/*}*/
+
+/*.recipe-details {*/
+/*  margin-right: 150px;*/
+/*  margin-left: 150px;*/
+/*}*/
+
+
+/*span {*/
+/*  font-size: 25px;*/
+/*  color: var(--red-color);*/
+/*}*/
+

@@ -14,6 +14,7 @@ import { MainHeaderComponent } from './components/main-header/main-header.compon
 import { SingleCategoryComponent } from './components/single-category/single-category.component';
 import { AllRecipesComponent } from './components/all-recipes/all-recipes.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

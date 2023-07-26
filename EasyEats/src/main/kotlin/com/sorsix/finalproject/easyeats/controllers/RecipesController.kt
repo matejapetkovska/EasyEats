@@ -1,5 +1,6 @@
 package com.sorsix.finalproject.easyeats.controllers
 
+import com.sorsix.finalproject.easyeats.models.Ingredient
 import com.sorsix.finalproject.easyeats.models.Recipe
 import com.sorsix.finalproject.easyeats.service.RecipeService
 import org.springframework.web.bind.annotation.*

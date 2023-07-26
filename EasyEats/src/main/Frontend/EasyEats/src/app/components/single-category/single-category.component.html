@@ -1,6 +1,18 @@
-<div *ngFor="let subCategory of category?.sub_categories">
-    <button (click)="onClickOfSubCategory(subCategory.id)">{{subCategory.name}}</button>
-</div>
-<div *ngFor="let recipe of recipes">
-    <h1>{{recipe.title}}</h1>
-</div>
+<app-main-header></app-main-header>
+
+<main>
+  <div class="subcategories">
+    <div *ngFor="let subCategory of category?.sub_categories">
+      <button (click)="onClickOfSubCategory(subCategory.id)">{{subCategory.name}}</button>
+    </div>
+  </div>
+  <div class="card-container">
+    <div *ngFor="let recipe of recipes" class="card">
+      <img src="{{recipe.image}}"/>
+      <div class="category-details">
+        <span class="category-title">{{recipe.title}}</span>
+      </div>
+    </div>
+  </div>
+</main>
+

@@ -1,5 +1,6 @@
 package com.sorsix.finalproject.easyeats.service.implementations
 
+import com.sorsix.finalproject.easyeats.models.Ingredient
 import com.sorsix.finalproject.easyeats.models.Recipe
 import com.sorsix.finalproject.easyeats.repository.RecipeRepository
 import com.sorsix.finalproject.easyeats.service.RecipeService
