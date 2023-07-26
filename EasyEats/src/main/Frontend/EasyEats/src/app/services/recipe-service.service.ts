@@ -20,4 +20,20 @@ export class RecipeService {
                                             subCategory_id: Number): Observable<Recipe[]>{
     return this.httpClient.get<Recipe[]>(`${this.url}/${category_id}/${subCategory_id}`)
   }
+
+  getAllRecipes(): Observable<Recipe[]>{
+    return this.httpClient.get<Recipe[]>(`${this.url}/`)
+  }
+
+  getRecipesByQueryText(queryText: String | null): Observable<Recipe[]>{
+    if(queryText == null || queryText == ""){
+      return this.httpClient.get<Recipe[]>(`${this.url}/`)
+    }else{
+      return this.httpClient.get<Recipe[]>(`${this.url}/query/${queryText}`)
+    }
+  }
+  
+  getAllRecipesBySubCategoryId(subCategory_id: Number): Observable<Recipe[]>{
+    return this.httpClient.get<Recipe[]>(`${this.url}/subcategory/${subCategory_id}`)
+  }
 }

@@ -24,4 +24,20 @@ class RecipeServiceImpl(private val recipeRepository: RecipeRepository): RecipeS
         }
         return null
     }
+
+    override fun getAllRecipes(): List<Recipe> {
+        return recipeRepository.findAll()
+    }
+
+    override fun getAllRecipesByTitleContaining(queryText: String): List<Recipe> {
+        return recipeRepository.findByTitleContainingIgnoreCase(queryText)
+    }
+
+    override fun getAllRecipesBySubCategory(subCategory_id: String): List<Recipe>? {
+        val subCategoryIdLong=subCategory_id.toLongOrNull()
+        if(subCategoryIdLong != null) {
+            return recipeRepository.findBySubCategory_Id(subCategoryIdLong)
+        }
+        return null
+    }
 }
