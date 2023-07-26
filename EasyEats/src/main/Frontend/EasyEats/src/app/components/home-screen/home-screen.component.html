@@ -1,14 +1,14 @@
 <app-main-header></app-main-header>
 <main>
   <span class="title">Categories</span>
-    <div class="card-container">
-      <div *ngFor="let category of categories" class="card">
-        <a [routerLink]="['/recipes', category.id]"> 
-          <img src="{{category.image}}"/>
-          <div class="category-details">
-            <span class="category-description">{{category.description}}</span>
-          </div>
-        </a>
+  <div class="card-container">
+    <div *ngFor="let category of categories" class="card">
+      <a [routerLink]="['/recipes', category.id]">
+        <img src="{{category.image}}"/>
+      </a>
+      <div class="category-details">
+        <span class="category-description">{{category.description}}</span>
       </div>
     </div>
+  </div>
 </main>

@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import {LoginComponent} from './components/login/login.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { SingleCategoryComponent } from './components/single-category/single-category.component';
+import { RecipeComponent } from './components/recipe/recipe.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SingleCategoryComponent } from './components/single-category/single-cat
     LoginComponent,
     MainHeaderComponent,
     SingleCategoryComponent,
+    RecipeComponent,
   ],
   imports: [
     BrowserModule,

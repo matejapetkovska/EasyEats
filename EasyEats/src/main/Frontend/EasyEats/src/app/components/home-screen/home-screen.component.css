@@ -26,7 +26,7 @@ main {
   height: 350px;
 }
 
-.card > img {
+img {
   width: 300px;
   height: 250px;
 }
@@ -40,7 +40,7 @@ main {
   height: 100px;
 }
 
-.card:hover > img {
+img:hover {
   filter: brightness(120%);
   cursor: pointer;
 }
