@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface SignUpRepository : JpaRepository<User, Long?> {
+interface UserRepository : JpaRepository<User, Long?> {
 
-    fun findByUsername(username: String): Optional<User>
     fun findByEmail(email: String): Optional<User>
+    fun findByUsername(username: String?): Optional<User?>
 }
