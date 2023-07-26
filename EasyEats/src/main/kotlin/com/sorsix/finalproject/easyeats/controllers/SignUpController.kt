@@ -1,10 +1,10 @@
 package com.sorsix.finalproject.easyeats.controllers
 
-import com.sorsix.finalproject.easyeats.models.User
+import com.sorsix.finalproject.easyeats.models.enumerations.Role
 import com.sorsix.finalproject.easyeats.models.exception.Error
-import com.sorsix.finalproject.easyeats.repository.SignUpRepository
-import com.sorsix.finalproject.easyeats.service.SignUpService
-import org.springframework.http.HttpStatus
+import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
+import com.sorsix.finalproject.easyeats.models.exception.PasswordDoNotMatch
+import com.sorsix.finalproject.easyeats.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -12,36 +12,72 @@ import java.util.*
 @RestController
 @RequestMapping("/signup")
 @CrossOrigin(origins = ["http://localhost:4200"])
-class SignUpController(val userRepository: SignUpRepository, val signUpService: SignUpService) {
+class SignUpController(val userService: UserService) {
+
+    data class UserRegistrationRequest(
+        val username: String,
+        val email: String,
+        val password: String,
+        val repeatPass: String,
+        val first_name: String,
+        val last_name: String,
+        val role: Role,
+        val image: String
+    )
 
     @PostMapping
-    fun signUp(@RequestBody user: User): ResponseEntity<Any> {
-        if (user.username.isBlank() || user.email.isBlank() || user.password.isBlank() ||
-                user.first_name.isBlank() || user.last_name.isBlank()) {
-            return ResponseEntity.badRequest().body(Error("Please fill in all required fields."))
+    fun signUp(@RequestBody request: UserRegistrationRequest): ResponseEntity<Any> {
+
+        try {
+            if (request.username.isNullOrBlank() || request.email.isNullOrBlank() || request.password.isNullOrBlank() ||
+                request.repeatPass.isNullOrBlank() || request.first_name.isNullOrBlank() || request.last_name.isNullOrBlank()
+            ) {
+                val errorMessage = "Please fill in all required fields."
+                return ResponseEntity.badRequest().body(Error(errorMessage))
+            }
+
+            if (!userService.isValidEmail(request.email)) {
+                val errorMessage = "Please enter a valid email address."
+                return ResponseEntity.badRequest().body(Error(errorMessage))
+            }
+
+            if (request.password.length < 6) {
+                val errorMessage = "Password must be at least 6 characters long."
+                return ResponseEntity.badRequest().body(Error(errorMessage))
+            }
+
+            if(userService.doesUsernameExist(request.username) && userService.doesEmailExist(request.email)){
+                val errorMessage = "Username and Email already exists."
+                return ResponseEntity.badRequest().body(Error(errorMessage))
+            }
+
+            if (userService.doesUsernameExist(request.username)) {
+                val errorMessage = "Username already exists."
+                return ResponseEntity.badRequest().body(Error(errorMessage))
+            }
+
+            if (userService.doesEmailExist(request.email)) {
+                val errorMessage = "Email already exists."
+                return ResponseEntity.badRequest().body(Error(errorMessage))
+            }
+
+            val savedUser = userService.register(
+                request.username,
+                request.email,
+                request.password,
+                request.repeatPass,
+                request.first_name,
+                request.last_name,
+                Role.USER,
+                request.image
+            ) ?: return ResponseEntity.badRequest().body(Error("User registration failed."))
+
+            return ResponseEntity.ok(savedUser)
+        } catch (exception: InvalidArgumentsException) {
+            return ResponseEntity.badRequest().body(Error(exception.message))
+        } catch (exception: PasswordDoNotMatch) {
+            return ResponseEntity.badRequest().body(Error(exception.message))
         }
-
-        if (!signUpService.isValidEmail(user.email)) {
-            return ResponseEntity.badRequest().body(Error("Please enter a valid email address."))
-        }
-
-        if (user.password.length < 6) {
-            return ResponseEntity.badRequest().body(Error("Password must be at least 6 characters long."))
-        }
-
-
-        val existingUserByUsername: Optional<User> = userRepository.findByUsername(user.username)
-        if (existingUserByUsername.isPresent) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(Error("Username already exists."))
-        }
-
-        val existingUserByEmail: Optional<User> = userRepository.findByEmail(user.email)
-        if (existingUserByEmail.isPresent) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(Error("Email already exists."))
-        }
-
-        val savedUser = userRepository.save(user)
-        return ResponseEntity.ok(savedUser)
     }
-
 }
+

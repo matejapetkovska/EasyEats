@@ -20,28 +20,25 @@ class LoginController(val service: UserService) {
 
     @PostMapping("/login")
     fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<Any> {
-        if (loginRequest.username.isBlank() || loginRequest.password.isBlank()) {
-            val errorResponse = ErrorResponse("Fill the field(s)")
+        val username = loginRequest.username
+        val password = loginRequest.password
+
+        if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
+            val errorResponse = ErrorResponse("Please fill in all required fields.")
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse)
         }
 
         return try {
-            val user = service.login(loginRequest.username, loginRequest.password)
-
-            if (user != null) {
-                ResponseEntity.ok(user)
-            } else {
-                val errorResponse = ErrorResponse("Invalid credentials")
-                ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse)
-            }
+            val user = service.login(username, password)
+            ResponseEntity.ok(user)
         } catch (exception: UsernameNotFoundException) {
-            val errorResponse = ErrorResponse("Username is not valid")
+            val errorResponse = ErrorResponse("Username not found")
             ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse)
         } catch (exception: InvalidArgumentsException) {
-            val errorResponse = ErrorResponse("Username and/or password is not valid")
+            val errorResponse = ErrorResponse("Invalid Arguments")
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse)
         } catch (exception: InvalidPasswordException) {
-            val errorResponse = ErrorResponse("Password is not valid")
+            val errorResponse = ErrorResponse("Invalid password")
             ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse)
         } catch (exception: Exception) {
             val errorResponse = ErrorResponse("Unknown error occurred")

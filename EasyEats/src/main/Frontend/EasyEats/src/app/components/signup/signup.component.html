@@ -9,23 +9,27 @@
       </label>
       <label>
         Last name:
-        <input placeholder="Last Name" required [(ngModel)]="user.last_name" name="last_name">
+        <input placeholder="Last Name" required [(ngModel)]="user.last_name" name="last_name" aria-required="true">
       </label>
       <label>
         Username:
-        <input placeholder="Username" required [(ngModel)]="user.username" name="username">
+        <input placeholder="Username" required [(ngModel)]="user.username" name="username" aria-required="true">
       </label>
       <label>
         E-mail:
-        <input type="email" placeholder="E-mail" required [(ngModel)]="user.email" name="email">
+        <input type="email" placeholder="E-mail" required [(ngModel)]="user.email" name="email" aria-required="true">
       </label>
       <label>
         Password:
-        <input type="password" placeholder="Password" required [(ngModel)]="user.password" name="password">
+        <input type="password" placeholder="Password" required [(ngModel)]="user.password" name="password" aria-required="true">
+      </label>
+      <label>
+        Repeat Password:
+        <input type="password" placeholder="Repeat Password" required [(ngModel)]="user.repeatPass" name="repeatPass" aria-required="true">
       </label>
       <label>
         Profile picture:
-        <input placeholder="Image" required [(ngModel)]="user.image" name="image">
+        <input placeholder="Image" required [(ngModel)]="user.image" name="image" aria-required="true">
       </label>
 
       <div class="error-message">{{ errorMessage }}</div>
@@ -35,7 +39,6 @@
     <span>Already have an account? <a routerLink="/login">Log in</a></span>
   </div>
 </main>
-
 
 
 

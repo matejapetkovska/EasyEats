@@ -1,3 +1,3 @@
 package com.sorsix.finalproject.easyeats.models.exception
 
-class InvalidArgumentsException : RuntimeException()
+class InvalidArgumentsException : RuntimeException("Invalid arguments")

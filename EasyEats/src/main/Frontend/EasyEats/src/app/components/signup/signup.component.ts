@@ -17,6 +17,7 @@ export class SignupComponent {
     username: '',
     email: '',
     password: '',
+    repeatPass: '',
     image: '',
     role: 'USER',
   };
@@ -32,7 +33,11 @@ export class SignupComponent {
         this.router.navigate(['/home']);
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = error.error.error;
+        if (error.status === 400) {
+          this.errorMessage = error.error.message;
+        } else {
+          this.errorMessage = 'An error occurred during registration.';
+        }
       }
     );
   }

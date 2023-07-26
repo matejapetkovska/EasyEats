@@ -1,3 +1,3 @@
 package com.sorsix.finalproject.easyeats.models.exception
 
-class UsernameNotFoundException  : RuntimeException()
+class UsernameNotFoundException  : RuntimeException("Username not found")
