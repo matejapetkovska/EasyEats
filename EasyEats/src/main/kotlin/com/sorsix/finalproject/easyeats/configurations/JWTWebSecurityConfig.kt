@@ -1,6 +1,5 @@
 package com.sorsix.finalproject.easyeats.configurations
 
-
 import com.sorsix.finalproject.easyeats.configurations.filters.JWTAuthenticationFilter
 import com.sorsix.finalproject.easyeats.configurations.filters.UrlMapping
 import com.sorsix.finalproject.easyeats.service.UserService
@@ -63,7 +62,7 @@ class JWTWebSecurityConfig(val passwordEncoder: PasswordEncoder, val userService
                 it.requestMatchers(UrlMapping.AUTH + UrlMapping.SIGN_UP).permitAll()
                     .requestMatchers(UrlMapping.AUTH + UrlMapping.LOGIN).permitAll()
                     .requestMatchers(UrlMapping.VALIDATE_JWT).permitAll()
-                    .requestMatchers("/categories", "/assets/**", "/signup", "/api/**").permitAll()
+                    .requestMatchers("/recipes/**","/categories","/categories/{id}", "/assets/**", "/signup", "/api/**").permitAll()
                     .anyRequest().authenticated()
             }
             .addFilter(JWTAuthenticationFilter(authenticationManager(), userService, passwordEncoder))

@@ -8,9 +8,16 @@ import { Category } from '../models/category';
 })
 export class CategoryService {
 
+  url = "http://localhost:8081/categories"
+
   constructor(private httpClient : HttpClient) {}
 
   getAllCategories(): Observable<Category[]>{
-    return this.httpClient.get<Category[]>("http://localhost:8081/categories")
+    return this.httpClient.get<Category[]>(`${this.url}`)
   }
+
+  getCategoryById(category_id: String): Observable<Category>{
+    return this.httpClient.get<Category>(`${this.url}/${category_id}`)
+  }
+
 }
