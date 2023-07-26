@@ -8,11 +8,12 @@ import {AppRoutingModule} from './app-routing.module';
 import {HomeScreenComponent} from './components/home-screen/home-screen.component';
 import {HttpClientModule} from '@angular/common/http';
 import {SignupComponent} from "./components/signup/signup.component";
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './components/login/login.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { SingleCategoryComponent } from './components/single-category/single-category.component';
-import { RecipeComponent } from './components/recipe/recipe.component';
+import { AllRecipesComponent } from './components/all-recipes/all-recipes.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
     LoginComponent,
     MainHeaderComponent,
     SingleCategoryComponent,
-    RecipeComponent,
+    AllRecipesComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +33,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

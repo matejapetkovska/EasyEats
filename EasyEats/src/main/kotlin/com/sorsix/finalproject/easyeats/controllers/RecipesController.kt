@@ -21,4 +21,18 @@ class RecipesController(private val recipeService: RecipeService) {
         return recipeService.getAllRecipesByCategoryAndSubCategory(category_id, subCategory_id)
     }
 
+    @GetMapping("/")
+    fun getAllRecipes(): List<Recipe> {
+        return recipeService.getAllRecipes()
+    }
+
+    @GetMapping("/query/{queryText}")
+    fun getRecipesByTitleOrDescriptionContainingQueryText(@PathVariable queryText: String): List<Recipe>{
+        return recipeService.getAllRecipesByTitleContaining(queryText)
+    }
+
+    @GetMapping("/subcategory/{subCategory_id}")
+    fun getRecipesBySubCategory(@PathVariable subCategory_id: String): List<Recipe>?{
+        return recipeService.getAllRecipesBySubCategory(subCategory_id)
+    }
 }

@@ -1,0 +1,7 @@
+<input type="text" [formControl]='queryText' (input)="search()" placeholder="Search recipes...">
+<div *ngFor="let subCategory of subCategories">
+    <button (click)="onClickOfSubCategory(subCategory.id)">{{subCategory.name}}</button>
+</div>
+<div *ngFor="let recipe of recipes">
+    <p>{{recipe.title}}</p>
+</div>
