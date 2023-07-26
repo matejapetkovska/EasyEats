@@ -5,6 +5,7 @@ import { HomeScreenComponent } from './components/home-screen/home-screen.compon
 import {SignupComponent} from "./components/signup/signup.component";
 import {LoginComponent} from "./components/login/login.component";
 import { SingleCategoryComponent } from './components/single-category/single-category.component';
+import { AllRecipesComponent } from './components/all-recipes/all-recipes.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:'home', component: HomeScreenComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'recipes/:category_id', component: SingleCategoryComponent}
+  {path: 'recipes/:category_id', component: SingleCategoryComponent},
+  {path: 'recipes', component: AllRecipesComponent}
 ];
 
 @NgModule({
