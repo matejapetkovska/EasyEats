@@ -1,7 +1,18 @@
-<input type="text" [formControl]='queryText' (input)="search()" placeholder="Search recipes...">
-<div *ngFor="let subCategory of subCategories">
-    <button (click)="onClickOfSubCategory(subCategory.id)">{{subCategory.name}}</button>
-</div>
-<div *ngFor="let recipe of recipes">
-    <p>{{recipe.title}}</p>
-</div>
+<app-main-header></app-main-header>
+
+<main>
+  <div class="title">Explore all recipes..</div>
+  <div class="search">
+    <input type="text" [formControl]='queryText' (input)="search()" placeholder="Search recipes...">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </div>
+  <div class="card-container">
+    <div *ngFor="let recipe of recipes" class="card">
+      <img src="{{recipe.image}}"/>
+      <div class="category-details">
+        <span class="category-title">{{recipe.title}}</span>
+      </div>
+    </div>
+  </div>
+</main>
+

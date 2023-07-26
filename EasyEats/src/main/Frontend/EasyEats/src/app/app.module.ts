@@ -13,6 +13,7 @@ import {LoginComponent} from './components/login/login.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { SingleCategoryComponent } from './components/single-category/single-category.component';
 import { AllRecipesComponent } from './components/all-recipes/all-recipes.component';
+import {RecipeComponent} from "./components/recipe/recipe.component";
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { AllRecipesComponent } from './components/all-recipes/all-recipes.compon
     MainHeaderComponent,
     SingleCategoryComponent,
     AllRecipesComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,7 @@ main {
   position: relative;
   margin: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 202px);
+  grid-template-columns: repeat(auto-fit, 203px);
   gap: 2rem;
 }
 
@@ -44,7 +44,8 @@ main {
 }
 
 .category-title {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Righteous', cursive;
+  color: var(--green-color);
 }
 
 img:hover {
