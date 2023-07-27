@@ -27,12 +27,28 @@ export class SignupComponent {
   constructor(private signUpService: SignupServiceService, private router: Router) {
   }
 
+  // onSignUp() {
+  //   this.signUpService.signUp(this.user).subscribe(
+  //     (response) => {
+  //       this.router.navigate(['/home']);
+  //     },
+  //     (error: HttpErrorResponse) => {
+  //       if (error.status === 400) {
+  //         this.errorMessage = error.error.message;
+  //       } else {
+  //         this.errorMessage = 'An error occurred during registration.';
+  //       }
+  //     }
+  //   );
+  // }
+
   onSignUp() {
     this.signUpService.signUp(this.user).subscribe(
       (response) => {
         this.router.navigate(['/home']);
       },
       (error: HttpErrorResponse) => {
+        console.log('Error occurred:', error);
         if (error.status === 400) {
           this.errorMessage = error.error.message;
         } else {

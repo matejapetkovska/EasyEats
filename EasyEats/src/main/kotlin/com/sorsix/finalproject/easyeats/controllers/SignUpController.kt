@@ -25,6 +25,8 @@ class SignUpController(val userService: UserService) {
         val image: String
     )
 
+    data class ErrorResponse(val message: String)
+
     @PostMapping
     fun signUp(@RequestBody request: UserRegistrationRequest): ResponseEntity<Any> {
 
@@ -33,32 +35,32 @@ class SignUpController(val userService: UserService) {
                 request.repeatPass.isNullOrBlank() || request.first_name.isNullOrBlank() || request.last_name.isNullOrBlank()
             ) {
                 val errorMessage = "Please fill in all required fields."
-                return ResponseEntity.badRequest().body(Error(errorMessage))
+                return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
             if (!userService.isValidEmail(request.email)) {
                 val errorMessage = "Please enter a valid email address."
-                return ResponseEntity.badRequest().body(Error(errorMessage))
+                return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
             if (request.password.length < 6) {
                 val errorMessage = "Password must be at least 6 characters long."
-                return ResponseEntity.badRequest().body(Error(errorMessage))
+                return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
             if(userService.doesUsernameExist(request.username) && userService.doesEmailExist(request.email)){
                 val errorMessage = "Username and Email already exists."
-                return ResponseEntity.badRequest().body(Error(errorMessage))
+                return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
             if (userService.doesUsernameExist(request.username)) {
                 val errorMessage = "Username already exists."
-                return ResponseEntity.badRequest().body(Error(errorMessage))
+                return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
             if (userService.doesEmailExist(request.email)) {
                 val errorMessage = "Email already exists."
-                return ResponseEntity.badRequest().body(Error(errorMessage))
+                return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
             val savedUser = userService.register(
@@ -70,13 +72,13 @@ class SignUpController(val userService: UserService) {
                 request.last_name,
                 Role.USER,
                 request.image
-            ) ?: return ResponseEntity.badRequest().body(Error("User registration failed."))
+            ) ?: return ResponseEntity.badRequest().body(ErrorResponse("User registration failed."))
 
             return ResponseEntity.ok(savedUser)
         } catch (exception: InvalidArgumentsException) {
-            return ResponseEntity.badRequest().body(Error(exception.message))
+            return ResponseEntity.badRequest().body(exception.message?.let { ErrorResponse(it) })
         } catch (exception: PasswordDoNotMatch) {
-            return ResponseEntity.badRequest().body(Error(exception.message))
+            return ResponseEntity.badRequest().body(exception.message?.let { ErrorResponse(it) })
         }
     }
 }
