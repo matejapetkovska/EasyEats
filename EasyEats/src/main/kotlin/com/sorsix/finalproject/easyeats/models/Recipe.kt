@@ -1,11 +1,12 @@
 package com.sorsix.finalproject.easyeats.models
 
 import jakarta.persistence.*
+import java.awt.TextArea
 import java.time.LocalDateTime
 
 @Entity
 @Table(name="recipes")
-class Recipe (
+class Recipe(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

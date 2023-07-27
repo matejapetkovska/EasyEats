@@ -32,7 +32,10 @@
         <input placeholder="Image" required [(ngModel)]="user.image" name="image" aria-required="true">
       </label>
 
-      <div class="error-message">{{ errorMessage }}</div>
+<!--      <div class="error-message">{{ errorMessage }}</div>-->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
 
       <button (click)="onSignUp()">Sign Up</button>
     </form>
