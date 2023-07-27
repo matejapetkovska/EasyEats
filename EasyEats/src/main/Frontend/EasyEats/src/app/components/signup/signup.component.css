@@ -40,7 +40,7 @@ label {
 
 input {
   flex: 0 0 100px;
-  padding: 5px;
+  padding: 3px;
   margin-left: 10px;
   border:2px solid var(--green-color);
   border-radius: 5px;
