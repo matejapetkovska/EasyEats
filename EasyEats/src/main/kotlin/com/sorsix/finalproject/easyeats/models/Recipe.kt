@@ -13,6 +13,7 @@ class Recipe (
 
     val title: String,
 
+    @Column(columnDefinition = "TEXT")
     val description: String,
 
     @OneToMany

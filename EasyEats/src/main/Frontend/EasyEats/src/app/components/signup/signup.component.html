@@ -3,13 +3,13 @@
   <div class="right-corner">
     <span class="phrase">Welcome to <a routerLink="/welcome">EasyEats!</a></span>
     <form class="signup-form">
-      <label for="first_name">
+      <label>
         First name:
-        <input id="first_name" placeholder="First Name" required [(ngModel)]="user.first_name" name="first_name">
+        <input placeholder="First name" required [(ngModel)]="user.first_name" name="first_name">
       </label>
       <label>
         Last name:
-        <input placeholder="Last Name" required [(ngModel)]="user.last_name" name="last_name" aria-required="true">
+        <input placeholder="Last name" required [(ngModel)]="user.last_name" name="last_name" aria-required="true">
       </label>
       <label>
         Username:
@@ -25,14 +25,14 @@
       </label>
       <label>
         Repeat Password:
-        <input type="password" placeholder="Repeat Password" required [(ngModel)]="user.repeatPass" name="repeatPass" aria-required="true">
+        <input type="password" placeholder="Repeat password" required [(ngModel)]="user.repeatPass" name="repeatPass" aria-required="true">
       </label>
       <label>
         Profile picture:
         <input placeholder="Image" required [(ngModel)]="user.image" name="image" aria-required="true">
       </label>
 
-      <div class="error-message">{{ errorMessage }}</div>
+      <div class="error-message">{{errorMessage}}</div>
 
       <button (click)="onSignUp()">Sign Up</button>
     </form>
