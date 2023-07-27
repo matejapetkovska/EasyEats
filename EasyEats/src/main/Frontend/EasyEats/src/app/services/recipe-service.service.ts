@@ -33,8 +33,4 @@ export class RecipeService {
       return this.httpClient.get<Recipe[]>(`${this.url}/query/${queryText}`)
     }
   }
-  
-  getAllRecipesBySubCategoryId(subCategory_id: Number): Observable<Recipe[]>{
-    return this.httpClient.get<Recipe[]>(`${this.url}/subcategory/${subCategory_id}`)
-  }
 }

@@ -8,7 +8,8 @@
   </div>
   <div class="card-container">
     <div *ngFor="let recipe of recipes" class="card">
-      <img src="{{recipe.image}}"/>
+      <a [routerLink]="['/recipe', recipe.id]">
+        <img src="{{recipe.image}}"/></a>
       <div class="category-details">
         <span class="category-title">{{recipe.title}}</span>
       </div>
