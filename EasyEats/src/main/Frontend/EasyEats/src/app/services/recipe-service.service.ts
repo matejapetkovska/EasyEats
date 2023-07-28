@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Recipe } from '../models/recipe';
@@ -34,7 +34,9 @@ export class RecipeService {
     }
   }
   
-  getAllRecipesBySubCategoryId(subCategory_id: Number): Observable<Recipe[]>{
-    return this.httpClient.get<Recipe[]>(`${this.url}/subcategory/${subCategory_id}`)
+  addRecipe(formData: FormData): Observable<any>{
+  
+    return this.httpClient.post<FormData>(`${this.url}/add`, formData);
   }
+
 }

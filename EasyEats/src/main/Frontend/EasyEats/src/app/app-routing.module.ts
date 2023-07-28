@@ -6,6 +6,7 @@ import {SignupComponent} from "./components/signup/signup.component";
 import {LoginComponent} from "./components/login/login.component";
 import { SingleCategoryComponent } from './components/single-category/single-category.component';
 import { AllRecipesComponent } from './components/all-recipes/all-recipes.component';
+import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'login', component: LoginComponent},
   {path: 'recipes/:category_id', component: SingleCategoryComponent},
-  {path: 'recipes', component: AllRecipesComponent}
+  {path: 'recipes', component: AllRecipesComponent},
+  {path: 'addrecipe', component: AddRecipeComponent}
 ];
 
 @NgModule({

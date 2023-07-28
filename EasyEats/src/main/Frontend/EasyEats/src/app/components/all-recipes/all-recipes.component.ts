@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { Recipe } from 'src/app/models/recipe';
-import { SubCategory } from 'src/app/models/sub_category';
 import { RecipeService } from 'src/app/services/recipe-service.service';
 
 @Component({

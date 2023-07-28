@@ -14,6 +14,7 @@ import { MainHeaderComponent } from './components/main-header/main-header.compon
 import { SingleCategoryComponent } from './components/single-category/single-category.component';
 import { AllRecipesComponent } from './components/all-recipes/all-recipes.component';
 import {RecipeComponent} from "./components/recipe/recipe.component";
+import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {RecipeComponent} from "./components/recipe/recipe.component";
     MainHeaderComponent,
     SingleCategoryComponent,
     AllRecipesComponent,
-    RecipeComponent
+    RecipeComponent,
+    AddRecipeComponent
   ],
   imports: [
     BrowserModule,
