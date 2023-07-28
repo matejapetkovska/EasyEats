@@ -1,7 +1,6 @@
 package com.sorsix.finalproject.easyeats.controllers
 
 import com.sorsix.finalproject.easyeats.models.enumerations.Role
-import com.sorsix.finalproject.easyeats.models.exception.Error
 import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
 import com.sorsix.finalproject.easyeats.models.exception.PasswordDoNotMatch
 import com.sorsix.finalproject.easyeats.service.UserService
@@ -76,6 +75,7 @@ class SignUpController(val userService: UserService) {
                 httprequest
             ) ?: return ResponseEntity.badRequest().body(ErrorResponse("User registration failed."))
 
+            httprequest.session.setAttribute("user", savedUser)
             return ResponseEntity.ok(savedUser)
         } catch (exception: InvalidArgumentsException) {
             return ResponseEntity.badRequest().body(exception.message?.let { ErrorResponse(it) })

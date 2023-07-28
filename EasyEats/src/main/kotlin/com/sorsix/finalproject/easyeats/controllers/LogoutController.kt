@@ -1,9 +1,16 @@
 package com.sorsix.finalproject.easyeats.controllers
 
-import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
+import jakarta.servlet.http.HttpServletRequest
 
-@Controller
-@RequestMapping("/logout")
+
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = ["http://localhost:4200"], allowCredentials = "true")
 class LogoutController {
+
+    @GetMapping("/logout")
+    fun logout(request: HttpServletRequest) {
+        request.session.invalidate()
+    }
 }

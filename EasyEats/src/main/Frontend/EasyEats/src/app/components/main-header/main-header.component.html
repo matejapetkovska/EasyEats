@@ -13,8 +13,14 @@
       <a routerLink="/home">Categories</a>
       <a routerLink="/recipes">Recipes</a>
     </div>
-    <div class="right-corner">
-      <button (click)="onLogOut()"><i class="fa-solid fa-right-from-bracket" title="Logout"></i></button>
+
+    <div class="right-corner" *ngIf="isLoggedIn">
+      <a [routerLink]="['/user-profile', user?.username]">{{ user?.username }}</a>
+      <button (click)="logout()">Logout</button>
+    </div>
+
+    <div class="right-corner" *ngIf="!isLoggedIn">
+      <a routerLink="/login">Login</a>
     </div>
   </div>
 </main>

@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private service: UserService) { }
 
   login(username: string, password: string): Observable<any> {
 
@@ -23,14 +23,9 @@ export class AuthService {
   }
 
 
-  // logout(): Observable<any> {
-  //   this.userService.clean()
-  //   return this.http.post(`${PATH_AUTH}logout`, httpOptions);
-  // }
-  //
-  // register(user: User): Observable<any> {
-  //   return this.http.post(`${PATH_AUTH}users/add`, user);
-  // }
-
+  logout(): Observable<any> {
+    this.service.clean()
+    return this.http.get('http://localhost:8081/api/logout', httpOptions);
+  }
 
 }
