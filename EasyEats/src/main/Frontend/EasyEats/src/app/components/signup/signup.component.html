@@ -2,7 +2,7 @@
   <img ngSrc="../../assets/images/signup.png" height="500" width="500">
   <div class="right-corner">
     <span class="phrase">Welcome to <a routerLink="/welcome">EasyEats!</a></span>
-    <form class="signup-form">
+    <form #form="ngForm" (ngSubmit)="onSignUp(form)" class="signup-form">
       <label>
         First name:
         <input placeholder="First name" required [(ngModel)]="user.first_name" name="first_name">
@@ -38,8 +38,7 @@
         {{ errorMessage }}
       </div>
 
-
-      <button (click)="onSignUp()">Sign Up</button>
+      <button type="submit">Sign Up</button>
     </form>
     <span>Already have an account? <a routerLink="/login">Log in</a></span>
   </div>

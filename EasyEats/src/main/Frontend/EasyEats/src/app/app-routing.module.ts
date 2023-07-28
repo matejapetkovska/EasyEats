@@ -19,7 +19,8 @@ const routes: Routes = [
   {path: 'recipes/:category_id', component: SingleCategoryComponent},
   {path: 'recipes', component: AllRecipesComponent},
   {path: 'user-profile', component: UserProfileComponent},
-  {path: 'recipe/:recipe_id', component: RecipeComponent}
+  {path: 'recipe/:recipe_id', component: RecipeComponent},
+  { path: 'user-profile/:username', component: UserProfileComponent }
 ];
 
 @NgModule({

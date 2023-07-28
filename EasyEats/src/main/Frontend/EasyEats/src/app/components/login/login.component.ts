@@ -32,7 +32,7 @@ export class LoginComponent {
     this.http.post<any>('http://localhost:8081/api/login', loginRequest).subscribe(
       (response) => {
         this.userService.saveUser(response);
-        this.router.navigate(['/user-profile']);
+        this.router.navigate(['/home']);
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = error.error.message;

@@ -8,7 +8,8 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class UserService {
-  constructor() {}
+  constructor() {
+  }
 
   public saveUser(user: any): void {
     const userJson = JSON.stringify(user);
@@ -31,5 +32,12 @@ export class UserService {
   }
 
 
+  public isLoggedIn(): boolean {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    return !!user;
+  }
 
+  clean(): void {
+    window.sessionStorage.clear();
+  }
 }
