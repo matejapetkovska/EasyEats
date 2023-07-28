@@ -14,6 +14,7 @@ import { MainHeaderComponent } from './components/main-header/main-header.compon
 import { SingleCategoryComponent } from './components/single-category/single-category.component';
 import { AllRecipesComponent } from './components/all-recipes/all-recipes.component';
 import {RecipeComponent} from "./components/recipe/recipe.component";
+import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
 import {HttpInterceptorProviders} from "./services/AuthInterceptor";
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
@@ -30,6 +31,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     SingleCategoryComponent,
     AllRecipesComponent,
     RecipeComponent,
+    AddRecipeComponent,
     UserProfileComponent
   ],
   imports: [
