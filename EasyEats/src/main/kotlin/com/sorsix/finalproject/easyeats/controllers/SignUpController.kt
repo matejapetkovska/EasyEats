@@ -5,6 +5,7 @@ import com.sorsix.finalproject.easyeats.models.exception.Error
 import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
 import com.sorsix.finalproject.easyeats.models.exception.PasswordDoNotMatch
 import com.sorsix.finalproject.easyeats.service.UserService
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -28,7 +29,7 @@ class SignUpController(val userService: UserService) {
     data class ErrorResponse(val message: String)
 
     @PostMapping
-    fun signUp(@RequestBody request: UserRegistrationRequest): ResponseEntity<Any> {
+    fun signUp(@RequestBody request: UserRegistrationRequest, httprequest: HttpServletRequest): ResponseEntity<Any> {
 
         try {
             if (request.username.isNullOrBlank() || request.email.isNullOrBlank() || request.password.isNullOrBlank() ||
@@ -71,7 +72,8 @@ class SignUpController(val userService: UserService) {
                 request.first_name,
                 request.last_name,
                 Role.USER,
-                request.image
+                request.image,
+                httprequest
             ) ?: return ResponseEntity.badRequest().body(ErrorResponse("User registration failed."))
 
             return ResponseEntity.ok(savedUser)
