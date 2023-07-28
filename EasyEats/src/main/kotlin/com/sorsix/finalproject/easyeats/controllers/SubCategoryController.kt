@@ -12,7 +12,6 @@ class SubCategoryController(private val subCategoryService: SubCategoryService) 
 
     @GetMapping()
     fun getAllSubCategories(): List<SubCategory>{
-        return subCategoryService.getAllSubCategories()
+        return subCategoryService.getAllSubcategories()
     }
-
 }

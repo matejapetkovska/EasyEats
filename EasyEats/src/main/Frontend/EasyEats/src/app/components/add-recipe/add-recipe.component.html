@@ -1,0 +1,50 @@
+<form enctype="multipart/form-data">
+    <label>
+      Title:
+      <input placeholder="Title" required [(ngModel)]="title" name="title">
+    </label><br>
+    <label>
+      Description:
+      <input placeholder="Description" required [(ngModel)]="description" name="description" aria-required="true">
+    </label><br>
+    <label>
+      Image:
+        <input type="file" requiered (change)="onFileChange($event)" accept="image/*">
+    </label><br>
+    <label>
+      Choose category:
+      <select [(ngModel)]="selectedCategoryId" name="selectedCategory">
+        <option *ngFor="let category of categories" [value]=category.id>{{category.name}}</option>
+      </select>
+    </label><br>
+    <label>
+      Choose subcategory:
+      <select [(ngModel)]="selectedSubCategoryId" name="selectedSubCategory">
+        <option *ngFor="let subCategory of subCategories" [value]=subCategory.id>{{subCategory.name}}</option>
+      </select>
+    </label><br>
+    <div *ngIf="ingredients.length">
+      <p>Added ingredients:</p>
+      <div *ngFor="let addedIngredient of ingredients">
+        {{addedIngredient.name}}
+      </div>
+    </div>
+    <label>
+      Ingredients:
+      <label>
+        Name:
+        <input [(ngModel)]="ingredient.name" name="ingredientName">
+      </label>
+      <label>
+        Quntity:
+        <input [(ngModel)]="ingredient.quantity" name="ingredientQuantity">
+      </label>
+      <label>
+        Measurement unit:
+        <input [(ngModel)]="ingredient.measurementUnit" name="ingredientMeasurementUnit">
+      </label>
+      <button (click)="onAddIngredient()">Add ingredient</button>
+    </label><br>
+
+    <button (click)="onAddRecipe()">Add recipe</button>
+</form>

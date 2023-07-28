@@ -17,8 +17,8 @@ class Recipe(
     @Column(columnDefinition = "TEXT")
     val description: String,
 
-    @OneToMany
-    val ingredients: List<Ingredient>?,
+    @OneToMany(cascade = [CascadeType.PERSIST])
+    var ingredients: MutableList<Ingredient>,
 
     val image: String,
 
@@ -28,7 +28,10 @@ class Recipe(
     val category: Category?,
 
     @ManyToOne
-    val subCategory: SubCategory?
+    val subCategory: SubCategory?,
 
-) { constructor() : this(0, "", "", null, "", null, null, null) {}
+    @ManyToOne
+    val user: User?
+
+) { constructor() : this(0, "", "", mutableListOf(), "", null, null, null, null) {}
 }

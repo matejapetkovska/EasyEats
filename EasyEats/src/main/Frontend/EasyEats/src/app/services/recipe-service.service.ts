@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Recipe } from '../models/recipe';
@@ -33,4 +33,10 @@ export class RecipeService {
       return this.httpClient.get<Recipe[]>(`${this.url}/query/${queryText}`)
     }
   }
+  
+  addRecipe(formData: FormData): Observable<any>{
+  
+    return this.httpClient.post<FormData>(`${this.url}/add`, formData);
+  }
+
 }

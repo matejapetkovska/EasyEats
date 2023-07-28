@@ -37,6 +37,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation:3.1.1")
     implementation("org.flywaydb:flyway-core")
 
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.7.1")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.rest-assured:rest-assured:5.3.1")
 }
