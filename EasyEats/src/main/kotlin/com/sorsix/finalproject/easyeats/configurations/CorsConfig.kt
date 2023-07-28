@@ -1,6 +1,9 @@
 package com.sorsix.finalproject.easyeats.configurations
 
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
@@ -14,6 +17,8 @@ class CorsConfig : WebMvcConfigurer {
             .allowedOrigins("http://localhost:4200")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept")
+            .allowCredentials(true)
+            .maxAge(3600);
     }
 }
 

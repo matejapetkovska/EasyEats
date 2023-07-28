@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {UserService} from "../../services/UserService";
+import {AuthService} from "../../services/AuthService";
+import {NgForm} from "@angular/forms";
+import {User} from "../../models/user";
 
 interface LoginRequest {
   username: string;
@@ -16,17 +20,19 @@ export class LoginComponent {
 
   username: string = '';
   password: string = '';
-  errorMessage: string = '';
+  errorMessage: string='';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private userService: UserService, private http: HttpClient) {
+  }
 
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
     const loginRequest: LoginRequest = { username: this.username, password: this.password };
 
     this.http.post<any>('http://localhost:8081/api/login', loginRequest).subscribe(
       (response) => {
-        this.router.navigate(['/home']);
+        this.userService.saveUser(response);
+        this.router.navigate(['/user-profile']);
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = error.error.message;
@@ -35,3 +41,4 @@ export class LoginComponent {
   }
 
 }
+

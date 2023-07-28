@@ -14,6 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
@@ -62,20 +65,11 @@ class JWTWebSecurityConfig(val passwordEncoder: PasswordEncoder, val userService
                 it.requestMatchers(UrlMapping.AUTH + UrlMapping.SIGN_UP).permitAll()
                     .requestMatchers(UrlMapping.AUTH + UrlMapping.LOGIN).permitAll()
                     .requestMatchers(UrlMapping.VALIDATE_JWT).permitAll()
-                    .requestMatchers("/recipes/add", "/recipes","/recipes/**","/categories","/categories/{id}", "/assets/**", "/signup", "/api/**", "/subcategories").permitAll()
+                    .requestMatchers("/recipe/{id}", "/recipes/add" ,"/recipes","/recipes/**","/categories","/categories/{id}", "/assets/**", "/signup", "/api/**", "/subcategories").permitAll()
                     .anyRequest().authenticated()
             }
             .addFilter(JWTAuthenticationFilter(authenticationManager(), userService, passwordEncoder))
         return http.build()
     }
 
-    @Bean
-    fun corsConfigurer(): WebMvcConfigurer {
-        return object : WebMvcConfigurer {
-            override fun addCorsMappings(registry: CorsRegistry) {
-                registry.addMapping("/**")
-                    .allowedMethods("*")
-            }
-        }
-    }
 }

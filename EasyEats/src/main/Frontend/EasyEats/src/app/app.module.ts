@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {NgModule, Pipe, PipeTransform} from '@angular/core';
+import {BrowserModule, DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import {WelcomeScreenComponent} from './components/welcome-screen/welcome-screen.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeScreenComponent} from './components/home-screen/home-screen.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SignupComponent} from "./components/signup/signup.component";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './components/login/login.component';
@@ -15,6 +15,8 @@ import { SingleCategoryComponent } from './components/single-category/single-cat
 import { AllRecipesComponent } from './components/all-recipes/all-recipes.component';
 import {RecipeComponent} from "./components/recipe/recipe.component";
 import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
+import {HttpInterceptorProviders} from "./services/AuthInterceptor";
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { AddRecipeComponent } from './components/add-recipe/add-recipe.component
     SingleCategoryComponent,
     AllRecipesComponent,
     RecipeComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,9 @@ import { AddRecipeComponent } from './components/add-recipe/add-recipe.component
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+  HttpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

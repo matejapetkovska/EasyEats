@@ -8,6 +8,7 @@ import com.sorsix.finalproject.easyeats.models.exception.UsernameNotFoundExcepti
 import com.sorsix.finalproject.easyeats.models.exception.*
 import com.sorsix.finalproject.easyeats.repository.UserRepository
 import com.sorsix.finalproject.easyeats.service.UserService
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service
 @Service
 class UserServiceImpl(val repository: UserRepository, val passwordEncoder: PasswordEncoder) : UserService {
 
-    override fun login(username: String?, password: String?): User? {
+    override fun login(username: String?, password: String?, request: HttpServletRequest): User? {
         if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
             throw InvalidArgumentsException()
         }
@@ -26,6 +27,7 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
 
         if (user != null) {
             if (passwordEncoder.matches(password, user.password)) {
+                request.session.setAttribute("user", user)
                 return user
             } else {
                 throw InvalidPasswordException()
@@ -36,6 +38,10 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
 
     }
 
+    override fun getLoggedInUser(request: HttpServletRequest): User? {
+        return request.session.getAttribute("user") as? User
+    }
+
     override fun register(
         username: String?,
         email: String?,
@@ -44,7 +50,8 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
         name: String?,
         surname: String?,
         role: Role?,
-        image: String?
+        image: String?,
+        request: HttpServletRequest
     ): User? {
         if (username.isNullOrEmpty() || password.isNullOrEmpty() || email.isNullOrEmpty() || name.isNullOrEmpty() || surname.isNullOrEmpty() || role == null || image.isNullOrEmpty()) {
             val errorMessage = "Invalid or missing values for the following fields: " +
@@ -63,7 +70,7 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
         }
 
         val user = User(0, name, surname, email, username, passwordEncoder.encode(password), role, image)
-
+        request.session.setAttribute("user", user)
         return repository.save(user)
     }
 

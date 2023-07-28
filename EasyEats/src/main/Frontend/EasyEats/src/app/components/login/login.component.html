@@ -2,7 +2,7 @@
   <img ngSrc="../../assets/images/login.png" height="500" width="500">
   <div class="right-corner">
     <span class="phrase">Welcome back!</span>
-    <form (ngSubmit)="onSubmit()" class="signup-form">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="signup-form">
       <label for="username">Username:</label>
       <input type="text" id="username" [(ngModel)]="username" name="username" required>
       <label for="password">Password:</label>
@@ -12,10 +12,3 @@
     </form>
   </div>
 </main>
-
-
-
-
-
-
-
