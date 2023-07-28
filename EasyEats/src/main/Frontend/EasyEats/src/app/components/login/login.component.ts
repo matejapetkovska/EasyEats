@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/UserService";
 import {AuthService} from "../../services/AuthService";
+import {NgForm} from "@angular/forms";
+import {User} from "../../models/user";
 
 interface LoginRequest {
   username: string;
@@ -24,18 +26,15 @@ export class LoginComponent {
   }
 
 
-  onSubmit() {
-    const loginRequest: LoginRequest = {username: this.username, password: this.password};
+  onSubmit(form: NgForm) {
+    const loginRequest: LoginRequest = { username: this.username, password: this.password };
 
     this.http.post<any>('http://localhost:8081/api/login', loginRequest).subscribe(
       (response) => {
-        // Assuming the response contains a 'token' property with the JWT token
-        localStorage.setItem('authToken', response.token);
-        console.log('Token stored in localStorage:', response.token);
+        this.userService.saveUser(response);
         this.router.navigate(['/user-profile']);
       },
       (error: HttpErrorResponse) => {
-        console.error('Error response from login API:', error);
         this.errorMessage = error.error.message;
       }
     );
