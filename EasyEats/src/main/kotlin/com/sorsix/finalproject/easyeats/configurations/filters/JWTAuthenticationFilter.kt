@@ -43,6 +43,7 @@ class JWTAuthenticationFilter(
         if (creds == null) {
             throw UsernameNotFoundException("Invalid credentials")
         }
+
         val userDetails = userDetailsService!!.loadUserByUsername(creds.username)
         if (!passwordEncoder!!.matches(creds.password, userDetails.password)) {
             throw InvalidPasswordException()

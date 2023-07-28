@@ -4,6 +4,7 @@ import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsExcepti
 import com.sorsix.finalproject.easyeats.models.exception.InvalidPasswordException
 import com.sorsix.finalproject.easyeats.models.exception.UsernameNotFoundException
 import com.sorsix.finalproject.easyeats.service.UserService
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = ["http://localhost:4200"])
+@CrossOrigin(origins = ["http://localhost:4200"], allowCredentials = "true")
 class LoginController(val service: UserService) {
 
     data class LoginRequest(val username: String, val password: String)
@@ -19,7 +20,7 @@ class LoginController(val service: UserService) {
 
 
     @PostMapping("/login")
-    fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<Any> {
+    fun login(@RequestBody loginRequest: LoginRequest, request: HttpServletRequest): ResponseEntity<Any> {
         val username = loginRequest.username
         val password = loginRequest.password
 
@@ -29,7 +30,8 @@ class LoginController(val service: UserService) {
         }
 
         return try {
-            val user = service.login(username, password)
+            val user = service.login(username, password, request)
+            request.session.setAttribute("user", user)
             ResponseEntity.ok(user)
         } catch (exception: UsernameNotFoundException) {
             val errorResponse = ErrorResponse("Username not found")
