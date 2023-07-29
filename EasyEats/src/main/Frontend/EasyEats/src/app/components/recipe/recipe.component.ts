@@ -27,8 +27,8 @@ export class RecipeComponent implements OnInit{
     this.recipeDetailsService.getRecipeWithReview(recipe_id).subscribe(
       (data) => {
         this.recipeReview = data;
-        this.recipe.image="../../../assets/recipe_images/"+this.recipe.image;
-        console.log(this.recipe)
+        this.recipeReview.recipe.image="../../../assets/recipe_images/"+this.recipeReview.recipe.image;
+        console.log(this.recipeReview)
       },
       (error) => {
         console.error('Error fetching recipe details:', error);
