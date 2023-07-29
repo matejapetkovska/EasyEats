@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 
 
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -61,7 +60,7 @@ class JWTWebSecurityConfig(val passwordEncoder: PasswordEncoder, val userService
                 it.requestMatchers(UrlMapping.AUTH + UrlMapping.SIGN_UP).permitAll()
                     .requestMatchers(UrlMapping.AUTH + UrlMapping.LOGIN).permitAll()
                     .requestMatchers(UrlMapping.VALIDATE_JWT).permitAll()
-                    .requestMatchers("/recipe/{id}", "/recipes/add" ,"/recipes","/recipes/**","/categories","/categories/{id}", "/assets/**", "/signup", "/api/**", "/subcategories").permitAll()
+                    .requestMatchers("/recipe/{id}","/recipes","/recipes/**","/categories","/categories/{id}", "/assets/**", "/signup", "/api/**", "/subcategories").permitAll()
                     .anyRequest().authenticated()
             }
             .addFilter(JWTAuthenticationFilter(authenticationManager(), userService, passwordEncoder))

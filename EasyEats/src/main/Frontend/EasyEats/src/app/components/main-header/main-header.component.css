@@ -7,36 +7,40 @@
   margin-left: 15px;
 }
 
+a {
+  text-decoration: none;
+}
+
+.links>a:hover,a:hover{
+  color: var(--red-color);
+}
+
 .links {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-a {
-  text-decoration: none;
+.links>a {
   font-size: 23px;
   color: var(--green-color);
   font-family: 'Righteous', cursive;
 }
 
-a:hover{
-  color: var(--red-color);
-}
-
 .right-corner {
   display: flex;
   align-items: center;
-  gap: 2em;
-  margin-right: 2em;
+  gap: 1em;
+  margin-right: 20px;
+}
+
+.username {
+  color: var(--green-color);
+  font-weight: bold;
 }
 
 button{
-  margin-top: 25px;
-  margin-bottom: 10px;
-  width: 150px;
-  height: 40px;
-  font-size: 20px;
+  font-size: 15px;
   border: 2px solid var(--white);
   border-radius: 5px;
   background-color: var(--red-color);
@@ -50,9 +54,16 @@ button:hover {
   transform: scale(1.1);
 }
 
+button>a{
+  color: var(--white);
+}
+
+.log-in-btn {
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+}
+
 i {
   color: var(--green-color);
 }
-
-
-

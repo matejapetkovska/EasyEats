@@ -1,23 +1,33 @@
 <app-main-header></app-main-header>
 
-<main>
-  <div *ngIf="recipe" class="recipe">
+<main *ngIf="recipeReview">
+  <div class="recipe">
+    <h1 class="recipe-title">{{recipeReview.recipe.title}}</h1>
+    <div class="recipe-details">
+      <img ngSrc="{{recipeReview.recipe.image}}" width="300" height="400">
       <div class="recipe-info">
-        <h1 class="recipe-title">{{recipe.title}}</h1>
-        <img ngSrc="{{recipe.image}}" width="300" height="400">
-      </div>
-      <div class="recipe-details">
         <div class="ingredients">
           <span>Ingredients:</span>
-          <ul *ngFor="let ingredient of recipe.ingredients">
+          <ul *ngFor="let ingredient of recipeReview.recipe.ingredients">
             <li>{{ingredient.quantity}}{{ingredient.measurementUnit}} {{ingredient.name}}</li>
           </ul>
         </div>
         <div class="steps">
           <span>How to make it:</span>
-          <div>{{recipe.description}}</div>
+          <div>{{recipeReview.recipe.description}}</div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="reviews">
+    <span>Reviews</span>
+    <div *ngFor="let review of recipeReview.reviews" class="single-review">
+      <div class="user">{{review.user.first_name}}</div>
+      <div class="review-details">
+        <div><u>Rating:</u> {{review.rating}}/5</div>
+        <div>{{review.comment}}</div>
+      </div>
+    </div>
+  </div>
 </main>
 

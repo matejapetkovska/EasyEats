@@ -17,7 +17,7 @@ class Review (
     @OneToOne
     val user: User?,
 
-    @OneToOne
+    @ManyToOne
     val recipe: Recipe?
 
 ) { constructor() : this(0, 0, "", null, null) {}
