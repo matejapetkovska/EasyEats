@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Recipe} from "../../models/recipe";
 import {RecipeDetailsService} from "../../services/recipe-details.service";
 import {ActivatedRoute} from "@angular/router";
+import {RecipeReview} from "../../models/recipe-review";
 
 @Component({
   selector: 'app-recipe',
@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class RecipeComponent implements OnInit{
 
-  recipe: Recipe | undefined
+  recipeReview: RecipeReview | undefined
 
   constructor(private recipeDetailsService: RecipeDetailsService,
               private route: ActivatedRoute) { }
@@ -24,10 +24,9 @@ export class RecipeComponent implements OnInit{
 
   fetchRecipeDetails(recipe_id: string | null): void {
     if (!recipe_id) return;
-    this.recipeDetailsService.getRecipeDetails(recipe_id).subscribe(
+    this.recipeDetailsService.getRecipeWithReview(recipe_id).subscribe(
       (data) => {
-        this.recipe = data;
-        console.log(this.recipe)
+        this.recipeReview = data;
       },
       (error) => {
         console.error('Error fetching recipe details:', error);

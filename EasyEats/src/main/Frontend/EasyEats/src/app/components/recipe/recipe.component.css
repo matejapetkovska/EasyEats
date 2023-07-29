@@ -1,19 +1,16 @@
-main {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  margin: 50px;
-}
-
-.subcategories {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
 .recipe {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.recipe-details {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  width: 80%;
+  gap: 5em;
 }
 
 .recipe-title {
@@ -24,26 +21,53 @@ main {
   margin: 30px;
 }
 
-.recipe-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 img {
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin-bottom: 40px;
 }
 
-.recipe-details {
-  margin-right: 150px;
+span {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--green-color);
+}
+
+ul>li {
+  list-style-type: none;
+}
+
+ul>li::before {
+  content: "\1F374";
+  display: inline-block;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.steps {
+  text-align: justify;
+}
+
+.reviews {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
   margin-left: 150px;
 }
 
+.single-review {
+  border-bottom: 2px solid lightgrey;
+  margin-bottom: 20px;
+  width: 90%;
+  padding-bottom: 5px;
+}
 
-span {
-  font-size: 25px;
-  color: var(--red-color);
+.user {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.review-details {
+  padding-left: 25px;
 }
 
