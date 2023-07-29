@@ -49,6 +49,7 @@ export class SingleCategoryComponent implements OnInit {
         next: (recipes) => {
           if(recipes != null){
             this.recipes = recipes;
+            this.addPathToImages(recipes)
           }else{
             this.router.navigate(['/home']);
           }
@@ -65,6 +66,7 @@ export class SingleCategoryComponent implements OnInit {
       next: (recipes) => {
         if(recipes != null){
           this.recipes = recipes;
+          this.addPathToImages(recipes)
         }else{
           this.router.navigate(['/categories']);
         }
@@ -73,6 +75,12 @@ export class SingleCategoryComponent implements OnInit {
         console.error('error in fetching recipes by category and sub category');
       }
   });
+  }
+
+  addPathToImages(list: Recipe[]){
+    for(let i=0; i<list.length; i++){
+      list[i].image="../../../assets/recipe_images/"+list[i].image;
+    }
   }
 
 }

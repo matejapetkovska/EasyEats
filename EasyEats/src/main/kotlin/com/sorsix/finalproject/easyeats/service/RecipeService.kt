@@ -14,5 +14,5 @@ interface RecipeService {
 
     fun getAllRecipesByTitleContaining(queryText: String): List<Recipe>
 
-    fun addRecipe(title: String, description: String, file: MultipartFile, category_id: String, subCategory_id: String, ingredients: String): Recipe?
+    fun addRecipe(title: String, description: String, file: MultipartFile, category_id: String, subCategory_id: String, ingredients: String, user: User): Recipe?
 }

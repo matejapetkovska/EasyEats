@@ -31,7 +31,7 @@ class Recipe(
     val subCategory: SubCategory?,
 
     @ManyToOne
-    val user: User?
+    var user: User?
 
 ) { constructor() : this(0, "", "", mutableListOf(), "", null, null, null, null) {}
 }

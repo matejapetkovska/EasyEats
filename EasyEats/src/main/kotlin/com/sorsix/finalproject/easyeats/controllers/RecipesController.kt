@@ -1,16 +1,18 @@
 package com.sorsix.finalproject.easyeats.controllers
 
-import com.sorsix.finalproject.easyeats.models.Ingredient
 import com.sorsix.finalproject.easyeats.models.Recipe
-import com.sorsix.finalproject.easyeats.models.dto.IngredientDto
 import com.sorsix.finalproject.easyeats.service.RecipeService
+import com.sorsix.finalproject.easyeats.service.UserService
+import jakarta.servlet.http.HttpServletRequest
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/recipes")
 @CrossOrigin(origins = ["http://localhost:4200"])
-class RecipesController(private val recipeService: RecipeService) {
+class RecipesController(private val recipeService: RecipeService,
+                        private val userService: UserService) {
     @GetMapping("/{category_id}")
     fun getRecipesByCategory(@PathVariable category_id: String) : List<Recipe>? {
         return recipeService.getAllRecipesByCategory(category_id)
@@ -38,7 +40,12 @@ class RecipesController(private val recipeService: RecipeService) {
                   @RequestParam file: MultipartFile,
                   @RequestParam category_id: String,
                   @RequestParam subCategory_id: String,
-                  @RequestParam ingredients: String){
-        recipeService.addRecipe(title, description, file, category_id, subCategory_id, ingredients)
+                  @RequestParam ingredients: String,
+                    request: HttpServletRequest): ResponseEntity<Any>{
+        val user = userService.getLoggedInUser(request)
+            ?: return ResponseEntity.badRequest().body(Error("Error in saving recipe. Please log in first."))
+        val recipe = recipeService.addRecipe(title, description, file, category_id, subCategory_id, ingredients, user)
+            ?: return ResponseEntity.badRequest().body(Error("Error in saving recipe. Please change image name."))
+        return ResponseEntity.ok(recipe)
     }
 }
