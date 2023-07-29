@@ -36,6 +36,8 @@ export class AddRecipeComponent implements OnInit {
 
   ingredients : Ingredient[]= []
 
+  errorMessage: String = ''
+
   constructor(private categoryService: CategoryService,
               private subCategoryService: SubcategoryService,
               private recipeService: RecipeService){ }
@@ -103,7 +105,11 @@ export class AddRecipeComponent implements OnInit {
           next: () => {
             console.log('Recipe added successfully');
           },
-          error: () => {
+          error: (error) => {
+            if(error.status === 400){
+              this.errorMessage = error.error.message
+              console.log(this.errorMessage)
+            }
             console.log('error in adding recipe');
           }
         });

@@ -46,5 +46,7 @@
       <button (click)="onAddIngredient()">Add ingredient</button>
     </label><br>
 
+    <div *ngIf="errorMessage.length">{{errorMessage}}</div>
+
     <button (click)="onAddRecipe()">Add recipe</button>
 </form>

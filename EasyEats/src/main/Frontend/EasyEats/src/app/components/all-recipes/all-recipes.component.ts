@@ -26,6 +26,7 @@ export class AllRecipesComponent implements OnInit {
       .subscribe({
         next: (recipes) => {
             this.recipes = recipes;
+            this.addPathToImages(this.recipes)
         },
         error: () => {
           console.error('error in fetching recipes');
@@ -40,6 +41,14 @@ export class AllRecipesComponent implements OnInit {
       switchMap(value => this.recipeService.getRecipesByQueryText(value))
     ).subscribe(result => {
       this.recipes = result as Array<Recipe>;
+      this.addPathToImages(this.recipes)
     });
   }
+
+  addPathToImages(list: Recipe[]){
+    for(let i=0; i<list.length; i++){
+      list[i].image="../../../assets/recipe_images/"+list[i].image;
+    }
+  }
+
 }
