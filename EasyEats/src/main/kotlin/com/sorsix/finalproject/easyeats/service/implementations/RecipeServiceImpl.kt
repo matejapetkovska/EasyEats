@@ -1,23 +1,17 @@
 package com.sorsix.finalproject.easyeats.service.implementations
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.sorsix.finalproject.easyeats.models.Ingredient
 import com.sorsix.finalproject.easyeats.models.Recipe
 import com.sorsix.finalproject.easyeats.models.User
 import com.sorsix.finalproject.easyeats.models.dto.IngredientDto
 import com.sorsix.finalproject.easyeats.repository.RecipeRepository
-import com.sorsix.finalproject.easyeats.service.CategoryService
-import com.sorsix.finalproject.easyeats.service.IngredientService
-import com.sorsix.finalproject.easyeats.service.RecipeService
-import com.sorsix.finalproject.easyeats.service.SubCategoryService
-
+import com.sorsix.finalproject.easyeats.service.*
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.LocalDateTime
-import java.util.*
+import kotlin.io.path.exists
 
 @Service
 class RecipeServiceImpl(private val recipeRepository: RecipeRepository,
@@ -55,17 +49,22 @@ class RecipeServiceImpl(private val recipeRepository: RecipeRepository,
                             file: MultipartFile,
                             category_id: String,
                             subCategory_id: String,
-                            ingredients: String ): Recipe? {
+                            ingredients: String,
+                            user: User): Recipe? {
         val category = categoryService.getCategoryById(category_id.toLong())
         val subCategory = subCategoryService.getSubCategoryById(subCategory_id.toLong())
         val imageName = file.originalFilename
         var recipe : Recipe? = null
         if(imageName != null) {
-            val imageFilePath = Paths.get("C:\\Users\\Marija Anakieva\\Desktop\\easyEats1\\EasyEats\\EasyEats\\src\\main\\Frontend\\EasyEats\\src\\assets\\recipe_images", imageName).toString()
-            Files.copy(file.inputStream, Paths.get(imageFilePath))
-            recipe = Recipe(0, title, description,
-                mutableListOf() , imageName, LocalDateTime.now(),
-                category, subCategory, null)
+            val imageFilePath = Paths.get("C:\\Users\\Marija Anakieva\\Desktop\\easyEats1\\EasyEats\\EasyEats\\src\\main\\Frontend\\EasyEats\\src\\assets\\recipe_images", imageName)
+            if(!imageFilePath.exists()) {
+                Files.copy(file.inputStream, Paths.get(imageFilePath.toString()))
+                recipe = Recipe(
+                    0, title, description,
+                    mutableListOf(), imageName, LocalDateTime.now(),
+                    category, subCategory, user
+                )
+            }
         }
         if (recipe != null) {
             val objectMapper = jacksonObjectMapper()
