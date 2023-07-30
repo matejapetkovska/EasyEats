@@ -1,0 +1,121 @@
+.background>img {
+  background-size: cover;
+  background-position: center center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+main {
+  margin-top: 10px;
+  z-index: 1;
+  color: white;
+  width: 90%;
+}
+
+span {
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--neon-green);
+}
+
+.add-recipe {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+label {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+label:not(.image) {
+  display: flex;
+  justify-content: space-between;
+}
+
+input, select {
+  flex: 0 0 100px;
+  padding: 3px;
+  border: 2px solid var(--green-color);
+  border-radius: 5px;
+  background-color: #b9bbaf;
+  color: var(--red-color);
+}
+
+input:focus, select:focus {
+  color: var(--green-color);
+  font-weight: bold;
+  outline-color: var(--red-color);
+}
+
+option {
+  color: var(--red-color);
+  font-weight: bold;
+}
+
+::placeholder {
+  color: var(--red-color);
+  opacity: 0.8;
+}
+
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.ingredient-title {
+  font-weight: bold;
+  color: var(--neon-green);
+}
+
+p {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--neon-green);
+}
+
+li {
+  list-style-type: "\1F4CC";
+}
+
+button {
+  width: 200px;
+  font-size: 18px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 300ms ease-in-out;
+}
+
+.add-ingredient-btn {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  border: 2px solid var(--red-color);
+  background-color: var(--white);
+  font-weight: bold;
+  color: var(--red-color);
+}
+
+.add-recipe-btn {
+  border: 2px solid var(--white);
+  background-color: var(--red-color);
+  color: var(--white);
+  margin-bottom: 25px;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

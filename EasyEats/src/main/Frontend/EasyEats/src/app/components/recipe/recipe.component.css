@@ -33,15 +33,8 @@ span {
   color: var(--green-color);
 }
 
-ul>li {
-  list-style-type: none;
-}
-
-ul>li::before {
-  content: "\1F374";
-  display: inline-block;
-  font-size: 20px;
-  margin-right: 5px;
+li {
+  list-style-type: "\1F374";
 }
 
 .steps {
