@@ -1,52 +1,60 @@
-<form enctype="multipart/form-data">
+<div class="background">
+  <img src="../../assets/images/add-recipe.jpg">
+</div>
+<main class="add-recipe">
+  <span>Add a recipe</span>
+  <form enctype="multipart/form-data" class="form">
     <label>
       Title:
       <input placeholder="Title" required [(ngModel)]="title" name="title">
-    </label><br>
+    </label>
     <label>
-      Instructions how to make it:
-      <textarea required [(ngModel)]="description" name="description" aria-required="true"></textarea>
-    </label><br>
-    <label>
+      Description:
+      <input placeholder="Description" required [(ngModel)]="description" name="description" aria-required="true">
+    </label>
+    <label class="image">
       Image:
-        <input type="file" requiered (change)="onFileChange($event)" accept="image/*">
-    </label><br>
+      <input type="file" required (change)="onFileChange($event)" accept="image/*">
+    </label>
     <label>
       Choose category:
       <select [(ngModel)]="selectedCategoryId" name="selectedCategory">
         <option *ngFor="let category of categories" [value]=category.id>{{category.name}}</option>
       </select>
-    </label><br>
+    </label>
     <label>
       Choose subcategory:
       <select [(ngModel)]="selectedSubCategoryId" name="selectedSubCategory">
         <option *ngFor="let subCategory of subCategories" [value]=subCategory.id>{{subCategory.name}}</option>
       </select>
-    </label><br>
-    <div *ngIf="ingredients.length">
-      <p>Added ingredients:</p>
-      <div *ngFor="let addedIngredient of ingredients">
-        {{addedIngredient.name}}
-      </div>
-    </div>
-    <label>
-      Ingredients:
+    </label>
+    <label class="ingredients">
+      <p class="ingredient-title">Ingredients:</p>
       <label>
         Name:
-        <input [(ngModel)]="ingredient.name" name="ingredientName">
+        <input [(ngModel)]="ingredient.name" name="ingredientName" placeholder="Name of ingredient">
       </label>
       <label>
-        Quntity:
-        <input [(ngModel)]="ingredient.quantity" name="ingredientQuantity">
+        Quantity:
+        <input [(ngModel)]="ingredient.quantity" name="ingredientQuantity" placeholder="Quantity">
       </label>
       <label>
         Measurement unit:
-        <input [(ngModel)]="ingredient.measurementUnit" name="ingredientMeasurementUnit">
+        <input [(ngModel)]="ingredient.measurementUnit" name="ingredientMeasurementUnit" placeholder="kg/g/ml/l ...">
       </label>
-      <button (click)="onAddIngredient()">Add ingredient</button>
-    </label><br>
+
+      <div *ngIf="ingredients.length" class="added-ingredients">
+        <p>Added ingredients:</p>
+        <ul *ngFor="let addedIngredient of ingredients">
+          <li>{{addedIngredient.quantity}}{{addedIngredient.measurementUnit}} {{addedIngredient.name}}</li>
+        </ul>
+      </div>
+
+      <button (click)="onAddIngredient()" class="add-ingredient-btn">Add ingredient</button>
+    </label>
 
     <div *ngIf="errorMessage.length">{{errorMessage}}</div>
 
-    <button (click)="onAddRecipe()">Add recipe</button>
-</form>
+    <button (click)="onAddRecipe()" class="add-recipe-btn">Add recipe</button>
+  </form>
+</main>
