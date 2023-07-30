@@ -28,7 +28,6 @@ export class MainHeaderComponent implements OnInit{
         (user) => {
           if(user) {
             this.user = user;
-            console.log('User data:', this.user);
           }
         },
         (error) => {
@@ -46,7 +45,6 @@ export class MainHeaderComponent implements OnInit{
       },
       error: error => {
         console.log(error)
-
       }
     })
   }
