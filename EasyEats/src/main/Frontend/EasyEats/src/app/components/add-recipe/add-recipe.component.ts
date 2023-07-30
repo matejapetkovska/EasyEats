@@ -76,11 +76,13 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onAddIngredient(){
-    let copyOfIngredient={...this.ingredient}
-    this.ingredients.push(copyOfIngredient)
-    this.ingredient.name=''
-    this.ingredient.quantity=0
-    this.ingredient.measurementUnit=''
+    if(this.ingredient.name != "" && this.ingredient.quantity != 0){
+      let copyOfIngredient={...this.ingredient}
+      this.ingredients.push(copyOfIngredient)
+      this.ingredient.name=''
+      this.ingredient.quantity=0
+      this.ingredient.measurementUnit=''
+    }
   }
 
   createFormData(): FormData{
