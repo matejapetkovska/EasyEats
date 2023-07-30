@@ -22,12 +22,26 @@
   <div class="reviews">
     <span>Reviews</span>
     <div *ngFor="let review of recipeReview.reviews" class="single-review">
-      <div class="user">{{review.user.first_name}}</div>
+      <div class="user">{{ review.user.first_name }}</div>
       <div class="review-details">
-        <div><u>Rating:</u> {{review.rating}}/5</div>
-        <div>{{review.comment}}</div>
+        <div><u>Rating:</u> {{ review.rating }}/5</div>
+        <div>{{ review.comment }}</div>
       </div>
     </div>
+  </div>
+  <div class="add-review">
+    <span>Add your review</span>
+    <form enctype="multipart/form-data" class="form">
+      <label>
+        Your opinion:
+        <input placeholder="Comment" required [(ngModel)]="comment" name="title">
+      </label>
+      <label>
+        Rating:
+        <input placeholder="/5" required [(ngModel)]="rating" name="description" aria-required="true">
+      </label>
+      <button (click)="onAddReview()">Add</button>
+    </form>
   </div>
 </main>
 

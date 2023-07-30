@@ -15,4 +15,8 @@ export class RecipeDetailsService {
     return this.httpClient.get<RecipeReview>(`${this.url}/${recipe_id}`)
   }
 
+  addReview(recipe_id: String | null, formData: FormData): Observable<any> {
+    return this.httpClient.post<FormData>(`${this.url}/${recipe_id}`, formData)
+  }
+
 }

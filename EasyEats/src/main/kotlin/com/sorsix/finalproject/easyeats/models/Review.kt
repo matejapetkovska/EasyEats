@@ -14,7 +14,7 @@ class Review (
 
     val comment: String,
 
-    @OneToOne
+    @ManyToOne
     val user: User?,
 
     @ManyToOne
