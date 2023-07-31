@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Recipe } from 'src/app/models/recipe';
+import { SubCategory } from 'src/app/models/sub_category';
 import { CategoryService } from 'src/app/services/category-service.service';
 import { RecipeService } from 'src/app/services/recipe-service.service';
+import { SubcategoryService } from 'src/app/services/subcategory-service.service';
 
 @Component({
   selector: 'app-single-category',
@@ -18,16 +20,20 @@ export class SingleCategoryComponent implements OnInit {
 
   category: Category | undefined
 
+  subCategories: SubCategory[] | undefined
+
   constructor(private route: ActivatedRoute,
               private recipeService: RecipeService,
               private router: Router,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              private subCategoryService: SubcategoryService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.category_id = params['category_id'];
       this.fetchRecipes();
       this.getCategoryById();
+      this.getAllSubCategories();
     });
   }
 
@@ -39,6 +45,18 @@ export class SingleCategoryComponent implements OnInit {
         },
         error: () => {
           console.error('error in getting category by id');
+        }
+      })
+  }
+
+  getAllSubCategories(){
+    this.subCategoryService.getAllSubCategories()
+      .subscribe({
+        next: (subCategories) => {
+          this.subCategories = subCategories;
+        },
+        error: () => {
+          console.error('error in getting subcategories');
         }
       })
   }

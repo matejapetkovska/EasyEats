@@ -41,11 +41,10 @@ class RecipesController(private val recipeService: RecipeService,
                   @RequestParam category_id: String,
                   @RequestParam subCategory_id: String,
                   @RequestParam ingredients: String,
-                    request: HttpServletRequest): ResponseEntity<Any>{
+                  request: HttpServletRequest): ResponseEntity<Any>{
         val user = userService.getLoggedInUser(request)
             ?: return ResponseEntity.badRequest().body(Error("Error in saving recipe. Please log in first."))
         val recipe = recipeService.addRecipe(title, description, file, category_id, subCategory_id, ingredients, user)
-            ?: return ResponseEntity.badRequest().body(Error("Error in saving recipe. Please change image name."))
         return ResponseEntity.ok(recipe)
     }
 }

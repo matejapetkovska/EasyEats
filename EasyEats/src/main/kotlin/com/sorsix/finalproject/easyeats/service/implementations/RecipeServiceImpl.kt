@@ -44,6 +44,14 @@ class RecipeServiceImpl(private val recipeRepository: RecipeRepository,
     override fun getAllRecipesByTitleContaining(queryText: String): List<Recipe> {
         return recipeRepository.findByTitleContainingIgnoreCase(queryText)
     }
+    private fun generateRandomImageName(): String{
+        val sb = StringBuilder()
+        for (i in 0..5) {
+            val rand = listOf(('a'..'z'), ('A'..'Z')).flatten().random()
+            sb.append(rand)
+        }
+        return sb.toString()
+    }
 
     override fun addRecipe( title: String,
                             description: String,
@@ -51,36 +59,32 @@ class RecipeServiceImpl(private val recipeRepository: RecipeRepository,
                             category_id: String,
                             subCategory_id: String,
                             ingredients: String,
-                            user: User): Recipe? {
+                            user: User): Recipe {
         val category = categoryService.getCategoryById(category_id.toLong())
         val subCategory = subCategoryService.getSubCategoryById(subCategory_id.toLong())
-        val imageName = file.originalFilename
-        var recipe : Recipe? = null
-        if(imageName != null) {
-            val imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\recipe_images\\", imageName)
-            if(!imageFilePath.exists()) {
-                Files.copy(file.inputStream, Paths.get(imageFilePath.toString()))
-                recipe = Recipe(
-                    0, title, description,
-                    mutableListOf(), imageName, LocalDateTime.now(),
-                    category, subCategory, user
-                )
-            }
+
+        var imageName = generateRandomImageName()+".jpg"
+        var imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\recipe_images\\", imageName)
+        while(imageFilePath.exists()) {
+            imageName = generateRandomImageName()
+            imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\recipe_images\\", imageName)
         }
-        if (recipe != null) {
-            val objectMapper = jacksonObjectMapper()
-            val ingredientsList: List<IngredientDto> = objectMapper.readValue(
-                ingredients,
-                objectMapper.typeFactory.constructCollectionType(List::class.java, IngredientDto::class.java)
+        Files.copy(file.inputStream, Paths.get(imageFilePath.toString()))
+
+        val recipe = Recipe(
+                0, title, description,
+                mutableListOf(), imageName, LocalDateTime.now(),
+                category, subCategory, user
             )
-            for (ingredient in ingredientsList) {
-                val savedIngredient = ingredientService.saveIngredient(ingredient.name, ingredient.quantity, ingredient.measurementUnit)
-                recipe.ingredients.add(savedIngredient)
-            }
-            return recipeRepository.save(recipe)
+
+        val objectMapper = jacksonObjectMapper()
+        val ingredientsList: List<IngredientDto> = objectMapper.readValue(ingredients,
+            objectMapper.typeFactory.constructCollectionType(List::class.java, IngredientDto::class.java))
+        for (ingredient in ingredientsList) {
+            val savedIngredient = ingredientService.saveIngredient(ingredient.name, ingredient.quantity, ingredient.measurementUnit)
+            recipe.ingredients.add(savedIngredient)
         }
-        return null
+
+        return recipeRepository.save(recipe)
     }
-
-
 }
