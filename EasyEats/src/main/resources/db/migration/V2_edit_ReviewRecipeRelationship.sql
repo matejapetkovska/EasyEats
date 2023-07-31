@@ -9,4 +9,4 @@ ALTER TABLE reviews ADD CONSTRAINT FK_reviews_recipe
 
 
 insert into reviews(comment, rating, recipe_id, user_id)
-values ('Tasty!',4,1,16)
+values ('Tasty!',4,1,1)

@@ -2,7 +2,7 @@
 
 <main>
   <div class="subcategories">
-    <div *ngFor="let subCategory of category?.sub_categories">
+    <div *ngFor="let subCategory of subCategories">
       <button (click)="onClickOfSubCategory(subCategory.id)">{{subCategory.name}}</button>
     </div>
   </div>
