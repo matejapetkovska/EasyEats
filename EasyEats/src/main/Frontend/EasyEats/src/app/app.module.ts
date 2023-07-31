@@ -1,5 +1,5 @@
-import {NgModule, Pipe, PipeTransform} from '@angular/core';
-import {BrowserModule, DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
@@ -17,6 +17,7 @@ import {RecipeComponent} from "./components/recipe/recipe.component";
 import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
 import {HttpInterceptorProviders} from "./services/AuthInterceptor";
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { EditRecipeComponent } from './components/edit-recipe/edit-recipe.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     AllRecipesComponent,
     RecipeComponent,
     AddRecipeComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    EditRecipeComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { AllRecipesComponent } from './components/all-recipes/all-recipes.compon
 import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
 import {UserProfileComponent} from "./components/user-profile/user-profile.component";
 import {RecipeComponent} from "./components/recipe/recipe.component";
+import {EditRecipeComponent} from "./components/edit-recipe/edit-recipe.component";
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'recipes/:category_id', component: SingleCategoryComponent},
   {path: 'recipes', component: AllRecipesComponent},
   {path: 'addrecipe', component: AddRecipeComponent},
+  {path: 'editrecipe/:recipe_id', component: EditRecipeComponent},
   {path: 'user-profile', component: UserProfileComponent},
   {path: 'recipe/:recipe_id', component: RecipeComponent},
   { path: 'user-profile/:username', component: UserProfileComponent }

@@ -8,7 +8,7 @@ import {RecipeReview} from "../../models/recipe-review";
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.css']
 })
-export class RecipeComponent implements OnInit{
+export class RecipeComponent implements OnInit {
 
   recipeReview: RecipeReview | undefined
 
@@ -16,10 +16,11 @@ export class RecipeComponent implements OnInit{
 
   rating: String | undefined
 
-  errorMessage: String=""
+  errorMessage: String = ""
 
   constructor(private recipeDetailsService: RecipeDetailsService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -33,7 +34,7 @@ export class RecipeComponent implements OnInit{
     this.recipeDetailsService.getRecipeWithReview(recipe_id).subscribe(
       (data) => {
         this.recipeReview = data;
-        this.recipeReview.recipe.image="../../../assets/recipe_images/"+this.recipeReview.recipe.image;
+        this.recipeReview.recipe.image = "../../../assets/recipe_images/" + this.recipeReview.recipe.image;
       },
       (error) => {
         console.error('Error fetching recipe details:', error);
@@ -41,9 +42,9 @@ export class RecipeComponent implements OnInit{
     );
   }
 
-  createFormData(): FormData{
+  createFormData(): FormData {
     const formData = new FormData();
-    if(this.comment != null && this.rating != null){
+    if (this.comment != null && this.rating != null) {
       formData.append('comment', this.comment.toString())
       formData.append('rating', this.rating.toString())
     }
@@ -53,7 +54,7 @@ export class RecipeComponent implements OnInit{
   onAddReview() {
     const formData = this.createFormData();
     this.route.paramMap.subscribe(params => {
-      const recipe_id = params.get('recipe_id');
+      const recipe_id = params.get('recipe_id')
       this.recipeDetailsService.addReview(recipe_id, formData).subscribe({
         next: (newReview) => {
           this.recipeReview!!.reviews.push(newReview);
@@ -66,6 +67,6 @@ export class RecipeComponent implements OnInit{
           }
         }
       });
-    });
+    })
   }
 }
