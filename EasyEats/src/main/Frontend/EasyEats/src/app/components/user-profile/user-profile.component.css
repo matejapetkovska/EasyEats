@@ -1,0 +1,151 @@
+.container {
+  position: relative;
+}
+
+.background>img {
+  background-size: cover;
+  background-position: center center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.user {
+  position: absolute;
+  top: 50px;
+  left: 35%;
+  transform: translateX(-50%);
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  width: 1000px;
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.profile-item {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  color: var(--red-color);
+}
+
+.profile-item label {
+  font-weight: bold;
+  margin-right: 10px;
+  width: 110px;
+  font-size: 20px;
+}
+
+#button {
+  width: 400px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--red-color);
+  background-color: var(--white);
+  color: var(--red-color);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 300ms ease-in-out;
+  margin-top: 170px;
+  margin-left: -400px;
+  text-align: center;
+}
+
+#button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  border: 2px solid var(--white);
+  background-color: var(--red-color);
+  color: var(--white);
+}
+
+p {
+  padding: 3px;
+  margin-left: 2px;
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--red-color);
+  background-color: var(--white);
+  color: var(--red-color);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 300ms ease-in-out;
+  flex: 0 0 100px;
+  margin-top: 10px;
+}
+
+p:focus {
+  color: var(--green-color);
+  font-weight: bold;
+  outline-color: #e28743;
+}
+
+h1 div {
+  color: var(--green-color);
+  font-weight: bold;
+  outline-color: #e28743;
+}
+
+h1 {
+  text-align: left;
+  padding-bottom: 50px;
+}
+
+.edit-item input{
+  width: 400px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--red-color);
+  background-color: var(--white);
+  color: var(--red-color);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 300ms ease-in-out;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.edit-profile {
+  margin-top: -30px;
+}
+
+.edit-item label {
+  font-size: 20px;
+  color: var(--red-color);
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.edit-profile button {
+  width: 400px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--red-color);
+  background-color: var(--white);
+  color: var(--red-color);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 300ms ease-in-out;
+  margin-top: 70px;
+  margin-left: 30px;
+  text-align: center;
+}
+
+.edit-profile button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  border: 2px solid var(--white);
+  background-color: var(--red-color);
+  color: var(--white);
+}
+

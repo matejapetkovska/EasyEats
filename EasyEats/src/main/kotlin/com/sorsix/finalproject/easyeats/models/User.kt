@@ -11,21 +11,21 @@ class User (
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     val id: Long = 0,
 
-    val first_name: String,
+    var first_name: String,
 
-    val last_name: String,
+    var last_name: String,
 
-    val email: String,
+    var email: String,
 
     @Column(unique = true)
-    val username: String,
+    var username: String,
 
-    val password: String,
+    var password: String,
 
     @Enumerated(value = EnumType.STRING)
     val role: Role,
 
-    val image: String
+    var image: String
 
     ){ constructor() : this(0, "", "", "", "", "", Role.USER, "") {}
 }

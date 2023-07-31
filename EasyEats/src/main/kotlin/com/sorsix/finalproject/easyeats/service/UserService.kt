@@ -14,6 +14,7 @@ interface UserService : UserDetailsService{
     fun doesEmailExist(email: String): Boolean
     fun login(username: String?, password: String?, request: HttpServletRequest): User?
     fun getLoggedInUser(request: HttpServletRequest): User?
+    fun updateUser(updatedUser: User): User
 }
 
 
