@@ -1,16 +1,16 @@
 <div class="background">
   <img src="../../assets/images/add-recipe.jpg">
 </div>
-<main class="add-recipe">
+<main class="add-recipe" *ngIf="recipe">
   <span>Add a recipe</span>
   <form enctype="multipart/form-data" class="form">
     <label>
       Title:
-      <input placeholder="Title" required [(ngModel)]="title" name="title">
+      <input placeholder="Title" required [(ngModel)]="title" name="title" [defaultValue]="recipe.title">
     </label>
     <label>
       Description:
-      <textarea required [(ngModel)]="description" name="description" aria-required="true"></textarea>
+      <textarea placeholder="Description" required [(ngModel)]="description" name="description" aria-required="true"></textarea>
     </label>
     <label class="image">
       Image:
@@ -55,6 +55,6 @@
 
     <div *ngIf="errorMessage.length">{{errorMessage}}</div>
 
-    <button (click)="onAddRecipe()" class="add-recipe-btn">Add recipe</button>
+    <button (click)="onEditRecipe()" class="add-recipe-btn">Edit recipe</button>
   </form>
 </main>

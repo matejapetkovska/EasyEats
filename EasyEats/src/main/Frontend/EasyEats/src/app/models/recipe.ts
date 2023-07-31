@@ -10,5 +10,5 @@ export interface Recipe{
     image: String;
     date: Date;
     category: Category;
-    sub_category: SubCategory;
+    subCategory: SubCategory;
 }

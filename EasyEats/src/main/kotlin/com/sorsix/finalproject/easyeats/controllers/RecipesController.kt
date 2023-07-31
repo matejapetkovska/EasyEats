@@ -48,4 +48,19 @@ class RecipesController(private val recipeService: RecipeService,
             ?: return ResponseEntity.badRequest().body(Error("Error in saving recipe. Please change image name."))
         return ResponseEntity.ok(recipe)
     }
+
+    @PutMapping("/edit/{recipe_id}")
+    fun editRecipe(@PathVariable recipe_id: String,
+                   @RequestParam title: String,
+                   @RequestParam description: String,
+                   @RequestParam category_id: String,
+                   @RequestParam subCategory_id: String,
+                   @RequestParam ingredients: String,
+                   request: HttpServletRequest) : ResponseEntity<Any> {
+        val user = userService.getLoggedInUser(request)
+            ?: return ResponseEntity.badRequest().body(Error("Error in editing recipe. Please log in first."))
+        val recipe = recipeService.editRecipe(recipe_id,title, description, category_id, subCategory_id, ingredients, user)
+            ?: return ResponseEntity.badRequest().body(Error("Error in editing recipe."))
+        return ResponseEntity.ok(recipe)
+    }
 }

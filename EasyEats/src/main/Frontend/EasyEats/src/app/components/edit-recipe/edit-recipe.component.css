@@ -88,10 +88,15 @@ option {
   color: var(--neon-green);
 }
 
-p {
+p:not(.uploaded-image) {
   font-size: 25px;
   font-weight: bold;
   color: var(--neon-green);
+}
+
+.uploaded-image {
+  color: var(--red-color);
+  font-weight: bold;
 }
 
 li {

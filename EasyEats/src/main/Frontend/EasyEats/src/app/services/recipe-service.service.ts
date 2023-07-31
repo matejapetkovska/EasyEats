@@ -33,10 +33,14 @@ export class RecipeService {
       return this.httpClient.get<Recipe[]>(`${this.url}/query/${queryText}`)
     }
   }
-  
+
   addRecipe(formData: FormData): Observable<any>{
-  
     return this.httpClient.post<FormData>(`${this.url}/add`, formData);
+  }
+
+  editRecipe(recipe_id: String | null, formData: FormData): Observable<any> {
+    console.log(formData)
+    return this.httpClient.put<FormData>(`${this.url}/edit/${recipe_id}`, formData);
   }
 
 }

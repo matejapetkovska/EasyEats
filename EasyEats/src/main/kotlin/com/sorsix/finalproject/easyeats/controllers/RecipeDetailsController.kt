@@ -1,5 +1,6 @@
 package com.sorsix.finalproject.easyeats.controllers
 
+import com.sorsix.finalproject.easyeats.models.Recipe
 import com.sorsix.finalproject.easyeats.models.dto.RecipeReviewDto
 import com.sorsix.finalproject.easyeats.service.RecipeDetailsService
 import com.sorsix.finalproject.easyeats.service.ReviewService
@@ -19,7 +20,7 @@ class RecipeDetailsController(
     private val session: HttpSession
 ) {
     @GetMapping("/{recipe_id}")
-    fun getRecipeDetails(@PathVariable recipe_id: String): RecipeReviewDto? {
+    fun getRecipeWithReview(@PathVariable recipe_id: String): RecipeReviewDto? {
         val recipe = recipeDetailsService.getRecipeById(recipe_id)
         if (recipe != null) {
             val reviews = reviewService.getReviewById(recipe_id)
@@ -27,6 +28,11 @@ class RecipeDetailsController(
             return recipeWithReviews
         }
         return null
+    }
+
+    @GetMapping("/recipeDetails/{recipe_id}")
+    fun getRecipeDetails(@PathVariable recipe_id: String): Recipe? {
+        return this.recipeDetailsService.getRecipeById(recipe_id)
     }
 
     @PostMapping("/{recipe_id}")

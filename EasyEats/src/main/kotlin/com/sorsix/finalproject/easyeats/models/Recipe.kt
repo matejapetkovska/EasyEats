@@ -12,23 +12,23 @@ class Recipe(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    val title: String,
+    var title: String,
 
     @Column(columnDefinition = "TEXT")
-    val description: String,
+    var description: String,
 
     @OneToMany(cascade = [CascadeType.PERSIST])
     var ingredients: MutableList<Ingredient>,
 
-    val image: String,
+    var image: String,
 
     val date: LocalDateTime?,
 
     @ManyToOne
-    val category: Category?,
+    var category: Category?,
 
     @ManyToOne
-    val subCategory: SubCategory?,
+    var subCategory: SubCategory?,
 
     @ManyToOne
     var user: User?
