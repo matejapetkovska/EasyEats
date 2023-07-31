@@ -42,6 +42,20 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
         return request.session.getAttribute("user") as? User
     }
 
+    override fun updateUser(updatedUser: User): User {
+        val existingUser = repository.findById(updatedUser.id)
+            .orElseThrow { UsernameNotFoundException() }
+
+        existingUser.first_name = updatedUser.first_name
+        existingUser.last_name = updatedUser.last_name
+        existingUser.email = updatedUser.email
+        existingUser.password = updatedUser.password
+        existingUser.image = updatedUser.image
+        existingUser.username = updatedUser.username
+
+        return repository.save(existingUser)
+    }
+
     override fun register(
         username: String?,
         email: String?,

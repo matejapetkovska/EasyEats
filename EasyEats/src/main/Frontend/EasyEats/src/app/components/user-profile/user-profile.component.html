@@ -1,13 +1,81 @@
-<div *ngIf="user">
-  <h1>User Profile</h1>
-  <div>
-    <p><strong>First Name:</strong> {{ user.first_name }}</p>
-    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
-    <p><strong>Username:</strong> {{ user.username }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
+<app-header></app-header>
+
+<div class="container">
+  <div class="background">
+    <img src="../../../assets/images/background-user_profile.png" alt="Background Image" />
+  </div>
+
+  <div *ngIf="user" class="user">
+    <h1>Profile for user: <div>{{user.username}}</div></h1>
+    <div *ngIf="!isEditMode" class="profile-info">
+      <div class="profile-info">
+        <div class="left-column">
+          <div class="profile-item">
+            <label>First Name:</label>
+            <p>{{ user.first_name }}</p>
+          </div>
+          <div class="profile-item">
+            <label>Last Name:</label>
+            <p>{{ user.last_name }}</p>
+          </div>
+        </div>
+        <div class="right-column">
+          <div class="profile-item">
+            <label>Username:</label>
+            <p>{{ user.username }}</p>
+          </div>
+          <div class="profile-item">
+            <label>Email:</label>
+            <p>{{ user.email }}</p>
+          </div>
+        </div>
+      </div>
+      <button (click)="toggleEdit()" id="button">Edit your profile</button>
+    </div>
+
+
+    <div *ngIf="isEditMode" class="edit-profile">
+      <div class="edit-item">
+        <label>First Name:</label>
+        <input [(ngModel)]="editedUser.first_name" />
+      </div>
+      <div class="edit-item">
+        <label>Last Name:</label>
+        <input [(ngModel)]="editedUser.last_name" />
+      </div>
+      <div class="edit-item">
+        <label>Username:</label>
+        <input [(ngModel)]="editedUser.username" />
+      </div>
+      <div class="edit-item">
+        <label>Email:</label>
+        <input [(ngModel)]="editedUser.email" />
+      </div>
+      <div class="edit-item">
+        <label>Password:</label>
+        <input type="password" [(ngModel)]="editedUser.password" />
+      </div>
+      <div class="edit-item">
+        <label>Repeat Password:</label>
+        <input type="password" [(ngModel)]="editedUser.repeatPass" />
+      </div>
+      <div class="edit-item">
+        <label>Image:</label>
+        <input [(ngModel)]="editedUser.image" />
+      </div>
+      <div class="edit-item">
+        <label>Role:</label>
+        <input [(ngModel)]="editedUser.role" />
+      </div>
+      <button (click)="saveChanges()">Save Changes</button>
+      <button (click)="toggleEdit()">Cancel</button>
+    </div>
+  </div>
+
+  <div *ngIf="!user" class="user">
+    <p>User data not found.</p>
   </div>
 </div>
 
-<div *ngIf="!user">
-  <p>User data not found.</p>
-</div>
+
+

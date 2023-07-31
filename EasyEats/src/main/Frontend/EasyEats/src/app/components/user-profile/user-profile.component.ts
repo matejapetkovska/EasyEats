@@ -11,6 +11,9 @@ import { Router } from "@angular/router";
 export class UserProfileComponent implements OnInit {
 
   user: User | undefined;
+  isEditMode = false;
+  editedUser: User = {};
+
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -19,6 +22,7 @@ export class UserProfileComponent implements OnInit {
       (user) => {
         if(user) {
           this.user = user;
+          this.editedUser = { ...user };
           console.log('User data:', this.user);
         }
       },
@@ -28,4 +32,22 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
+  toggleEdit(): void {
+    this.isEditMode = !this.isEditMode;
+  }
+
+  saveChanges(): void {
+    this.userService.updateUser(this.editedUser).subscribe(
+      (response) => {
+        this.user = { ...this.editedUser };
+        this.userService.saveUserUpdate(this.editedUser);
+        this.isEditMode = false;
+      },
+      (error) => {
+        console.error('Error updating user data:', error);
+      }
+    );
+  }
+
 }
+
