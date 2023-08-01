@@ -14,5 +14,4 @@ interface RecipeRepository: JpaRepository<Recipe, Long> {
     fun findByTitleContainingIgnoreCase(title: String): List<Recipe>
 
     fun findBySubCategory_Id(subCategory_id: Long): List<Recipe>
-
 }

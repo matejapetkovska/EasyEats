@@ -1,6 +1,7 @@
 package com.sorsix.finalproject.easyeats.controllers
 
 import com.sorsix.finalproject.easyeats.models.Recipe
+import com.sorsix.finalproject.easyeats.repository.RecipeRepository
 import com.sorsix.finalproject.easyeats.service.RecipeService
 import com.sorsix.finalproject.easyeats.service.UserService
 import jakarta.servlet.http.HttpServletRequest
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile
 @RequestMapping("/recipes")
 @CrossOrigin(origins = ["http://localhost:4200"])
 class RecipesController(private val recipeService: RecipeService,
+                        private val recipeRepository: RecipeRepository,
                         private val userService: UserService) {
     @GetMapping("/{category_id}")
     fun getRecipesByCategory(@PathVariable category_id: String) : List<Recipe>? {
@@ -62,5 +64,10 @@ class RecipesController(private val recipeService: RecipeService,
         val recipe = recipeService.editRecipe(recipe_id,title, description, category_id, subCategory_id, ingredients, user)
             ?: return ResponseEntity.badRequest().body(Error("Error in editing recipe."))
         return ResponseEntity.ok(recipe)
+    }
+
+    @DeleteMapping("/delete/{recipe_id}")
+    fun deleteRecipe(@PathVariable recipe_id: String): Unit? {
+        return recipe_id.toLongOrNull()?.let { recipeRepository.deleteById(it) }
     }
 }
