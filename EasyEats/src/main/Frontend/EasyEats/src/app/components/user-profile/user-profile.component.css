@@ -45,29 +45,6 @@
   font-size: 20px;
 }
 
-#button {
-  width: 400px;
-  height: 40px;
-  font-size: 20px;
-  border-radius: 5px;
-  border: 2px solid var(--red-color);
-  background-color: var(--white);
-  color: var(--red-color);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
-  transition: transform 300ms ease-in-out;
-  margin-top: 170px;
-  margin-left: -100px;
-  text-align: center;
-}
-
-#button:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-  border: 2px solid var(--white);
-  background-color: var(--red-color);
-  color: var(--white);
-}
-
 p {
   padding: 3px;
   margin-left: 2px;
@@ -149,7 +126,16 @@ h1 {
   color: var(--white);
 }
 
-.profile-info button {
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 190px;
+  margin-left: -650px;
+}
+
+#button,
+.profile-info-button {
   width: 400px;
   height: 40px;
   font-size: 20px;
@@ -159,12 +145,23 @@ h1 {
   color: var(--red-color);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
   transition: transform 300ms ease-in-out;
-  margin-top: -49px;
-  margin-left: 30px;
   text-align: center;
+  margin-bottom: 15px;
 }
 
-.profile-info button:hover {
+#button {
+  margin-right: 40px;
+}
+
+#button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  border: 2px solid var(--white);
+  background-color: var(--red-color);
+  color: var(--white);
+}
+
+.profile-info-button:hover {
   cursor: pointer;
   transform: scale(1.1);
   border: 2px solid var(--white);
