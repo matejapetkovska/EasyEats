@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 
 @Configuration
@@ -51,7 +52,7 @@ class JWTWebSecurityConfig(val passwordEncoder: PasswordEncoder, val userService
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
-            .cors { it.disable() }
+            .cors { }
             .csrf { it.disable() }
             .sessionManagement { session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -60,10 +61,14 @@ class JWTWebSecurityConfig(val passwordEncoder: PasswordEncoder, val userService
                 it.requestMatchers(UrlMapping.AUTH + UrlMapping.SIGN_UP).permitAll()
                     .requestMatchers(UrlMapping.AUTH + UrlMapping.LOGIN).permitAll()
                     .requestMatchers(UrlMapping.VALIDATE_JWT).permitAll()
-                    .requestMatchers("/recipe/**","/recipes/**","/categories","/categories/{id}", "/assets/**", "/signup", "/api/**", "/subcategories").permitAll()
+//                    .requestMatchers("/recipe/**","/recipes/**","/categories","/categories/{id}", "/assets/**", "/signup", "/api/**", "/subcategories").permitAll()
+                    .requestMatchers("/signup", "/api/**").permitAll()
                     .anyRequest().authenticated()
             }
-            .addFilter(JWTAuthenticationFilter(authenticationManager(), userService, passwordEncoder))
+            .addFilterBefore(
+                JWTAuthenticationFilter(authenticationManager(), userService, passwordEncoder),
+                UsernamePasswordAuthenticationFilter::class.java
+            )
         return http.build()
     }
 
