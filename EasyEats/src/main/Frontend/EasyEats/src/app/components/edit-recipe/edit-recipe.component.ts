@@ -5,7 +5,7 @@ import {Ingredient} from "../../models/ingredient";
 import {CategoryService} from "../../services/category-service.service";
 import {SubcategoryService} from "../../services/subcategory-service.service";
 import {RecipeService} from "../../services/recipe-service.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Recipe} from "../../models/recipe";
 import {RecipeDetailsService} from "../../services/recipe-details.service";
 
@@ -22,8 +22,6 @@ export class EditRecipeComponent {
   title: String = ''
 
   description: String = ''
-
-  selectedFile: File | null = null
 
   selectedCategoryId: Number | undefined
 
@@ -45,7 +43,8 @@ export class EditRecipeComponent {
               private recipeService: RecipeService,
               private categoryService: CategoryService,
               private subCategoryService: SubcategoryService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -86,7 +85,6 @@ export class EditRecipeComponent {
     this.recipeDetailsService.getRecipe(recipe_id).subscribe(
       (data) => {
         this.recipe = data;
-        // this.selectedFile = this.recipe.;
         this.title = this.recipe.title;
         this.description = this.recipe.description;
         this.selectedCategoryId = this.recipe.category.id;
@@ -97,10 +95,6 @@ export class EditRecipeComponent {
         console.error('Error fetching recipe details:', error);
       }
     );
-  }
-
-  onFileChange(event: any) {
-    this.selectedFile = event.target.files[0];
   }
 
   onAddIngredient(){
@@ -115,12 +109,10 @@ export class EditRecipeComponent {
 
   createFormData(): FormData {
     const formData = new FormData();
-    if (this.title != null && this.description != null &&
-      this.selectedFile != null && this.selectedCategoryId != null &&
+    if (this.title != null && this.description != null && this.selectedCategoryId != null &&
       this.selectedSubCategoryId != null && this.ingredients != null) {
       formData.append('title', this.title.toString())
       formData.append('description', this.description.toString())
-      // formData.append('file', this.selectedFile);
       formData.append('category_id', this.selectedCategoryId.toString())
       formData.append('subCategory_id', this.selectedSubCategoryId.toString())
       formData.append('ingredients', JSON.stringify(this.ingredients))
@@ -135,6 +127,7 @@ export class EditRecipeComponent {
       this.recipeService.editRecipe(recipe_id, formData)
         .subscribe({
           next: () => {
+            this.router.navigate(['/recipes']);
             console.log('Recipe edited successfully');
           },
           error: (error) => {
