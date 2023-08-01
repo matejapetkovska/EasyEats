@@ -23,13 +23,29 @@ export class SignupComponent {
     role: 'USER',
   };
 
+  selectedFile: File | null = null
+
   errorMessage: string = '';
 
   constructor(private router: Router, private userService: UserService, private http: HttpClient) {
   }
 
+  onFileChange(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  createFormData(): FormData{
+    const formData = new FormData()
+    if(this.user != null && this.selectedFile != null){
+      formData.append("request", JSON.stringify(this.user))
+      formData.append("file", this.selectedFile)
+    }
+    return formData
+  }
+
   onSignUp(form: NgForm) {
-    this.http.post<any>('http://localhost:8081/signup', this.user).subscribe(
+    const formData = this.createFormData()
+    this.http.post<any>('http://localhost:8081/signup', formData).subscribe(
       (response) => {
         this.userService.saveUser(response);
         this.router.navigate(['/home']);

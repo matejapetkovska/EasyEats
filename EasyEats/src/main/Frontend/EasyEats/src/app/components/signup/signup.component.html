@@ -29,7 +29,7 @@
       </label>
       <label>
         Profile picture:
-        <input placeholder="Image" required [(ngModel)]="user.image" name="image" aria-required="true">
+        <input type="file" required (change)="onFileChange($event)" accept="image/*">
       </label>
 
 

@@ -1,5 +1,6 @@
 package com.sorsix.finalproject.easyeats.controllers
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.sorsix.finalproject.easyeats.models.enumerations.Role
 import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
 import com.sorsix.finalproject.easyeats.models.exception.PasswordDoNotMatch
@@ -7,6 +8,7 @@ import com.sorsix.finalproject.easyeats.service.UserService
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
 @RestController
@@ -28,50 +30,53 @@ class SignUpController(val userService: UserService) {
     data class ErrorResponse(val message: String)
 
     @PostMapping
-    fun signUp(@RequestBody request: UserRegistrationRequest, httprequest: HttpServletRequest): ResponseEntity<Any> {
-
+    fun signUp(@RequestParam request: String,
+               @RequestParam file: MultipartFile,
+               httprequest: HttpServletRequest): ResponseEntity<Any> {
+        val objectMapper = jacksonObjectMapper()
+        val user: UserRegistrationRequest = objectMapper.readValue(request, UserRegistrationRequest::class.java)
         try {
-            if (request.username.isNullOrBlank() || request.email.isNullOrBlank() || request.password.isNullOrBlank() ||
-                request.repeatPass.isNullOrBlank() || request.first_name.isNullOrBlank() || request.last_name.isNullOrBlank()
+            if (user.username.isBlank() || user.email.isBlank() || user.password.isBlank() ||
+                user.repeatPass.isBlank() || user.first_name.isBlank() || user.last_name.isBlank()
             ) {
                 val errorMessage = "Please fill in all required fields."
                 return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
-            if (!userService.isValidEmail(request.email)) {
+            if (!userService.isValidEmail(user.email)) {
                 val errorMessage = "Please enter a valid email address."
                 return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
-            if (request.password.length < 6) {
+            if (user.password.length < 6) {
                 val errorMessage = "Password must be at least 6 characters long."
                 return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
-            if(userService.doesUsernameExist(request.username) && userService.doesEmailExist(request.email)){
+            if(userService.doesUsernameExist(user.username) && userService.doesEmailExist(user.email)){
                 val errorMessage = "Username and Email already exists."
                 return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
-            if (userService.doesUsernameExist(request.username)) {
+            if (userService.doesUsernameExist(user.username)) {
                 val errorMessage = "Username already exists."
                 return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
-            if (userService.doesEmailExist(request.email)) {
+            if (userService.doesEmailExist(user.email)) {
                 val errorMessage = "Email already exists."
                 return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
             val savedUser = userService.register(
-                request.username,
-                request.email,
-                request.password,
-                request.repeatPass,
-                request.first_name,
-                request.last_name,
+                user.username,
+                user.email,
+                user.password,
+                user.repeatPass,
+                user.first_name,
+                user.last_name,
                 Role.USER,
-                request.image,
+                file,
                 httprequest
             ) ?: return ResponseEntity.badRequest().body(ErrorResponse("User registration failed."))
 
@@ -82,6 +87,7 @@ class SignUpController(val userService: UserService) {
         } catch (exception: PasswordDoNotMatch) {
             return ResponseEntity.badRequest().body(exception.message?.let { ErrorResponse(it) })
         }
+
     }
 }
 

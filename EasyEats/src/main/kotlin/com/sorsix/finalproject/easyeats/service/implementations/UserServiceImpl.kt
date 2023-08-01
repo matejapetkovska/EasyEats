@@ -13,6 +13,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
+import java.nio.file.Files
+import java.nio.file.Paths
+import kotlin.io.path.exists
 
 
 @Service
@@ -56,6 +60,15 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
         return repository.save(existingUser)
     }
 
+    private fun generateRandomImageName(): String {
+        val sb = StringBuilder()
+        for (i in 0..5) {
+            val rand = listOf(('a'..'z'), ('A'..'Z')).flatten().random()
+            sb.append(rand)
+        }
+        return sb.toString()
+    }
+
     override fun register(
         username: String?,
         email: String?,
@@ -64,13 +77,13 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
         name: String?,
         surname: String?,
         role: Role?,
-        image: String?,
+        file: MultipartFile,
         request: HttpServletRequest
     ): User? {
-        if (username.isNullOrEmpty() || password.isNullOrEmpty() || email.isNullOrEmpty() || name.isNullOrEmpty() || surname.isNullOrEmpty() || role == null || image.isNullOrEmpty()) {
+        if (username.isNullOrEmpty() || password.isNullOrEmpty() || email.isNullOrEmpty() || name.isNullOrEmpty() || surname.isNullOrEmpty() || role == null) {
             val errorMessage = "Invalid or missing values for the following fields: " +
                     "username=$username, email=$email, password=$password, repeatPassword=$repeatPassword, " +
-                    "name=$name, surname=$surname, role=$role, image=$image"
+                    "name=$name, surname=$surname, role=$role"
             println(errorMessage)
             throw InvalidUsernameOrPasswordException(errorMessage)
         }
@@ -82,6 +95,15 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
         if (repository.findByUsername(username!!).isPresent) {
             throw UsernameAlreadyExist(username)
         }
+
+        var imageName = generateRandomImageName() + ".jpg"
+        var imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\", imageName)
+        while (imageFilePath.exists()) {
+            imageName = generateRandomImageName()
+            imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\", imageName)
+        }
+        Files.copy(file.inputStream, Paths.get(imageFilePath.toString()))
+        val image = "../../assets/user_images/$imageName"
 
         val user = User(0, name, surname, email, username, passwordEncoder.encode(password), role, image)
         request.session.setAttribute("user", user)
