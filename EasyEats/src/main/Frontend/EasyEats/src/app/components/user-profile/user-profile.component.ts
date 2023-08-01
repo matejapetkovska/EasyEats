@@ -22,6 +22,7 @@ export class UserProfileComponent implements OnInit {
       (user) => {
         if(user) {
           this.user = user;
+          this.user.image = "../../assets/user_images/"+this.user.image
           this.editedUser = { ...user };
           console.log('User data:', this.user);
         }
