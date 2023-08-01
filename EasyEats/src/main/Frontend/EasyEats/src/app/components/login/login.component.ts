@@ -25,7 +25,6 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router, private userService: UserService, private http: HttpClient) {
   }
 
-
   onSubmit(form: NgForm) {
     const loginRequest: LoginRequest = { username: this.username, password: this.password };
 
@@ -39,6 +38,22 @@ export class LoginComponent {
       }
     );
   }
-
+  // onSubmit(form: NgForm) {
+  //   this.authService.login(this.username, this.password).subscribe(
+  //     (response) => {
+  //       // Assuming the server response contains the JWT token as response.token
+  //       const token = response.token;
+  //       this.authService.setAuthToken(token);
+  //       // Optionally, you can store the token in localStorage for persistence
+  //       localStorage.setItem('authToken', token);
+  //       this.router.navigate(['/home']);
+  //       console.log('Login successful');
+  //     },
+  //     (error) => {
+  //       this.errorMessage = error.error.message;
+  //       console.error('Login failed', error);
+  //     }
+  //   );
+  // }
 }
 
