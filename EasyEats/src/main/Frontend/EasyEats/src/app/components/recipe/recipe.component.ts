@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {RecipeDetailsService} from "../../services/recipe-details.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {RecipeReview} from "../../models/recipe-review";
+import {UserService} from "../../services/UserService";
+import {RecipeService} from "../../services/recipe-service.service";
 
 @Component({
   selector: 'app-recipe',
@@ -16,13 +18,19 @@ export class RecipeComponent implements OnInit {
 
   rating: String | undefined
 
+  isLoggedIn = false
+
   errorMessage: String = ""
 
   constructor(private recipeDetailsService: RecipeDetailsService,
+              private recipeService: RecipeService,
+              private userService: UserService,
+              private router: Router,
               private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.userService.isLoggedIn()
     this.route.paramMap.subscribe(params => {
       const recipe_id = params.get('recipe_id');
       this.fetchRecipeDetails(recipe_id);
@@ -68,5 +76,26 @@ export class RecipeComponent implements OnInit {
         }
       });
     })
+  }
+
+  onDeleteRecipe() {
+    this.route.paramMap.subscribe(params => {
+        const recipe_id = params.get('recipe_id')
+        this.recipeService.deleteRecipe(recipe_id).subscribe(
+          {
+            next: () => {
+              this.router.navigate(['/recipes'])
+            },
+            error: (error) => {
+              if (error.status === 400) {
+                this.errorMessage = error.error.message
+                console.log(this.errorMessage)
+              }
+              console.log('Error in editing recipe');
+            }
+          }
+        )
+      }
+    )
   }
 }

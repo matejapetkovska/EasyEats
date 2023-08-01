@@ -39,8 +39,11 @@ export class RecipeService {
   }
 
   editRecipe(recipe_id: String | null, formData: FormData): Observable<any> {
-    console.log(formData)
     return this.httpClient.put<FormData>(`${this.url}/edit/${recipe_id}`, formData);
+  }
+
+  deleteRecipe(recipe_id: String | null): Observable<any> {
+    return this.httpClient.delete(`${this.url}/delete/${recipe_id}`)
   }
 
 }

@@ -56,7 +56,7 @@ export class EditRecipeComponent {
     this.getAllSubCategories();
   }
 
-  getAllCategories(){
+  getAllCategories() {
     this.categoryService.getAllCategories()
       .subscribe({
         next: (categories) => {
@@ -68,7 +68,7 @@ export class EditRecipeComponent {
       });
   }
 
-  getAllSubCategories(){
+  getAllSubCategories() {
     this.subCategoryService.getAllSubCategories()
       .subscribe({
         next: (subCategories) => {
@@ -97,13 +97,13 @@ export class EditRecipeComponent {
     );
   }
 
-  onAddIngredient(){
-    if(this.ingredient.name != "" && this.ingredient.quantity != 0){
-      let copyOfIngredient={...this.ingredient}
+  onAddIngredient() {
+    if (this.ingredient.name != "" && this.ingredient.quantity != 0) {
+      let copyOfIngredient = {...this.ingredient}
       this.ingredients.push(copyOfIngredient)
-      this.ingredient.name=''
-      this.ingredient.quantity=0
-      this.ingredient.measurementUnit=''
+      this.ingredient.name = ''
+      this.ingredient.quantity = 0
+      this.ingredient.measurementUnit = ''
     }
   }
 
@@ -140,5 +140,4 @@ export class EditRecipeComponent {
         });
     })
   }
-
 }

@@ -5,6 +5,12 @@
   justify-content: center;
 }
 
+.edit-btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
 .recipe-details {
   display: grid;
   grid-template-columns: auto auto;
@@ -89,7 +95,7 @@ label {
 input {
   flex: 0 0 100px;
   padding: 3px;
-  border:2px solid var(--green-color);
+  border: 2px solid var(--green-color);
   border-radius: 5px;
 }
 
@@ -99,7 +105,7 @@ input:focus {
   outline-color: var(--red-color);
 }
 
-button{
+button {
   width: 75px;
   font-size: 18px;
   border: 2px solid var(--white);

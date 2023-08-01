@@ -6,6 +6,7 @@ import { SubCategory } from 'src/app/models/sub_category';
 import { CategoryService } from 'src/app/services/category-service.service';
 import { RecipeService } from 'src/app/services/recipe-service.service';
 import { SubcategoryService } from 'src/app/services/subcategory-service.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-recipe',
@@ -40,7 +41,8 @@ export class AddRecipeComponent implements OnInit {
 
   constructor(private categoryService: CategoryService,
               private subCategoryService: SubcategoryService,
-              private recipeService: RecipeService){ }
+              private recipeService: RecipeService,
+              private router: Router){ }
 
   ngOnInit(): void {
     this.getAllCategories();
@@ -106,6 +108,7 @@ export class AddRecipeComponent implements OnInit {
         .subscribe({
           next: () => {
             console.log('Recipe added successfully');
+            this.router.navigate(['/recipes'])
           },
           error: (error) => {
             if(error.status === 400){
