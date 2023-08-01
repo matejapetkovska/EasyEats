@@ -1,9 +1,11 @@
 package com.sorsix.finalproject.easyeats.service.implementations
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.sorsix.finalproject.easyeats.models.Ingredient
 import com.sorsix.finalproject.easyeats.models.Recipe
 import com.sorsix.finalproject.easyeats.models.User
 import com.sorsix.finalproject.easyeats.models.dto.IngredientDto
+import com.sorsix.finalproject.easyeats.repository.IngredientRepository
 import com.sorsix.finalproject.easyeats.repository.RecipeRepository
 import com.sorsix.finalproject.easyeats.service.*
 import org.springframework.stereotype.Service
@@ -18,7 +20,8 @@ class RecipeServiceImpl(
     private val recipeRepository: RecipeRepository,
     private val categoryService: CategoryService,
     private val subCategoryService: SubCategoryService,
-    private val ingredientService: IngredientService
+    private val ingredientService: IngredientService,
+    private val ingredientRepository: IngredientRepository
 ) : RecipeService {
     override fun getAllRecipesByCategory(category_id: String): List<Recipe>? {
         val categoryIdLong = category_id.toLongOrNull()
@@ -100,37 +103,35 @@ class RecipeServiceImpl(
         category_id: String,
         subCategory_id: String,
         ingredients: String,
-        user: User
+        user: User?
     ): Recipe? {
         val recipeIdLong = recipe_id.toLongOrNull()
         var recipe = recipeIdLong?.let { recipeRepository.findById(it) }
         if (recipe != null) {
             recipe.get().title = title
             recipe.get().description = description
-//            if (!file.isEmpty) {
-//                val imageName = file.originalFilename
-//                if (imageName != null) {
-//                    val imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\recipe_images\\", imageName)
-//                    Files.copy(file.inputStream, Paths.get(imageFilePath.toString()), StandardCopyOption.REPLACE_EXISTING)
-//                    recipe.get().image = imageName
-//                }
-//            }
+
             val category = category_id.toLongOrNull()?.let { categoryService.getCategoryById(it) }
             recipe.get().category = category
-            val subCategory = category_id.toLongOrNull()?.let { subCategoryService.getSubCategoryById(it) }
+            val subCategory = subCategory_id.toLongOrNull()?.let { subCategoryService.getSubCategoryById(it) }
             recipe.get().subCategory = subCategory
 
             val objectMapper = jacksonObjectMapper()
-            val ingredientsList: List<IngredientDto> = objectMapper.readValue(
+            val ingredientsList: List<Ingredient> = objectMapper.readValue(
                 ingredients,
-                objectMapper.typeFactory.constructCollectionType(List::class.java, IngredientDto::class.java)
+                objectMapper.typeFactory.constructCollectionType(List::class.java, Ingredient::class.java)
             )
 
             recipe.get().ingredients.clear()
 
             for (ingredient in ingredientsList) {
-                val savedIngredient =
-                    ingredientService.saveIngredient(ingredient.name, ingredient.quantity, ingredient.measurementUnit)
+                val existingIngredient = ingredientRepository.getIngredientById(ingredient.id)
+                val savedIngredient: Ingredient
+                if (existingIngredient != null) {
+                    savedIngredient = existingIngredient
+                } else {
+                    savedIngredient = ingredientService.saveIngredient(ingredient.name, ingredient.quantity, ingredient.measurementUnit)
+                }
                 recipe.get().ingredients.add(savedIngredient)
             }
 
@@ -139,4 +140,5 @@ class RecipeServiceImpl(
         }
         return null
     }
+
 }

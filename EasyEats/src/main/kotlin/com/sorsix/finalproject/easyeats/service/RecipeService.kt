@@ -16,6 +16,6 @@ interface RecipeService {
 
     fun addRecipe(title: String, description: String, file: MultipartFile, category_id: String, subCategory_id: String, ingredients: String, user: User): Recipe?
 
-    fun editRecipe(recipe_id: String,title: String, description: String, category_id: String, subCategory_id: String, ingredients: String, user: User): Recipe?
+    fun editRecipe(recipe_id: String,title: String, description: String, category_id: String, subCategory_id: String, ingredients: String, user: User?): Recipe?
 
 }

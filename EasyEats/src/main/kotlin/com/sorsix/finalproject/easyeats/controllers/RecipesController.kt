@@ -58,6 +58,7 @@ class RecipesController(private val recipeService: RecipeService,
                    request: HttpServletRequest) : ResponseEntity<Any> {
         val user = userService.getLoggedInUser(request)
             ?: return ResponseEntity.badRequest().body(Error("Error in editing recipe. Please log in first."))
+        println(user.first_name)
         val recipe = recipeService.editRecipe(recipe_id,title, description, category_id, subCategory_id, ingredients, user)
             ?: return ResponseEntity.badRequest().body(Error("Error in editing recipe."))
         return ResponseEntity.ok(recipe)
