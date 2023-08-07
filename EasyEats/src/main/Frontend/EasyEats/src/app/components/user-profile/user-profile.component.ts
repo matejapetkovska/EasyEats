@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { User } from "../../models/user";
-import { UserService } from "../../services/UserService";
-import { Router } from "@angular/router";
-import { Recipe } from "src/app/models/recipe";
-import { RecipeService } from "src/app/services/recipe-service.service";
+import {Component, OnInit} from "@angular/core";
+import {User} from "../../models/user";
+import {UserService} from "../../services/UserService";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Recipe} from "src/app/models/recipe";
+import {RecipeService} from "src/app/services/recipe-service.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -22,16 +22,22 @@ export class UserProfileComponent implements OnInit {
 
   recipes: Recipe[] | undefined
 
+  recipeId= ''
+
+  errorMessage = ''
+
   constructor(private userService: UserService,
               private router: Router,
-              private recipeService: RecipeService) { }
+              private recipeService: RecipeService,
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.userService.getUser().subscribe(
       (user) => {
-        if(user) {
+        if (user) {
           this.user = user;
-          this.editedUser = { ...user };
+          this.editedUser = {...user};
           console.log('User data:', this.user);
         }
       },
@@ -48,7 +54,7 @@ export class UserProfileComponent implements OnInit {
   saveChanges(): void {
     this.userService.updateUser(this.editedUser).subscribe(
       (response) => {
-        this.user = { ...this.editedUser };
+        this.user = {...this.editedUser};
         this.userService.saveUserUpdate(this.editedUser);
         this.isEditMode = false;
       },
@@ -58,22 +64,47 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  onClickViewPosts(){
+  onClickViewPosts() {
     this.recipeService.getRecipesByUserId(this.user?.id)
       .subscribe({
         next: (recipes) => {
-            this.recipes = recipes;
-            console.log(recipes)
+          this.recipes = recipes;
+          this.addPathToImages(this.recipes)
         },
         error: () => {
           console.error('error in fetching recipes');
         }
-    });
+      });
     this.togglePost()
   }
 
-  togglePost(){
+  togglePost() {
     this.isPostMode = !this.isPostMode;
   }
+
+  onDeleteRecipe(recipe: Recipe) {
+    this.recipeId = recipe.id.toString()
+    this.recipeService.deleteRecipe(this.recipeId).subscribe(
+      {
+        next: () => {
+          this.router.navigate(['/recipes'])
+        },
+        error: (error) => {
+          if (error.status === 400) {
+            this.errorMessage = error.error.message;
+            console.log(this.errorMessage);
+          }
+          console.log('Error in deleting recipe:', error);
+        }
+      }
+    );
+  }
+
+  addPathToImages(list: Recipe[]) {
+    for (let i = 0; i < list.length; i++) {
+      list[i].image = "../../../assets/recipe_images/" + list[i].image;
+    }
+  }
+
 }
 

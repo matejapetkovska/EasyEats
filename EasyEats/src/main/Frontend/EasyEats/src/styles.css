@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Righteous&display=swap');
 
-* {
-  font-family: 'Playfair Display', serif;
-  margin: 0;
+:root{
   --red-color: #c62a2a;
   --white: #FFF3E2;
   --green-color: #215c44;
   --neon-green: #4fec62;
 }
+* {
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+

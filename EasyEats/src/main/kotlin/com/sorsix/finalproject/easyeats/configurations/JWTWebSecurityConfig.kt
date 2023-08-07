@@ -61,8 +61,8 @@ class JWTWebSecurityConfig(val passwordEncoder: PasswordEncoder, val userService
                 it.requestMatchers(UrlMapping.AUTH + UrlMapping.SIGN_UP).permitAll()
                     .requestMatchers(UrlMapping.AUTH + UrlMapping.LOGIN).permitAll()
                     .requestMatchers(UrlMapping.VALIDATE_JWT).permitAll()
-//                    .requestMatchers("/recipe/**","/recipes/**","/categories","/categories/{id}", "/assets/**", "/signup", "/api/**", "/subcategories").permitAll()
-                    .requestMatchers("/signup", "/api/**").permitAll()
+                    .requestMatchers("/recipe/**","/recipes/**","/categories","/categories/{id}", "/assets/**", "/signup", "/api/**", "/subcategories").permitAll()
+//                    .requestMatchers("/signup", "/api/**").permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(

@@ -1,23 +1,21 @@
-<main>
-  <div class="header">
-    <div class="left-corner">
-      <a routerLink="/welcome">
-        <img ngSrc="../../assets/images/logo2.png" height="100" width="200">
-      </a>
-    </div>
-    <div class="links">
-      <a routerLink="/welcome">Homepage</a>
-      <a routerLink="/home">Categories</a>
-      <a routerLink="/recipes">Recipes</a>
-    </div>
-    <div class="right-corner" *ngIf="isLoggedIn">
-      <div>
-        Welcome back, <a [routerLink]="['/user-profile', user?.username]" class="username">{{ user?.username }}</a>
-      </div>
-      <button (click)="logout()">Log out</button>
-    </div>
-    <div class="right-corner" *ngIf="!isLoggedIn">
-      <button class="log-in-btn"><a routerLink="/login">Log in</a></button>
-    </div>
+<div class="header">
+  <div class="left-corner">
+    <a routerLink="/welcome">
+      <img ngSrc="../../assets/images/logo2.png" height="100" width="200">
+    </a>
   </div>
-</main>
+  <div class="links">
+    <a routerLink="/welcome">Homepage</a>
+    <a routerLink="/home">Categories</a>
+    <a routerLink="/recipes">Recipes</a>
+  </div>
+  <div class="right-corner" *ngIf="isLoggedIn">
+    <div>
+      Welcome back, <a [routerLink]="['/user-profile', user?.username]" class="username">{{ user?.username }}</a>
+    </div>
+    <button class="log-in-btn" (click)="logout()">Log out</button>
+  </div>
+  <div class="right-corner" *ngIf="!isLoggedIn">
+    <button class="log-in-btn"><a routerLink="/login">Log in</a></button>
+  </div>
+</div>
