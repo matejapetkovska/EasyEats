@@ -32,7 +32,7 @@ class RecipesController(private val recipeService: RecipeService,
     }
 
     @GetMapping("/query/{queryText}")
-    fun getRecipesByTitleOrDescriptionContainingQueryText(@PathVariable queryText: String): List<Recipe>{
+    fun getRecipesByTitleContainingQueryText(@PathVariable queryText: String): List<Recipe>{
         return recipeService.getAllRecipesByTitleContaining(queryText)
     }
 
@@ -69,5 +69,10 @@ class RecipesController(private val recipeService: RecipeService,
     @DeleteMapping("/delete/{recipe_id}")
     fun deleteRecipe(@PathVariable recipe_id: String): Unit? {
         return recipe_id.toLongOrNull()?.let { recipeRepository.deleteById(it) }
+    }
+
+    @GetMapping("/user/{user_id}")
+    fun getRecipesByUserId(@PathVariable user_id: String): List<Recipe>{
+        return recipeService.getAllRecipesByUser(user_id)
     }
 }

@@ -21,7 +21,8 @@ class RecipeServiceImpl(
     private val categoryService: CategoryService,
     private val subCategoryService: SubCategoryService,
     private val ingredientService: IngredientService,
-    private val ingredientRepository: IngredientRepository
+    private val ingredientRepository: IngredientRepository,
+    private val userService: UserService
 ) : RecipeService {
     override fun getAllRecipesByCategory(category_id: String): List<Recipe>? {
         val categoryIdLong = category_id.toLongOrNull()
@@ -139,6 +140,11 @@ class RecipeServiceImpl(
             return recipe.get()
         }
         return null
+    }
+
+    override fun getAllRecipesByUser(used_id: String): List<Recipe> {
+        val id = used_id.toLong()
+        return recipeRepository.findByUser_Id(id)
     }
 
 }

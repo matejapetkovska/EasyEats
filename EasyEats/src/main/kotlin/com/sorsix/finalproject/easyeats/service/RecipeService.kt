@@ -18,4 +18,6 @@ interface RecipeService {
 
     fun editRecipe(recipe_id: String,title: String, description: String, category_id: String, subCategory_id: String, ingredients: String, user: User?): Recipe?
 
+    fun getAllRecipesByUser(used_id: String): List<Recipe>
+
 }
