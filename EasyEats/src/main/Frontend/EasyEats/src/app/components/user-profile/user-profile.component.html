@@ -1,96 +1,121 @@
-<app-main-header></app-main-header>
+<main>
+  <app-main-header></app-main-header>
 
-<div class="container">
-  <div class="background">
-    <img src="../../../assets/images/background-user_profile.png" alt="Background Image" />
-  </div>
+  <div *ngIf="user && !isEditMode && !isPostMode" class="user">
+    <div class="user-name-img">
+      <img class="profile-picture" src="{{user.image}}" alt=""/>
+      <h2>{{user.username}}</h2>
+    </div>
 
-  <div *ngIf="user" class="user">
-    <h1>Profile for user: <div>{{user.username}}</div></h1>
     <div *ngIf="!isEditMode && !isPostMode" class="profile-info">
       <div class="profile-info">
-        <div class="left-column">
-          <div class="profile-item">
-            <label>First Name:</label>
-            <p>{{ user.first_name }}</p>
-          </div>
-          <div class="profile-item">
-            <label>Last Name:</label>
-            <p>{{ user.last_name }}</p>
-          </div>
+        <div class="full-name">
+          {{ user.first_name }} {{ user.last_name }}
         </div>
-        <div class="right-column">
-          <div class="profile-item">
-            <label>Username:</label>
-            <p>{{ user.username }}</p>
-          </div>
-          <div class="profile-item">
-            <label>Email:</label>
-            <p>{{ user.email }}</p>
-          </div>
-          <div class="profile-item">
-            <label>Profile picture:</label>
-            <img src="{{user.image}}">
-          </div>
+
+        <div class="user-mail">
+          {{ user.email }}
         </div>
       </div>
+      <div class="break-line"></div>
+      <div class="buttons-container">
+        <button (click)="toggleEdit()" class="edit-profile-btn buttons">
+          Edit your profile
+        </button>
 
-      <div class="button-container">
-        <button (click)="toggleEdit()" class="profile-info-button">Edit your profile</button>
-        <button (click)="onClickViewPosts()" id="button">View your posts</button>
+        <button (click)="onClickViewPosts()" class="view-posts-btn buttons">
+          View your posts
+        </button>
       </div>
-    </div>
-
-
-    <div *ngIf="isEditMode" class="edit-profile">
-      <div class="edit-item">
-        <label>First Name:</label>
-        <input [(ngModel)]="editedUser.first_name" />
-      </div>
-      <div class="edit-item">
-        <label>Last Name:</label>
-        <input [(ngModel)]="editedUser.last_name" />
-      </div>
-      <div class="edit-item">
-        <label>Username:</label>
-        <input [(ngModel)]="editedUser.username" />
-      </div>
-      <div class="edit-item">
-        <label>Email:</label>
-        <input [(ngModel)]="editedUser.email" />
-      </div>
-      <div class="edit-item">
-        <label>Password:</label>
-        <input type="password" [(ngModel)]="editedUser.password" />
-      </div>
-      <div class="edit-item">
-        <label>Repeat Password:</label>
-        <input type="password" [(ngModel)]="editedUser.repeatPass" />
-      </div>
-      <div class="edit-item">
-        <label>Image:</label>
-        <input [(ngModel)]="editedUser.image" />
-      </div>
-      <div class="edit-item">
-        <label>Role:</label>
-        <input [(ngModel)]="editedUser.role" />
-      </div>
-      <button (click)="saveChanges()">Save Changes</button>
-      <button (click)="toggleEdit()">Cancel</button>
     </div>
   </div>
 
-  <div *ngIf="isPostMode">
-    <div *ngFor="let recipe of recipes">
-      <h3>{{recipe.title}}</h3>
+  <div *ngIf="isPostMode && editedUser">
+    <div class="modal">
+      <div class="modal-container">
+        <header class="modal-container-header">
+          <img ngSrc="{{editedUser.image}}" width="100" height="100">
+          <h1 class="modal-container-title">
+            Recipes posted by <span class="username">{{editedUser.username}}</span>
+          </h1>
+        </header>
+        <section class="modal-container-body">
+          <div *ngFor="let recipe of recipes" class="recipe-container">
+            <img ngSrc="{{recipe.image}}" width="50" height="50" class="recipe-img">
+            <h4>{{recipe.title}}</h4>
+            <div class="edit-btn">
+              <button><a [routerLink]="['/editrecipe', recipe.id]"><i class="fa-regular fa-pen-to-square"></i></a>
+              </button>
+              <button (click)="onDeleteRecipe(recipe)"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        </section>
+        <footer class="modal-container-footer">
+          <button class="modal-btns" (click)="togglePost()">Close</button>
+        </footer>
+      </div>
     </div>
-    <button (click)="togglePost()">Back</button>
+  </div>
+
+  <div class="modal" *ngIf="isEditMode">
+    <div class="modal-container">
+      <div class="modal-container-header">
+        <h2 class="modal-container-title">Edit your profile</h2>
+      </div>
+      <div class="inputs-container modal-container-body">
+        <div class="left-col">
+          <div class="edit-item">
+            <input
+              [(ngModel)]="editedUser.first_name"
+              placeholder="First Name"/>
+          </div>
+          <div class="edit-item">
+            <input
+              [(ngModel)]="editedUser.last_name"
+              placeholder="Last Name"/>
+          </div>
+          <div class="edit-item">
+            <input
+              [(ngModel)]="editedUser.username"
+              placeholder="Username"/>
+          </div>
+          <div class="edit-item">
+            <input [(ngModel)]="editedUser.email" placeholder="Email"/>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="edit-item">
+            <input
+              type="password"
+              [(ngModel)]="editedUser.password"
+              placeholder="Password"/>
+          </div>
+          <div class="edit-item">
+            <input
+              type="password"
+              [(ngModel)]="editedUser.repeatPass"
+              placeholder="Repeat Password"/>
+          </div>
+          <div class="edit-item">
+            <input [(ngModel)]="editedUser.image" placeholder="Image URL"/>
+          </div>
+          <div class="edit-item">
+            <input [(ngModel)]="editedUser.role" placeholder="Role"/>
+          </div>
+        </div>
+      </div>
+      <div class="edit-profile-btns-container modal-container-footer">
+        <button (click)="toggleEdit()" class="modal-btns">
+          Cancel
+        </button>
+        <button (click)="saveChanges()" class="modal-btns">
+          Save Changes
+        </button>
+      </div>
+    </div>
   </div>
 
   <div *ngIf="!user" class="user">
     <p>User data not found.</p>
   </div>
-</div>
-
-
-
+</main>

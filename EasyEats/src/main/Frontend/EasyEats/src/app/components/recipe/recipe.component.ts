@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {RecipeReview} from "../../models/recipe-review";
 import {UserService} from "../../services/UserService";
 import {RecipeService} from "../../services/recipe-service.service";
+import {Recipe} from "../../models/recipe";
 
 @Component({
   selector: 'app-recipe',
@@ -42,6 +43,7 @@ export class RecipeComponent implements OnInit {
     this.recipeDetailsService.getRecipeWithReview(recipe_id).subscribe(
       (data) => {
         this.recipeReview = data;
+        this.addPathToImages(this.recipeReview)
       },
       (error) => {
         console.error('Error fetching recipe details:', error);
@@ -76,25 +78,7 @@ export class RecipeComponent implements OnInit {
       });
     })
   }
-
-  onDeleteRecipe() {
-    this.route.paramMap.subscribe(params => {
-        const recipe_id = params.get('recipe_id')
-        this.recipeService.deleteRecipe(recipe_id).subscribe(
-          {
-            next: () => {
-              this.router.navigate(['/recipes'])
-            },
-            error: (error) => {
-              if (error.status === 400) {
-                this.errorMessage = error.error.message
-                console.log(this.errorMessage)
-              }
-              console.log('Error in editing recipe');
-            }
-          }
-        )
-      }
-    )
+  addPathToImages(recipe: RecipeReview){
+      recipe.recipe.image="../../../assets/recipe_images/"+recipe.recipe.image;
   }
 }

@@ -3,14 +3,8 @@
 <main *ngIf="recipeReview">
   <div class="recipe">
     <h1 class="recipe-title">{{recipeReview.recipe.title}}</h1>
-
-    <div *ngIf="isLoggedIn" class="edit-btn">
-      <button class="log-in-btn"><a [routerLink]="['/editrecipe', recipeReview.recipe.id]">Edit</a></button>
-      <button class="log-in-btn" (click)="onDeleteRecipe()">Delete</button>
-    </div>
-
     <div class="recipe-details">
-      <img ngSrc="{{recipeReview.recipe.image}}" width="300" height="400">
+      <img ngSrc="{{recipeReview.recipe.image}}" width="300" height="350">
       <div class="recipe-info">
         <div class="ingredients">
           <span>Ingredients:</span>
