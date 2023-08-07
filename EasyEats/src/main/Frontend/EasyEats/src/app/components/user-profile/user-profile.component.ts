@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "../../models/user";
 import { UserService } from "../../services/UserService";
 import { Router } from "@angular/router";
+import { Recipe } from "src/app/models/recipe";
+import { RecipeService } from "src/app/services/recipe-service.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -11,18 +13,24 @@ import { Router } from "@angular/router";
 export class UserProfileComponent implements OnInit {
 
   user: User | undefined;
+
   isEditMode = false;
+
+  isPostMode = false;
+
   editedUser: User = {};
 
+  recipes: Recipe[] | undefined
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private recipeService: RecipeService) { }
 
   ngOnInit(): void {
     this.userService.getUser().subscribe(
       (user) => {
         if(user) {
           this.user = user;
-          this.user.image = "../../assets/user_images/"+this.user.image
           this.editedUser = { ...user };
           console.log('User data:', this.user);
         }
@@ -50,5 +58,22 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
+  onClickViewPosts(){
+    this.recipeService.getRecipesByUserId(this.user?.id)
+      .subscribe({
+        next: (recipes) => {
+            this.recipes = recipes;
+            console.log(recipes)
+        },
+        error: () => {
+          console.error('error in fetching recipes');
+        }
+    });
+    this.togglePost()
+  }
+
+  togglePost(){
+    this.isPostMode = !this.isPostMode;
+  }
 }
 

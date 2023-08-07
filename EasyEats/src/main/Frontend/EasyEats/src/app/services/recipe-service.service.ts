@@ -46,4 +46,8 @@ export class RecipeService {
     return this.httpClient.delete(`${this.url}/delete/${recipe_id}`)
   }
 
+  getRecipesByUserId(user_id: Number | undefined): Observable<Recipe[]>{
+    return this.httpClient.get<Recipe[]>(`${this.url}/user/${user_id}`)
+  }
+
 }

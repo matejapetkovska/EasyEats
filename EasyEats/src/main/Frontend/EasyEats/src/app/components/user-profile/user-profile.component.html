@@ -7,7 +7,7 @@
 
   <div *ngIf="user" class="user">
     <h1>Profile for user: <div>{{user.username}}</div></h1>
-    <div *ngIf="!isEditMode" class="profile-info">
+    <div *ngIf="!isEditMode && !isPostMode" class="profile-info">
       <div class="profile-info">
         <div class="left-column">
           <div class="profile-item">
@@ -37,7 +37,7 @@
 
       <div class="button-container">
         <button (click)="toggleEdit()" class="profile-info-button">Edit your profile</button>
-        <button id="button">View your posts</button>
+        <button (click)="onClickViewPosts()" id="button">View your posts</button>
       </div>
     </div>
 
@@ -78,6 +78,13 @@
       <button (click)="saveChanges()">Save Changes</button>
       <button (click)="toggleEdit()">Cancel</button>
     </div>
+  </div>
+
+  <div *ngIf="isPostMode">
+    <div *ngFor="let recipe of recipes">
+      <h3>{{recipe.title}}</h3>
+    </div>
+    <button (click)="togglePost()">Back</button>
   </div>
 
   <div *ngIf="!user" class="user">
