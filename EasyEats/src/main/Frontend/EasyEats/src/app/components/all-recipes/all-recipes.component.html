@@ -1,7 +1,10 @@
 <app-main-header></app-main-header>
 
 <main>
-  <div class="title">Explore all recipes..</div>
+  <div class="top">
+    <div class="title">Explore all recipes..</div>
+    <a [routerLink]="['/addrecipe']"><button>Add a recipe</button></a>
+  </div>
   <div class="search">
     <input type="text" [formControl]='queryText' (input)="search()" placeholder="Search recipes...">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -9,7 +12,7 @@
   <div class="card-container">
     <div *ngFor="let recipe of recipes" class="card">
       <a [routerLink]="['/recipe', recipe.id]">
-      <img src="{{recipe.image}}"/></a>
+        <img src="{{recipe.image}}"/></a>
       <div class="category-details">
         <span class="category-title">{{recipe.title}}</span>
       </div>

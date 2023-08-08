@@ -3,8 +3,8 @@
   <div class="right-corner">
     <span class="phrase">Welcome back!</span>
     <form #form="ngForm" (ngSubmit)="onSubmit()" class="signup-form">
-      <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="request.email" name="username" required>
+      <label for="email">E-mail:</label>
+      <input type="text" id="email" [(ngModel)]="request.email" name="email" required>
       <label for="password">Password:</label>
       <input type="password" id="password" [(ngModel)]="request.password" name="password" required>
       <!-- <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> -->
