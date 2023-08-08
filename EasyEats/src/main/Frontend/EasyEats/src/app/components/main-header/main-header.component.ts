@@ -21,26 +21,23 @@ export class MainHeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = localStorage.getItem('token') != null;
+    this.getUserFromToken()
+  }
 
-    if (this.isLoggedIn) {
-      this.userService.getUser().subscribe(
-        (user) => {
-          if(user) {
-            this.user = user;
-          }
-        },
-        (error) => {
-          console.error('Error fetching user data:', error);
-        }
-      );
-    }
+  getUserFromToken(){
+    const token = localStorage.getItem('token')
+    this.userService.getUserFromToken(token).subscribe({
+      next: (user) => {
+        this.user = user
+      },
+      error: () => {
+        console.log("error in getting user from token")
+      }
+    })
   }
 
   logout() {
-    console.log(localStorage.getItem('token'))
     localStorage.removeItem('token');
-    console.log(localStorage.getItem('token'))
     this.router.navigate(['/login']);
   }
 

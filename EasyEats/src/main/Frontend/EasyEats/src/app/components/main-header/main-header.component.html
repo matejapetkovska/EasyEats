@@ -9,9 +9,9 @@
     <a routerLink="/home">Categories</a>
     <a routerLink="/recipes">Recipes</a>
   </div>
-  <div class="right-corner" *ngIf="isLoggedIn">
+  <div class="right-corner">
     <div>
-      Welcome back, <a [routerLink]="['/user-profile', user?.username]" class="username">{{ user?.username }}</a>
+      <a [routerLink]="['/user-profile', user?.userName]" class="username">{{ user?.userName }}</a>
     </div>
     <button class="log-in-btn" (click)="logout()">Log out</button>
   </div>

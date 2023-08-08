@@ -20,7 +20,6 @@ export class SignupComponent {
     email:"",
     username:"",
     password:"",
-    imageFile:""
   }
 
   constructor(private authService: AuthService, private router: Router){}

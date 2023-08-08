@@ -19,7 +19,6 @@ export class AuthInterceptor implements HttpInterceptor{
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(clonedReq.headers.get('Authorization'))
 
       return next.handle(clonedReq);
     }

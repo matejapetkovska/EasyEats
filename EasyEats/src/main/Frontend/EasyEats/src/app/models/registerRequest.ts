@@ -3,6 +3,5 @@ export interface RegisterRequest{
     lastName: String,
     username: String,
     email: String,
-    password: String,
-    imageFile: String
+    password: String
 }
