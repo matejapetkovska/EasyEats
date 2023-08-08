@@ -2,7 +2,7 @@
   <img ngSrc="../../assets/images/signup.png" height="500" width="500">
   <div class="right-corner">
     <span class="phrase">Welcome to <a routerLink="/welcome">EasyEats!</a></span>
-    <form #form="ngForm" (ngSubmit)="onSubmit()" class="signup-form">
+    <form #form="ngForm" (ngSubmit)="onSubmit()" class="signup-form" enctype="multipart/form-data">
       <label>
         First name:
         <input placeholder="First name" required [(ngModel)]="request.firstName" name="first_name">
@@ -23,6 +23,7 @@
         Password:
         <input type="password" placeholder="Password" required [(ngModel)]="request.password" name="password" aria-required="true">
       </label>
+
 
       <!-- <label>
         Profile picture:

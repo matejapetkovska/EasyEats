@@ -22,6 +22,4 @@ class RegisterRequest(
 
     val password: String,
 
-    val imageFile: String
-
 ) {}
