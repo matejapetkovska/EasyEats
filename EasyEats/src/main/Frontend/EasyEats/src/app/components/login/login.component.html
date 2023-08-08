@@ -2,12 +2,12 @@
   <img ngSrc="../../assets/images/login.png" height="500" width="500">
   <div class="right-corner">
     <span class="phrase">Welcome back!</span>
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="signup-form">
+    <form #form="ngForm" (ngSubmit)="onSubmit()" class="signup-form">
       <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="username" name="username" required>
+      <input type="text" id="username" [(ngModel)]="request.email" name="username" required>
       <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
-      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <input type="password" id="password" [(ngModel)]="request.password" name="password" required>
+      <!-- <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> -->
       <button type="submit">Login</button>
     </form>
   </div>

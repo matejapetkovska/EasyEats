@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from '../../models/category';
 import {CategoryService} from '../../services/category-service.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class HomeScreenComponent implements OnInit {
 
   categories: Category[] | undefined
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService,  private router: Router) {
   }
 
   ngOnInit(): void {

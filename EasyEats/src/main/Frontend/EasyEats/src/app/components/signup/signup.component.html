@@ -2,41 +2,41 @@
   <img ngSrc="../../assets/images/signup.png" height="500" width="500">
   <div class="right-corner">
     <span class="phrase">Welcome to <a routerLink="/welcome">EasyEats!</a></span>
-    <form #form="ngForm" (ngSubmit)="onSignUp(form)" class="signup-form">
+    <form #form="ngForm" (ngSubmit)="onSubmit()" class="signup-form">
       <label>
         First name:
-        <input placeholder="First name" required [(ngModel)]="user.first_name" name="first_name">
+        <input placeholder="First name" required [(ngModel)]="request.firstName" name="first_name">
       </label>
       <label>
         Last name:
-        <input placeholder="Last name" required [(ngModel)]="user.last_name" name="last_name" aria-required="true">
+        <input placeholder="Last name" required [(ngModel)]="request.lastName" name="last_name" aria-required="true">
       </label>
       <label>
         Username:
-        <input placeholder="Username" required [(ngModel)]="user.username" name="username" aria-required="true">
+        <input placeholder="Username" required [(ngModel)]="request.username" name="username" aria-required="true">
       </label>
       <label>
         E-mail:
-        <input type="email" placeholder="E-mail" required [(ngModel)]="user.email" name="email" aria-required="true">
+        <input type="email" placeholder="E-mail" required [(ngModel)]="request.email" name="email" aria-required="true">
       </label>
       <label>
         Password:
-        <input type="password" placeholder="Password" required [(ngModel)]="user.password" name="password" aria-required="true">
+        <input type="password" placeholder="Password" required [(ngModel)]="request.password" name="password" aria-required="true">
       </label>
-      <label>
+      <!-- <label>
         Repeat Password:
         <input type="password" placeholder="Repeat password" required [(ngModel)]="user.repeatPass" name="repeatPass" aria-required="true">
-      </label>
-      <label>
+      </label> -->
+      <!-- <label>
         Profile picture:
         <input type="file" required (change)="onFileChange($event)" accept="image/*">
-      </label>
+      </label> -->
 
 
 
-      <div *ngIf="errorMessage" class="error-message">
+      <!-- <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
-      </div>
+      </div> -->
 
       <button type="submit">Sign Up</button>
     </form>
