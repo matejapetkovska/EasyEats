@@ -1,5 +1,6 @@
 package com.sorsix.finalproject.easyeats.service.implementations
 
+import com.sorsix.finalproject.easyeats.configurations.JwtService
 import com.sorsix.finalproject.easyeats.models.User
 import com.sorsix.finalproject.easyeats.models.enumerations.Role
 import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
@@ -20,7 +21,8 @@ import kotlin.io.path.exists
 
 
 @Service
-class UserServiceImpl(val repository: UserRepository, val passwordEncoder: PasswordEncoder) : UserService {
+class UserServiceImpl(val repository: UserRepository,
+                      val jwtService: JwtService) : UserService {
 
     //    override fun login(username: String?, password: String?, request: HttpServletRequest): User? {
 //        if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
@@ -39,6 +41,9 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
 //        }else{
 //            throw UsernameNotFoundException()
 //        }
+
+
+
     override fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$")
         return email.matches(emailRegex)
@@ -73,6 +78,10 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
         existingUser.userName = updatedUser.username
 
         return repository.save(existingUser)
+    }
+
+    override fun getUserFromToken(token: String): User? {
+        return repository.findByEmail(jwtService.extractUsername(token))
     }
 
     override fun loadUserByUsername(username: String?): UserDetails {

@@ -16,4 +16,9 @@ class UserController(private val userService: UserService) {
         return ResponseEntity.ok(user)
     }
 
+    @GetMapping("/token")
+    fun getUserFromToken(@RequestParam token: String): User?{
+        return userService.getUserFromToken(token)
+    }
+
 }

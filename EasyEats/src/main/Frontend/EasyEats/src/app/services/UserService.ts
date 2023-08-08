@@ -60,4 +60,8 @@ export class UserService {
   updateUser(user: User | undefined): Observable<User | null> {
     return this.http.put<User>(`http://localhost:8081/api/user/${user?.id}`, user);
   }
+
+  getUserFromToken(token: String | null): Observable<User>{
+    return this.http.get<User>(`http://localhost:8081/api/user/token?token=${token}`)
+  }
 }

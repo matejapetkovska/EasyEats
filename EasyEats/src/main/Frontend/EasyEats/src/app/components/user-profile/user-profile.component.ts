@@ -33,18 +33,23 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe(
-      (user) => {
-        if (user) {
-          this.user = user;
-          this.editedUser = {...user};
-          console.log('User data:', this.user);
-        }
+    this.getUserFromToken()
+    if(this.user != undefined){
+      console.log(this.user)
+      console.log(this.user.email)
+    }
+  }
+
+  getUserFromToken(){
+    const token = localStorage.getItem('token')
+    this.userService.getUserFromToken(token).subscribe({
+      next: (user) => {
+        this.user = user
       },
-      (error) => {
-        console.error('Error fetching user data:', error);
+      error: () => {
+        console.log("error in getting user from token")
       }
-    );
+    })
   }
 
   toggleEdit(): void {
