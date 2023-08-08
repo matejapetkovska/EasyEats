@@ -1,9 +1,6 @@
 package com.sorsix.finalproject.easyeats.auth
 
-import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
-import com.sorsix.finalproject.easyeats.models.exception.InvalidPasswordException
-import com.sorsix.finalproject.easyeats.models.exception.PasswordDoNotMatch
-import com.sorsix.finalproject.easyeats.models.exception.UsernameNotFoundException
+import com.sorsix.finalproject.easyeats.models.exception.*
 import lombok.RequiredArgsConstructor
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -74,8 +71,8 @@ class AuthenticationController(private val service: AuthenticationService) {
 
         return try {
             ResponseEntity.ok(service.authenticate(request))
-        } catch (exception: UsernameNotFoundException) {
-            val errorResponse = ErrorResponse("Username not found")
+        } catch (exception: EmailNotFoundException) {
+            val errorResponse = ErrorResponse("Email not found")
             ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse)
         } catch (exception: InvalidArgumentsException) {
             val errorResponse = ErrorResponse("Invalid Arguments")

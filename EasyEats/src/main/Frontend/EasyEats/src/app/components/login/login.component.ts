@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/AuthService";
 import { LoginRequest } from 'src/app/models/loginRequest';
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @Component({
@@ -16,6 +17,8 @@ export class LoginComponent {
     password:""
   }
 
+  errorMessage:String ="";
+
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(){
@@ -24,8 +27,9 @@ export class LoginComponent {
         localStorage.setItem('token', response.token);
         this.router.navigate(['home'])
       },
-      error:() =>{
+      error:(error: HttpErrorResponse) =>{
         console.log("error in logging in")
+        this.errorMessage = error.error.message;
       }
     })
   }

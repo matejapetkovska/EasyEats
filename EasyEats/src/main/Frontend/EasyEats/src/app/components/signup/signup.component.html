@@ -23,15 +23,18 @@
         Password:
         <input type="password" placeholder="Password" required [(ngModel)]="request.password" name="password" aria-required="true">
       </label>
+
+
       <!-- <label>
-        Repeat Password:
-        <input type="password" placeholder="Repeat password" required [(ngModel)]="user.repeatPass" name="repeatPass" aria-required="true">
+        Profile picture:
+        <input type="file" required (change)="onFileChange($event)" accept="image/*">
       </label> -->
 
 
-      <!-- <div *ngIf="errorMessage" class="error-message">
+
+       <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
-      </div> -->
+      </div>
 
       <button type="submit">Sign Up</button>
     </form>
