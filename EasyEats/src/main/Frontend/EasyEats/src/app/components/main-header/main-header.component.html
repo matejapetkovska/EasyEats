@@ -11,11 +11,8 @@
   </div>
   <div class="right-corner">
     <div>
-      <a [routerLink]="['/user-profile', user?.userName]" class="username">{{ user?.userName }}</a>
+      Welcome back, <a [routerLink]="['/user-profile', user?.userName]" class="username">{{ user?.userName }}</a>
     </div>
     <button class="log-in-btn" (click)="logout()">Log out</button>
-  </div>
-  <div class="right-corner" *ngIf="!isLoggedIn">
-    <button class="log-in-btn"><a routerLink="/login">Log in</a></button>
   </div>
 </div>
