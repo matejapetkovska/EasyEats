@@ -4,7 +4,6 @@ import com.sorsix.finalproject.easyeats.models.User
 import com.sorsix.finalproject.easyeats.models.enumerations.Role
 import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
 import com.sorsix.finalproject.easyeats.models.exception.InvalidPasswordException
-import com.sorsix.finalproject.easyeats.models.exception.UsernameNotFoundException
 import com.sorsix.finalproject.easyeats.models.exception.*
 import com.sorsix.finalproject.easyeats.repository.UserRepository
 import com.sorsix.finalproject.easyeats.service.UserService
@@ -63,7 +62,7 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
 
     override fun updateUser(updatedUser: User): User {
         val existingUser = repository.findById(updatedUser.id)
-            .orElseThrow { UsernameNotFoundException() }
+            .orElseThrow { EmailNotFoundException() }
 
         existingUser.first_name = updatedUser.first_name
         existingUser.last_name = updatedUser.last_name
@@ -78,7 +77,7 @@ class UserServiceImpl(val repository: UserRepository, val passwordEncoder: Passw
     override fun loadUserByUsername(username: String?): UserDetails {
         val user = repository.findByUserName(username)
         if (user == null) {
-            throw UsernameNotFoundException()
+            throw EmailNotFoundException()
         }
         val authorities = mutableListOf<SimpleGrantedAuthority>()
 

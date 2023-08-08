@@ -4,6 +4,10 @@ package com.sorsix.finalproject.easyeats.auth
 import com.sorsix.finalproject.easyeats.configurations.JwtService
 import com.sorsix.finalproject.easyeats.models.User
 import com.sorsix.finalproject.easyeats.models.enumerations.Role
+import com.sorsix.finalproject.easyeats.models.exception.EmailAlreadyExist
+import com.sorsix.finalproject.easyeats.models.exception.EmailNotFoundException
+import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
+import com.sorsix.finalproject.easyeats.models.exception.InvalidPasswordException
 import com.sorsix.finalproject.easyeats.repository.UserRepository
 import jakarta.servlet.http.HttpServletRequest
 import lombok.RequiredArgsConstructor
@@ -24,29 +28,53 @@ class AuthenticationService(private val repository: UserRepository,
                             private val authenticationManager: AuthenticationManager) {
 
     fun register(request: RegisterRequest): AuthenticationResponse {
+
+        if (request.username.isNullOrEmpty() || request.password.isNullOrEmpty() || request.email.isNullOrEmpty() || request.firstName.isNullOrEmpty() || request.lastName.isNullOrEmpty()) {
+            throw InvalidArgumentsException()
+        }
+
         val user = User(
             id = 0,
             first_name = request.firstName,
             last_name = request.lastName,
             email = request.email,
-            userName =request.username,
+            userName = request.username,
             passw = passwordEncoder.encode(request.password),
             role = Role.USER,
             image = ""
         )
+
+        if (repository.findByEmail(request.email) != null) {
+            throw EmailAlreadyExist(request.email)
+        }
         repository.save(user)
         val jwtToken = jwtService.generateToken(user)
         return AuthenticationResponse(jwtToken)
+
+
     }
 
     fun authenticate(request: AuthenticationRequest): AuthenticationResponse {
-        authenticationManager.authenticate(
-            UsernamePasswordAuthenticationToken(request.email, request.password)
-        )
-        val user: User = repository.findByEmail(request.email) ?: throw Exception()
-        val jwtToken = jwtService.generateToken(user)
-        return AuthenticationResponse(jwtToken)
+
+        if (request.email.isNullOrEmpty() || request.password.isNullOrEmpty()) {
+            throw InvalidArgumentsException()
+        }
+
+        val user: User = repository.findByEmail(request.email) ?: throw EmailNotFoundException()
+
+
+        if (passwordEncoder.matches(request.password, user.password)) {
+            authenticationManager.authenticate(
+                UsernamePasswordAuthenticationToken(request.email, request.password)
+            )
+            val jwtToken = jwtService.generateToken(user)
+            return AuthenticationResponse(jwtToken)
+        } else {
+            throw InvalidPasswordException()
+        }
+
     }
+
 
 //    fun authenticate(request: AuthenticationRequest): AuthenticationResponse {
 //        authenticationManager.authenticate(
@@ -153,7 +181,7 @@ class AuthenticationService(private val repository: UserRepository,
 
      fun updateUser(updatedUser: User): User {
         val existingUser = repository.findById(updatedUser.id)
-            .orElseThrow { com.sorsix.finalproject.easyeats.models.exception.UsernameNotFoundException() }
+            .orElseThrow { com.sorsix.finalproject.easyeats.models.exception.EmailNotFoundException() }
 
         existingUser.first_name = updatedUser.first_name
         existingUser.last_name = updatedUser.last_name
@@ -168,7 +196,7 @@ class AuthenticationService(private val repository: UserRepository,
      fun loadUserByUsername(username: String?): UserDetails {
         val user = repository.findByUserName(username)
         if (user == null) {
-            throw com.sorsix.finalproject.easyeats.models.exception.UsernameNotFoundException()
+            throw com.sorsix.finalproject.easyeats.models.exception.EmailNotFoundException()
         }
         val authorities = mutableListOf<SimpleGrantedAuthority>()
 

@@ -23,6 +23,7 @@ export class SignupComponent {
     imageFile:""
   }
 
+  errorMessage:String ="";
   constructor(private authService: AuthService, private router: Router){}
 
   onSubmit(){
@@ -31,8 +32,9 @@ export class SignupComponent {
         localStorage.setItem('token', response.token);
         this.router.navigate(['home'])
       },
-      error:() =>{
-        console.log("error in registrating")
+      error:(error: HttpErrorResponse) =>{
+        console.log("error in logging in")
+        this.errorMessage = error.error.message;
       }
     })
   }
