@@ -5,11 +5,8 @@ import {UserService} from "../../services/UserService";
 import {AuthService} from "../../services/AuthService";
 import {NgForm} from "@angular/forms";
 import {User} from "../../models/user";
+import { LoginRequest } from 'src/app/models/loginRequest';
 
-interface LoginRequest {
-  username: string;
-  password: string;
-}
 
 @Component({
   selector: 'app-login',
@@ -18,27 +15,46 @@ interface LoginRequest {
 })
 export class LoginComponent {
 
-  username: string = '';
-  password: string = '';
-  errorMessage: string='';
-
-  constructor(private authService: AuthService, private router: Router, private userService: UserService, private http: HttpClient) {
+  request: LoginRequest = {
+    email:"",
+    password:""
   }
 
+  constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit(form: NgForm) {
-    const loginRequest: LoginRequest = { username: this.username, password: this.password };
-
-    this.http.post<any>('http://localhost:8081/api/login', loginRequest).subscribe(
-      (response) => {
-        this.userService.saveUser(response);
-        this.router.navigate(['/home']);
+  onSubmit(){
+    this.authService.login(this.request).subscribe({
+      next:(response) => {
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['home'])
       },
-      (error: HttpErrorResponse) => {
-        this.errorMessage = error.error.message;
+      error:() =>{
+        console.log("error in logging in")
       }
-    );
+    })
   }
+
+  // username: string = '';
+  // password: string = '';
+  // errorMessage: string='';
+
+  // constructor(private authService: AuthService, private router: Router, private userService: UserService, private http: HttpClient) {
+  // }
+
+
+  // onSubmit(form: NgForm) {
+  //   const loginRequest: LoginRequest = { username: this.username, password: this.password };
+
+  //   this.http.post<any>('http://localhost:8081/api/login', loginRequest).subscribe(
+  //     (response) => {
+  //       this.userService.saveUser(response);
+  //       this.router.navigate(['/home']);
+  //     },
+  //     (error: HttpErrorResponse) => {
+  //       this.errorMessage = error.error.message;
+  //     }
+  //   );
+  // }
 
 }
 

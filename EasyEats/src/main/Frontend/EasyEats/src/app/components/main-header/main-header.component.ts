@@ -21,7 +21,7 @@ export class MainHeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.userService.isLoggedIn();
+    this.isLoggedIn = localStorage.getItem('token') != null;
 
     if (this.isLoggedIn) {
       this.userService.getUser().subscribe(
@@ -38,15 +38,10 @@ export class MainHeaderComponent implements OnInit{
   }
 
   logout() {
-    this.authService.logout().subscribe({
-      next: response => {
-        this.userService.clean()
-        this.router.navigate(['/login']);
-      },
-      error: error => {
-        console.log(error)
-      }
-    })
+    console.log(localStorage.getItem('token'))
+    localStorage.removeItem('token');
+    console.log(localStorage.getItem('token'))
+    this.router.navigate(['/login']);
   }
 
 }

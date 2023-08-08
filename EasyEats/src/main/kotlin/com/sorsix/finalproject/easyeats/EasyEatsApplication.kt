@@ -11,10 +11,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 @SpringBootApplication
 class EasyEatsApplication {
-    @Bean
-    fun passwordEncoder(): PasswordEncoder? {
-        return BCryptPasswordEncoder()
-    }
 }
 
 fun main(args: Array<String>) {

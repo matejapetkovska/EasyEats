@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {UserService} from "./UserService";
+import { RegisterRequest } from '../models/registerRequest';
+import { AuthResponse } from '../models/authResponse';
+import { LoginRequest } from '../models/loginRequest';
 
 
 const httpOptions = {
@@ -14,18 +17,22 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private service: UserService) { }
 
-  login(username: string, password: string): Observable<any> {
+  constructor(private httpClient: HttpClient) { }
 
-    return this.http.post(
-      'http://localhost:8081/api/login', {username, password}, httpOptions);
+  register(request: RegisterRequest): Observable<AuthResponse>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json' 
+    });
+    return this.httpClient.post<AuthResponse>("http://localhost:8081/api/auth/register", request, { headers });
   }
 
-
-  logout(): Observable<any> {
-    this.service.clean()
-    return this.http.get('http://localhost:8081/api/logout', httpOptions);
+  login(request: LoginRequest): Observable<AuthResponse>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json' 
+    });
+    return this.httpClient.post<AuthResponse>("http://localhost:8081/api/auth/authenticate", request, { headers });
+  
   }
 
 }
