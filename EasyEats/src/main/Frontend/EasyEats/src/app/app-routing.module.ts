@@ -10,22 +10,23 @@ import { AddRecipeComponent } from './components/add-recipe/add-recipe.component
 import {UserProfileComponent} from "./components/user-profile/user-profile.component";
 import {RecipeComponent} from "./components/recipe/recipe.component";
 import {EditRecipeComponent} from "./components/edit-recipe/edit-recipe.component";
+import {AuthGuard} from "./auth.guard";
 
 
 
 const routes: Routes = [
-  {path: 'welcome', component: WelcomeScreenComponent},
-  {path:'', redirectTo:'/welcome', pathMatch:'full'},
-  {path:'home', component: HomeScreenComponent},
-  {path: 'signup', component: SignupComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'recipes/:category_id', component: SingleCategoryComponent},
-  {path: 'recipes', component: AllRecipesComponent},
-  {path: 'addrecipe', component: AddRecipeComponent},
-  {path: 'editrecipe/:recipe_id', component: EditRecipeComponent},
-  {path: 'user-profile', component: UserProfileComponent},
-  {path: 'recipe/:recipe_id', component: RecipeComponent},
-  { path: 'user-profile/:username', component: UserProfileComponent }
+  { path: 'welcome', component: WelcomeScreenComponent },
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeScreenComponent, canActivate: [AuthGuard] },
+  { path: 'recipes/:category_id', component: SingleCategoryComponent, canActivate: [AuthGuard] },
+  { path: 'recipes', component: AllRecipesComponent, canActivate: [AuthGuard] },
+  { path: 'addrecipe', component: AddRecipeComponent, canActivate: [AuthGuard] },
+  { path: 'editrecipe/:recipe_id', component: EditRecipeComponent, canActivate: [AuthGuard] },
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'recipe/:recipe_id', component: RecipeComponent, canActivate: [AuthGuard] },
+  { path: 'user-profile/:username', component: UserProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
