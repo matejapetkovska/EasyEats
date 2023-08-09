@@ -41,7 +41,7 @@ class AuthenticationService(private val repository: UserRepository,
             userName = request.username,
             passw = passwordEncoder.encode(request.password),
             role = Role.USER,
-            image = ""
+            image = "default_profile_picture.jpg"
         )
 
         if (repository.findByEmail(request.email) != null) {
