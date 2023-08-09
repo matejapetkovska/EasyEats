@@ -64,4 +64,8 @@ export class UserService {
   getUserFromToken(token: String | null): Observable<User>{
     return this.http.get<User>(`http://localhost:8081/api/user/token?token=${token}`)
   }
+
+  changeProfilePicture(user: User, formData: FormData): Observable<User>{
+    return this.http.put<User>(`http://localhost:8081/api/user/profilepicture/${user.id}`, formData)
+  }
 }

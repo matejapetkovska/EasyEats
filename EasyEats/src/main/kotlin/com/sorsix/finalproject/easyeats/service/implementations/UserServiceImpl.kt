@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.io.path.exists
@@ -83,6 +84,34 @@ class UserServiceImpl(val repository: UserRepository,
         return repository.findByEmail(jwtService.extractUsername(token))
     }
 
+    override fun updateImageField(user_id: Long, image: MultipartFile): User? {
+        val user = repository.findById(user_id).orElse(null)
+        var imageName = generateRandomImageName() + ".jpg"
+        var imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\", imageName)
+        while (imageFilePath.exists()) {
+            imageName = generateRandomImageName()
+            imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\", imageName)
+        }
+        Files.copy(image.inputStream, Paths.get(imageFilePath.toString()))
+
+        if(user.image != "default_profile_picture.jpg") {
+            val file = File("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\" + user.image)
+            file.delete()
+        }
+
+        user.image=imageName
+        return repository.save(user)
+    }
+
+    private fun generateRandomImageName(): String {
+        val sb = StringBuilder()
+        for (i in 0..5) {
+            val rand = listOf(('a'..'z'), ('A'..'Z')).flatten().random()
+            sb.append(rand)
+        }
+        return sb.toString()
+    }
+
     override fun loadUserByUsername(username: String?): UserDetails {
         val user = repository.findByUserName(username)
         if (user == null) {
@@ -103,16 +132,6 @@ class UserServiceImpl(val repository: UserRepository,
 
 }
 
-
-
-    private fun generateRandomImageName(): String {
-        val sb = StringBuilder()
-        for (i in 0..5) {
-            val rand = listOf(('a'..'z'), ('A'..'Z')).flatten().random()
-            sb.append(rand)
-        }
-        return sb.toString()
-    }
 
 //    override fun register(
 //        username: String?,
