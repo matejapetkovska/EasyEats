@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.web.multipart.MultipartFile
+import java.security.Principal
 
 
 interface UserService : UserDetailsService{
@@ -14,6 +15,7 @@ interface UserService : UserDetailsService{
     fun doesUsernameExist(username: String): Boolean
     fun doesEmailExist(email: String): Boolean
     fun getLoggedInUser(request: HttpServletRequest): User?
+    fun updateUser(userId: Long, updatedUser: User, principal: Principal): User
     fun updateUser(updatedUser: User): User
     fun getUserFromToken(token: String): User?
     fun updateImageField(user_id: Long, image: MultipartFile): User?

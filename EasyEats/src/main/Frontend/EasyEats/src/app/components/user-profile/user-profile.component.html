@@ -90,8 +90,10 @@
               [(ngModel)]="editedUser.userName"
               placeholder="Username"/>
           </div>
+          <div class="right-col">
           <div class="edit-item">
             <input [(ngModel)]="editedUser.email" placeholder="Email"/>
+          </div>
           </div>
         </div>
         <div class="right-col">
@@ -101,25 +103,13 @@
               [(ngModel)]="editedUser.password"
               placeholder="Password"/>
           </div>
-          <div class="edit-item">
-            <input
-              type="password"
-              [(ngModel)]="editedUser.repeatPass"
-              placeholder="Repeat Password"/>
-          </div>
-          <div class="edit-item">
-            <input [(ngModel)]="editedUser.image" placeholder="Image URL"/>
-          </div>
-          <div class="edit-item">
-            <input [(ngModel)]="editedUser.role" placeholder="Role"/>
-          </div>
         </div>
       </div>
       <div class="edit-profile-btns-container modal-container-footer">
         <button (click)="toggleEdit()" class="modal-btns">
           Cancel
         </button>
-        <button (click)="saveChanges()" class="modal-btns">
+        <button (click)="editUserProfile()" class="modal-btns">
           Save Changes
         </button>
       </div>
