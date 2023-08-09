@@ -19,7 +19,13 @@ export class LoginComponent {
 
   errorMessage:String ="";
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    this.authService.isAuthenticated$().subscribe((authenticated) => {
+      if (authenticated) {
+        this.router.navigate(['home']);
+      }
+    });
+  }
 
   onSubmit(){
     this.authService.login(this.request).subscribe({
