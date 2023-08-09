@@ -16,8 +16,9 @@ interface UserService : UserDetailsService{
     fun getLoggedInUser(request: HttpServletRequest): User?
     fun updateUser(updatedUser: User): User
     fun getUserFromToken(token: String): User?
-
     fun updateImageField(user_id: Long, image: MultipartFile): User?
+
+    fun getUserFromId(user_id: Long): User?
 
 }
 
