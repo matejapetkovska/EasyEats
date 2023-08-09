@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { RegisterRequest } from '../models/registerRequest';
-import { AuthResponse } from '../models/authResponse';
-import { LoginRequest } from '../models/loginRequest';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {RegisterRequest} from '../models/registerRequest';
+import {AuthResponse} from '../models/authResponse';
+import {LoginRequest} from '../models/loginRequest';
 
 
 const httpOptions = {
@@ -17,21 +17,43 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private httpClient: HttpClient) { }
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
 
-  register(request: RegisterRequest): Observable<AuthResponse>{
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.httpClient.post<AuthResponse>("http://localhost:8081/api/auth/register", request, { headers });
+
+  constructor(private httpClient: HttpClient) {
   }
 
-  login(request: LoginRequest): Observable<AuthResponse>{
+  register(request: RegisterRequest): Observable<AuthResponse> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.httpClient.post<AuthResponse>("http://localhost:8081/api/auth/authenticate", request, { headers });
+    return this.httpClient.post<AuthResponse>("http://localhost:8081/api/auth/register", request, {headers});
+  }
 
+  login(request: LoginRequest): Observable<AuthResponse> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    this.isAuthenticatedSubject.next(true);
+
+    return this.httpClient.post<AuthResponse>("http://localhost:8081/api/auth/authenticate", request, {headers});
+
+  }
+
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.isAuthenticatedSubject.next(false);
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
+
+  isAuthenticated$(): Observable<boolean> {
+    return this.isAuthenticatedSubject.asObservable();
   }
 
 }

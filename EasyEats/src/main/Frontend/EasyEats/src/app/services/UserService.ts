@@ -33,6 +33,7 @@ export class UserService {
     return this.http.get<User>(`http://localhost:8081/api/user/token?token=${token}`)
   }
 
+
   updateUser(user: User | undefined, token: string | null): Observable<User | null> {
     return this.http.put<User>(`http://localhost:8081/api/user/${user?.id}?token=${token}`, {
       first_name: user?.first_name,
@@ -43,5 +44,9 @@ export class UserService {
       role: user?.role,
       image: user?.image,
     });
+
+  changeProfilePicture(user: User, formData: FormData): Observable<User>{
+    return this.http.put<User>(`http://localhost:8081/api/user/profilepicture/${user.id}`, formData)
+
   }
 }

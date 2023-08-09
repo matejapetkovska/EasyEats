@@ -26,6 +26,8 @@ export class UserProfileComponent implements OnInit {
 
   errorMessage = ''
 
+  selectedFile: File | undefined
+
   constructor(private userService: UserService,
               private router: Router,
               private recipeService: RecipeService,
@@ -34,10 +36,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserFromToken()
-    if(this.user != undefined){
-      console.log(this.user)
-      console.log(this.user.email)
-    }
   }
 
   getUserFromToken(){
@@ -45,6 +43,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserFromToken(token).subscribe({
       next: (user) => {
         this.user = user
+        this.user.image="../../../assets/user_images/"+user.image
       },
       error: () => {
         console.log("error in getting user from token")
@@ -113,6 +112,24 @@ export class UserProfileComponent implements OnInit {
         }
       }
     );
+  }
+
+  onFileChange(event: any) {
+    this.selectedFile = event.target.files[0];
+    const formData = new FormData()
+    console.log(this.user)
+    if(this.user != null && this.selectedFile != null){
+      formData.append("image", this.selectedFile)
+      this.userService.changeProfilePicture(this.user, formData).subscribe({
+        next: (user) => {
+          this.user = user
+          this.user.image="../../../assets/user_images/"+user.image
+        },
+        error: () => {
+          console.log("error in changing profile picture")
+        }
+      })
+    }
   }
 
   addPathToImages(list: Recipe[]) {

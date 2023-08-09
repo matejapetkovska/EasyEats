@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.security.Principal
@@ -23,26 +24,6 @@ import kotlin.io.path.exists
 @Service
 class UserServiceImpl(val repository: UserRepository,
                       val jwtService: JwtService, val passwordEncoder: PasswordEncoder) : UserService {
-
-    //    override fun login(username: String?, password: String?, request: HttpServletRequest): User? {
-//        if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
-//            throw InvalidArgumentsException()
-//        }
-//
-//        val user = repository.findByUsername(username).orElseThrow { UsernameNotFoundException() };
-//
-//        if (user != null) {
-//            if (passwordEncoder.matches(password, user.password)) {
-//                request.session.setAttribute("user", user)
-//                return user
-//            } else {
-//                throw InvalidPasswordException()
-//            }
-//        }else{
-//            throw UsernameNotFoundException()
-//        }
-
-
 
     override fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$")
@@ -88,6 +69,38 @@ class UserServiceImpl(val repository: UserRepository,
         return repository.findByEmail(jwtService.extractUsername(token))
     }
 
+    override fun updateImageField(user_id: Long, image: MultipartFile): User? {
+        val user = repository.findById(user_id).orElse(null)
+        var imageName = generateRandomImageName() + ".jpg"
+        var imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\", imageName)
+        while (imageFilePath.exists()) {
+            imageName = generateRandomImageName()
+            imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\", imageName)
+        }
+        Files.copy(image.inputStream, Paths.get(imageFilePath.toString()))
+
+        if(user.image != "default_profile_picture.jpg") {
+            val file = File("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\" + user.image)
+            file.delete()
+        }
+
+        user.image=imageName
+        return repository.save(user)
+    }
+
+    override fun getUserFromId(user_id: Long): User? {
+        return repository.findById(user_id).orElse(null)
+    }
+
+    private fun generateRandomImageName(): String {
+        val sb = StringBuilder()
+        for (i in 0..5) {
+            val rand = listOf(('a'..'z'), ('A'..'Z')).flatten().random()
+            sb.append(rand)
+        }
+        return sb.toString()
+    }
+
     override fun loadUserByUsername(username: String?): UserDetails {
         val user = repository.findByUserName(username)
         if (user == null) {
@@ -108,56 +121,5 @@ class UserServiceImpl(val repository: UserRepository,
 
 }
 
-
-
-    private fun generateRandomImageName(): String {
-        val sb = StringBuilder()
-        for (i in 0..5) {
-            val rand = listOf(('a'..'z'), ('A'..'Z')).flatten().random()
-            sb.append(rand)
-        }
-        return sb.toString()
-    }
-
-//    override fun register(
-//        username: String?,
-//        email: String?,
-//        password: String?,
-//        repeatPassword: String?,
-//        name: String?,
-//        surname: String?,
-//        role: Role?,
-//        file: MultipartFile,
-//        request: HttpServletRequest
-//    ): User? {
-//        if (username.isNullOrEmpty() || password.isNullOrEmpty() || email.isNullOrEmpty() || name.isNullOrEmpty() || surname.isNullOrEmpty() || role == null) {
-//            val errorMessage = "Invalid or missing values for the following fields: " +
-//                    "username=$username, email=$email, password=$password, repeatPassword=$repeatPassword, " +
-//                    "name=$name, surname=$surname, role=$role"
-//            println(errorMessage)
-//            throw InvalidUsernameOrPasswordException(errorMessage)
-//        }
-//
-//        if (password != repeatPassword) {
-//            throw PasswordDoNotMatch()
-//        }
-//
-//        if (repository.findByUsername(username!!).isPresent) {
-//            throw UsernameAlreadyExist(username)
-//        }
-//
-//        var imageName = generateRandomImageName() + ".jpg"
-//        var imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\", imageName)
-//        while (imageFilePath.exists()) {
-//            imageName = generateRandomImageName()
-//            imageFilePath = Paths.get("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\", imageName)
-//        }
-//        Files.copy(file.inputStream, Paths.get(imageFilePath.toString()))
-//        val image = "../../assets/user_images/$imageName"
-//
-//        val user = User(0, name, surname, email, username, passwordEncoder.encode(password), role, image)
-//        request.session.setAttribute("user", user)
-//        return repository.save(user)
-//    }
 
 

@@ -3,6 +3,7 @@
 
   <div *ngIf="user && !isEditMode && !isPostMode" class="user">
     <div class="user-name-img">
+      <input type="file" (change)="onFileChange($event)">
       <img class="profile-picture" src="{{user.image}}" alt=""/>
       <h2>{{ user.userName }}</h2>
     </div>
@@ -30,7 +31,7 @@
     </div>
   </div>
 
-  <div *ngIf="isPostMode && editedUser">
+  <div *ngIf="isPostMode && editedUser && recipes?.length">
     <div class="modal">
       <div class="modal-container">
         <header class="modal-container-header">
@@ -53,6 +54,16 @@
         <footer class="modal-container-footer">
           <button class="modal-btns" (click)="togglePost()">Close</button>
         </footer>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" *ngIf="isPostMode && editedUser && !recipes?.length">
+    <div class="modal-no-recipes-content">
+      <div class="modal-text">You haven't posted any recipes yet.</div>
+      <div class="edit-profile-btns-container">
+        <button class="modal-no-recipes-btn" (click)="togglePost()">Close</button>
+        <button class="modal-no-recipes-btn"><a [routerLink]="['/addrecipe']">Add recipe</a></button>
       </div>
     </div>
   </div>
