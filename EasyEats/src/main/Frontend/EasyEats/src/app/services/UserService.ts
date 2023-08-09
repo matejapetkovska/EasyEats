@@ -44,9 +44,11 @@ export class UserService {
       role: user?.role,
       image: user?.image,
     });
+  }
 
   changeProfilePicture(user: User, formData: FormData): Observable<User>{
     return this.http.put<User>(`http://localhost:8081/api/user/profilepicture/${user.id}`, formData)
 
   }
 }
+

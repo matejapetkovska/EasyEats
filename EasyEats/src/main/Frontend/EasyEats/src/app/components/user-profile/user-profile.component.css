@@ -86,10 +86,6 @@ main::before {
   cursor: pointer;
 }
 
-* {
-  scrollbar-width: 0;
-}
-
 *::-webkit-scrollbar {
   background-color: transparent;
   width: 12px;
@@ -199,6 +195,11 @@ main::before {
   color: #fff;
 }
 
+.right-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .modal-btns:hover {
   transform: scale(1.1);
   cursor: pointer;
@@ -216,6 +217,7 @@ main::before {
   font-size: 1rem;
   background-color: transparent;
   color: black;
+  width: 100%;
 }
 
 .edit-item input:focus-visible {
