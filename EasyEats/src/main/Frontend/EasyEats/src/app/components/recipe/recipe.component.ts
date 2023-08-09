@@ -3,8 +3,6 @@ import {RecipeDetailsService} from "../../services/recipe-details.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RecipeReview} from "../../models/recipe-review";
 import {UserService} from "../../services/UserService";
-import {RecipeService} from "../../services/recipe-service.service";
-import {Recipe} from "../../models/recipe";
 
 @Component({
   selector: 'app-recipe',
@@ -23,10 +21,10 @@ export class RecipeComponent implements OnInit {
 
   errorMessage: String = ""
 
+  loggedInUserId: Number | undefined
+
   constructor(private recipeDetailsService: RecipeDetailsService,
-              private recipeService: RecipeService,
               private userService: UserService,
-              private router: Router,
               private route: ActivatedRoute) {
   }
 
@@ -36,6 +34,7 @@ export class RecipeComponent implements OnInit {
       const recipe_id = params.get('recipe_id');
       this.fetchRecipeDetails(recipe_id);
     });
+    this.getLoggedInUserId()
   }
 
   fetchRecipeDetails(recipe_id: string | null): void {
@@ -51,11 +50,25 @@ export class RecipeComponent implements OnInit {
     );
   }
 
+  getLoggedInUserId(){
+    const token = localStorage.getItem('token')
+    this.userService.getUserFromToken(token).subscribe({
+      next: (user) => {
+        this.loggedInUserId = user.id
+        console.log(this.loggedInUserId)
+      },
+      error: () => {
+        console.log("error in getting user from token")
+      }
+    })
+  }
+
   createFormData(): FormData {
     const formData = new FormData();
-    if (this.comment != null && this.rating != null) {
+    if (this.comment != null && this.rating != null && this.loggedInUserId != null) {
       formData.append('comment', this.comment.toString())
       formData.append('rating', this.rating.toString())
+      formData.append('user_id', this.loggedInUserId.toString())
     }
     return formData
   }

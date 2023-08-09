@@ -40,9 +40,10 @@ class RecipeDetailsController(
         @PathVariable recipe_id: String,
         @RequestParam comment: String,
         @RequestParam rating: Int,
+        @RequestParam user_id: Long,
         request: HttpServletRequest
     ): ResponseEntity<Any> {
-        val user = userService.getLoggedInUser(request)
+        val user = userService.getUserFromId(user_id)
             ?: return ResponseEntity.badRequest().body(Error("Error in saving review. Please log in first."))
         val recipe = recipeDetailsService.getRecipeById(recipe_id)
         if (recipe != null) {
