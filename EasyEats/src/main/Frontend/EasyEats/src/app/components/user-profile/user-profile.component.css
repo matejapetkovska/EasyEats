@@ -48,10 +48,12 @@ main::before {
   margin-top: 1rem;
   gap: 1rem;
 }
+
 .full-name {
   font-size: 2rem;
   font-weight: 500;
 }
+
 .user-mail {
   font-size: 1.4rem;
 }
@@ -67,6 +69,7 @@ main::before {
   gap: 1rem;
   justify-content: space-around;
 }
+
 .buttons {
   font-size: 1.2rem;
   font-weight: 500;
@@ -77,6 +80,7 @@ main::before {
   border: none;
   border-radius: 10px;
 }
+
 .buttons:hover {
   transform: scale(1.1);
   cursor: pointer;
@@ -85,10 +89,12 @@ main::before {
 * {
   scrollbar-width: 0;
 }
+
 *::-webkit-scrollbar {
   background-color: transparent;
   width: 12px;
 }
+
 *::-webkit-scrollbar-thumb {
   border-radius: 99px;
   background-color: #ddd;
@@ -104,7 +110,7 @@ main::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-container {
@@ -158,7 +164,7 @@ main::before {
   box-shadow: 5px 5px 5px #ccc;
 }
 
-.edit-btn>button {
+.edit-btn > button {
   padding-right: 10px;
   border: none;
   background-color: transparent;
@@ -182,7 +188,8 @@ main::before {
 }
 
 .modal-btns {
-  padding: 12px 20px;
+  width: 130px;
+  height: 30px;
   border-radius: 8px;
   border: 0;
   font-weight: 600;
@@ -210,6 +217,7 @@ main::before {
   background-color: transparent;
   color: black;
 }
+
 .edit-item input:focus-visible {
   outline: 2px solid #af303094;
   border-radius: 3px;
@@ -226,3 +234,37 @@ main::before {
   display: flex;
   justify-content: space-around;
 }
+
+.modal-no-recipes-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-text {
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.modal-no-recipes-btn {
+  background-color: var(--green-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  transition: transform 300ms ease-in-out;
+}
+
+.modal-no-recipes-btn:hover {
+  background-color: var(--neon-green);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
