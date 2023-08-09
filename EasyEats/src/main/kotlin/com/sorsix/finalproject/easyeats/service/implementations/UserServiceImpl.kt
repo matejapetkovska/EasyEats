@@ -16,12 +16,13 @@ import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.security.Principal
 import kotlin.io.path.exists
 
 
 @Service
 class UserServiceImpl(val repository: UserRepository,
-                      val jwtService: JwtService) : UserService {
+                      val jwtService: JwtService, val passwordEncoder: PasswordEncoder) : UserService {
 
     //    override fun login(username: String?, password: String?, request: HttpServletRequest): User? {
 //        if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
@@ -65,16 +66,20 @@ class UserServiceImpl(val repository: UserRepository,
         return request.session.getAttribute("user") as? User
     }
 
-    override fun updateUser(updatedUser: User): User {
-        val existingUser = repository.findById(updatedUser.id)
+
+    override fun updateUser(userId: Long, updatedUser: User, principal: Principal): User {
+        val existingUser = repository.findById(userId)
             .orElseThrow { EmailNotFoundException() }
 
-        existingUser.first_name = updatedUser.first_name
-        existingUser.last_name = updatedUser.last_name
-        existingUser.email = updatedUser.email
-        existingUser.passw = updatedUser.password
-        existingUser.image = updatedUser.image
-        existingUser.userName = updatedUser.username
+        existingUser.apply {
+            first_name = updatedUser.first_name
+            last_name = updatedUser.last_name
+            userName=updatedUser.userName
+            email = updatedUser.email
+            passw = passwordEncoder.encode(updatedUser.passw)
+            role=updatedUser.role
+            image = updatedUser.image
+        }
 
         return repository.save(existingUser)
     }

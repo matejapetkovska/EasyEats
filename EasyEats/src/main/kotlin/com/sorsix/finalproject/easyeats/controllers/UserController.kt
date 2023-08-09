@@ -4,6 +4,7 @@ import com.sorsix.finalproject.easyeats.models.User
 import com.sorsix.finalproject.easyeats.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 @RestController
 @RequestMapping("/api/user")
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.*
 class UserController(private val userService: UserService) {
 
     @PutMapping("/{id}")
-    fun updatedUser (@PathVariable id: Long, @RequestBody updatedUser: User) : ResponseEntity<User>{
-        val user = userService.updateUser(updatedUser)
+    fun editUserProfile(@PathVariable id: Long, @RequestBody updatedUser: User, principal: Principal): ResponseEntity<User> {
+        val user=userService.updateUser(id, updatedUser, principal)
         return ResponseEntity.ok(user)
     }
 

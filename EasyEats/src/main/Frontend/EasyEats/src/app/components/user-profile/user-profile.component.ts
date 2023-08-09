@@ -54,20 +54,30 @@ export class UserProfileComponent implements OnInit {
 
   toggleEdit(): void {
     this.isEditMode = !this.isEditMode;
+
+    if (this.isEditMode) {
+      this.editedUser = { ...this.user };
+    }
   }
 
-  saveChanges(): void {
-    this.userService.updateUser(this.editedUser).subscribe(
-      (response) => {
-        this.user = {...this.editedUser};
-        this.userService.saveUserUpdate(this.editedUser);
-        this.isEditMode = false;
+
+  editUserProfile(): void {
+    const token = localStorage.getItem('token')
+
+    this.userService.updateUser(this.editedUser, token).subscribe(
+      (updatedUser) => {
+        if (updatedUser) {
+          this.user = { ...this.editedUser };
+          this.isEditMode = false;
+        }
       },
       (error) => {
         console.error('Error updating user data:', error);
       }
     );
   }
+
+
 
   onClickViewPosts() {
     this.recipeService.getRecipesByUserId(this.user?.id)

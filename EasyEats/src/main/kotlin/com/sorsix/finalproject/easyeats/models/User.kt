@@ -27,7 +27,7 @@ class User (
     var passw: String,
 
     @Enumerated(value = EnumType.STRING)
-    val role: Role,
+    var role: Role,
 
     var image: String
 

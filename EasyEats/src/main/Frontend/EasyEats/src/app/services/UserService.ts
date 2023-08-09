@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { Observable, of } from 'rxjs';
+import {catchError, Observable, of, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 const USER_KEY = 'auth-user';
@@ -18,35 +18,6 @@ export class UserService {
     window.sessionStorage.setItem(USER_KEY, userJson);
   }
 
-  public saveUserUpdate(user: User): void {
-    this.updateUser(user).subscribe(
-      (updatedUser) => {
-        if (updatedUser) {
-          const userJson = JSON.stringify(updatedUser);
-          window.sessionStorage.removeItem(USER_KEY);
-          window.sessionStorage.setItem(USER_KEY, userJson);
-        }
-      },
-      (error) => {
-        console.error('Error updating user data:', error);
-      }
-    );
-  }
-
-
-  public getUser(): Observable<User | null> {
-    const userJson = window.sessionStorage.getItem(USER_KEY);
-    if (userJson) {
-      try {
-        const user: User = JSON.parse(userJson);
-        return of(user);
-      } catch (error) {
-        return of(null);
-      }
-    }
-    return of(null);
-  }
-
 
   public isLoggedIn(): boolean {
     const user = window.sessionStorage.getItem(USER_KEY);
@@ -57,11 +28,20 @@ export class UserService {
     window.sessionStorage.clear();
   }
 
-  updateUser(user: User | undefined): Observable<User | null> {
-    return this.http.put<User>(`http://localhost:8081/api/user/${user?.id}`, user);
-  }
 
   getUserFromToken(token: String | null): Observable<User>{
     return this.http.get<User>(`http://localhost:8081/api/user/token?token=${token}`)
+  }
+
+  updateUser(user: User | undefined, token: string | null): Observable<User | null> {
+    return this.http.put<User>(`http://localhost:8081/api/user/${user?.id}?token=${token}`, {
+      first_name: user?.first_name,
+      last_name: user?.last_name,
+      email: user?.email,
+      userName: user?.userName,
+      passw: user?.password,
+      role: user?.role,
+      image: user?.image,
+    });
   }
 }
