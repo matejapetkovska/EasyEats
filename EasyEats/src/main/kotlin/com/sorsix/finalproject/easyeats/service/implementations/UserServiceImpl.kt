@@ -57,7 +57,7 @@ class UserServiceImpl(val repository: UserRepository,
             last_name = updatedUser.last_name
             userName=updatedUser.userName
             email = updatedUser.email
-            passw = passwordEncoder.encode(updatedUser.passw)
+            passw = updatedUser.passw
             role=updatedUser.role
             image = updatedUser.image
         }
