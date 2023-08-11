@@ -3,8 +3,8 @@
 
   <div *ngIf="user && !isEditMode && !isPostMode" class="user">
     <div class="user-name-img">
-      <input type="file" (change)="onFileChange($event)">
       <img class="profile-picture" src="{{user.image}}" alt=""/>
+      <input class="custom-file-input" type="file" (change)="onFileChange($event)">
       <h2>{{ user.userName }}</h2>
     </div>
 

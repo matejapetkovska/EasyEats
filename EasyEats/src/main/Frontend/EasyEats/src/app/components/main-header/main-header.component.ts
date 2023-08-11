@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {User} from "../../models/user";
 import {UserService} from "../../services/UserService";
 import {AuthService} from "../../services/AuthService";
@@ -12,10 +11,8 @@ import {Router} from "@angular/router";
 })
 export class MainHeaderComponent implements OnInit{
 
-  isLoggedIn = false;
   username: string='';
   user: User | undefined;
-
 
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {
   }
