@@ -22,7 +22,10 @@
   <div class="reviews">
     <span>Reviews</span>
     <div *ngFor="let review of recipeReview.reviews" class="single-review">
-      <div class="user">{{ review.user.first_name }}</div>
+      <div class="user">
+        <img src="{{ review.user.image }}" class="profile_picture">
+        <div class="user_name">{{ review.user.first_name }}</div>
+      </div>
       <div class="review-details">
         <div><u>Rating:</u> {{ review.rating }}/5</div>
         <div>{{ review.comment }}</div>
