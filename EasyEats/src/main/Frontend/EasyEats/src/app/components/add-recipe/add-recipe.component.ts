@@ -89,15 +89,17 @@ export class AddRecipeComponent implements OnInit {
 
   createFormData(): FormData {
     const formData = new FormData();
+    const token = localStorage.getItem('token')
     if (this.title != null && this.description != null &&
       this.selectedFile != null && this.selectedCategoryId != null &&
-      this.selectedSubCategoryId != null && this.ingredients != null) {
+      this.selectedSubCategoryId != null && this.ingredients != null && token != null) {
       formData.append('title', this.title.toString())
       formData.append('description', this.description.toString())
       formData.append('file', this.selectedFile);
       formData.append('category_id', this.selectedCategoryId.toString())
       formData.append('subCategory_id', this.selectedSubCategoryId.toString())
       formData.append('ingredients', JSON.stringify(this.ingredients))
+      formData.append('token', token.toString())
     }
     return formData
   }

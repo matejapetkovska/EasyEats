@@ -17,4 +17,8 @@ class ReviewServiceImpl(private val reviewRepository: ReviewRepository): ReviewS
     override fun addReviewForRecipe(comment: String, rating: Int, user: User, recipe: Recipe): Review {
         return reviewRepository.save(Review(0,rating,comment,user, recipe))
     }
+
+    override fun deleteAllByRecipeId(recipe_id: Long) {
+        return reviewRepository.deleteAllByRecipeId(recipe_id)
+    }
 }

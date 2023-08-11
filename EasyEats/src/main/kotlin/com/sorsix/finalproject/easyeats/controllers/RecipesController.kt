@@ -43,8 +43,8 @@ class RecipesController(private val recipeService: RecipeService,
                   @RequestParam category_id: String,
                   @RequestParam subCategory_id: String,
                   @RequestParam ingredients: String,
-                  request: HttpServletRequest): ResponseEntity<Any>{
-        val user = userService.getLoggedInUser(request)
+                  @RequestParam token: String): ResponseEntity<Any>{
+        val user = userService.getUserFromToken(token)
             ?: return ResponseEntity.badRequest().body(Error("Error in saving recipe. Please log in first."))
         val recipe = recipeService.addRecipe(title, description, file, category_id, subCategory_id, ingredients, user)
         return ResponseEntity.ok(recipe)
@@ -57,18 +57,17 @@ class RecipesController(private val recipeService: RecipeService,
                    @RequestParam category_id: String,
                    @RequestParam subCategory_id: String,
                    @RequestParam ingredients: String,
-                   request: HttpServletRequest) : ResponseEntity<Any> {
-        val user = userService.getLoggedInUser(request)
+                   @RequestParam token: String) : ResponseEntity<Any> {
+        val user = userService.getUserFromToken(token)
             ?: return ResponseEntity.badRequest().body(Error("Error in editing recipe. Please log in first."))
-        println(user.first_name)
         val recipe = recipeService.editRecipe(recipe_id,title, description, category_id, subCategory_id, ingredients, user)
             ?: return ResponseEntity.badRequest().body(Error("Error in editing recipe."))
         return ResponseEntity.ok(recipe)
     }
 
     @DeleteMapping("/delete/{recipe_id}")
-    fun deleteRecipe(@PathVariable recipe_id: String): Unit? {
-        return recipe_id.toLongOrNull()?.let { recipeRepository.deleteById(it) }
+    fun deleteRecipe(@PathVariable recipe_id: Long) {
+        return recipeService.deleteRecipe(recipe_id)
     }
 
     @GetMapping("/user/{user_id}")

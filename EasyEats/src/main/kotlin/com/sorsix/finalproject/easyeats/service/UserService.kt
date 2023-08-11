@@ -16,7 +16,7 @@ interface UserService : UserDetailsService{
     fun doesEmailExist(email: String): Boolean
     fun getLoggedInUser(request: HttpServletRequest): User?
     fun updateUser(userId: Long, updatedUser: User, principal: Principal): User
-    fun updateUser(updatedUser: User): User
+    //fun updateUser(updatedUser: User): User
     fun getUserFromToken(token: String): User?
     fun updateImageField(user_id: Long, image: MultipartFile): User?
 
