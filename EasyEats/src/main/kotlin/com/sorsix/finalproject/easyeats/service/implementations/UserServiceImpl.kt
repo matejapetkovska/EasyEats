@@ -52,18 +52,24 @@ class UserServiceImpl(val repository: UserRepository,
         val existingUser = repository.findById(userId)
             .orElseThrow { EmailNotFoundException() }
 
+        if(updatedUser.passw!=existingUser.passw){
+            existingUser.apply {
+                passw = passwordEncoder.encode(updatedUser.passw)
+            }
+        }
         existingUser.apply {
             first_name = updatedUser.first_name
             last_name = updatedUser.last_name
             userName=updatedUser.userName
             email = updatedUser.email
-            passw = updatedUser.passw
             role=updatedUser.role
             image = updatedUser.image
         }
 
+
         return repository.save(existingUser)
     }
+
 
     override fun getUserFromToken(token: String): User? {
         return repository.findByEmail(jwtService.extractUsername(token))
