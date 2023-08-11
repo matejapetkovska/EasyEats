@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface IngredientRepository: JpaRepository<Ingredient, Long> {
     fun getIngredientById(id: Long): Ingredient?
+
 }

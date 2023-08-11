@@ -16,4 +16,5 @@ interface RecipeRepository: JpaRepository<Recipe, Long> {
     fun findBySubCategory_Id(subCategory_id: Long): List<Recipe>
 
     fun findByUser_Id(used_id: Long): List<Recipe>
+
 }

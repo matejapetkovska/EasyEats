@@ -13,4 +13,8 @@ class IngredientServiceImpl(private val ingredientRepository: IngredientReposito
         return ingredientRepository.save(ingredient)
     }
 
+    override fun deleteById(id: Long) {
+        ingredientRepository.deleteById(id)
+    }
+
 }

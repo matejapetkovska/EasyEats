@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*
 class CategoriesController(private val categoryService: CategoryService) {
 
     @GetMapping
-    fun getAllCategories(): ResponseEntity<List<Category>>{
-        return ResponseEntity.ok(categoryService.getAllCategories())
+    fun getAllCategories(): List<Category>{
+        return categoryService.getAllCategories()
     }
 
     @GetMapping("/{category_id}")

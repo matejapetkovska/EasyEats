@@ -8,8 +8,10 @@ import com.sorsix.finalproject.easyeats.models.dto.IngredientDto
 import com.sorsix.finalproject.easyeats.repository.IngredientRepository
 import com.sorsix.finalproject.easyeats.repository.RecipeRepository
 import com.sorsix.finalproject.easyeats.service.*
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.LocalDateTime
@@ -22,7 +24,7 @@ class RecipeServiceImpl(
     private val subCategoryService: SubCategoryService,
     private val ingredientService: IngredientService,
     private val ingredientRepository: IngredientRepository,
-    private val userService: UserService
+    private val reviewService: ReviewService
 ) : RecipeService {
     override fun getAllRecipesByCategory(category_id: String): List<Recipe>? {
         val categoryIdLong = category_id.toLongOrNull()
@@ -145,6 +147,15 @@ class RecipeServiceImpl(
     override fun getAllRecipesByUser(used_id: String): List<Recipe> {
         val id = used_id.toLong()
         return recipeRepository.findByUser_Id(id)
+    }
+
+    @Transactional
+    override fun deleteRecipe(recipe_id: Long) {
+        reviewService.deleteAllByRecipeId(recipe_id)
+        val recipe = recipeRepository.findById(recipe_id).get()
+        val file = File("src\\main\\Frontend\\EasyEats\\src\\assets\\recipe_images\\" + recipe.image)
+        file.delete()
+        recipeRepository.deleteById(recipe_id)
     }
 
 }

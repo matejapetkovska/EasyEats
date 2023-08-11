@@ -17,7 +17,7 @@ class Recipe(
     @Column(columnDefinition = "TEXT")
     var description: String,
 
-    @OneToMany(cascade = [CascadeType.PERSIST])
+    @OneToMany(cascade = [CascadeType.REMOVE])
     var ingredients: MutableList<Ingredient>,
 
     var image: String,

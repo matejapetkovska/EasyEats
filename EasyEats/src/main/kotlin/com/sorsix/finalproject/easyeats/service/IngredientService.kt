@@ -6,4 +6,6 @@ interface IngredientService {
 
     fun saveIngredient(name: String, quantity: Int, measurementUnit: String): Ingredient
 
+    fun deleteById(id: Long)
+
 }

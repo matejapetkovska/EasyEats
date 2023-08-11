@@ -20,4 +20,6 @@ interface RecipeService {
 
     fun getAllRecipesByUser(used_id: String): List<Recipe>
 
+    fun deleteRecipe(recipe_id: Long)
+
 }
