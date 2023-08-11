@@ -278,3 +278,7 @@ a {
   cursor: pointer;
 }
 
+#email {
+  cursor: default;
+  color: red;
+}
