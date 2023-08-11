@@ -44,6 +44,7 @@ export class UserService {
       role: user?.role,
       image: user?.image,
     });
+  }
 
   }
 
@@ -52,3 +53,4 @@ export class UserService {
   }
   
 }
+
