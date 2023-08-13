@@ -41,12 +41,6 @@ export class AuthService {
 
   }
 
-
-  logout(): void {
-    localStorage.removeItem('token');
-    this.isAuthenticatedSubject.next(false);
-  }
-
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     return !!token;

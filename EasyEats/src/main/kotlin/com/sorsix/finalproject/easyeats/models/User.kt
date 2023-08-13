@@ -7,11 +7,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
-@Table(name="users")
-class User (
+@Table(name = "users")
+class User(
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
     var first_name: String,
@@ -31,8 +31,8 @@ class User (
 
     var image: String
 
-    ) : UserDetails
-{ constructor() : this(0, "", "", "", "", "", Role.USER, "") {}
+) : UserDetails {
+    constructor() : this(0, "", "", "", "", "", Role.USER, "") {}
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf(SimpleGrantedAuthority(role.name))

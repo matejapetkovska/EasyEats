@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RecipeDetailsService} from "../../services/recipe-details.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {RecipeReview} from "../../models/recipe-review";
 import {UserService} from "../../services/UserService";
 
@@ -50,7 +50,7 @@ export class RecipeComponent implements OnInit {
     );
   }
 
-  getLoggedInUserId(){
+  getLoggedInUserId() {
     const token = localStorage.getItem('token')
     this.userService.getUserFromToken(token).subscribe({
       next: (user) => {
@@ -91,7 +91,11 @@ export class RecipeComponent implements OnInit {
       });
     })
   }
-  addPathToImages(recipe: RecipeReview){
-      recipe.recipe.image="../../../assets/recipe_images/"+recipe.recipe.image;
+
+  addPathToImages(recipe: RecipeReview) {
+    recipe.recipe.image = "../../../assets/recipe_images/" + recipe.recipe.image;
+    let list = recipe.reviews;
+    for (let i = 0; i < list.length; i++)
+      list[i].user.image = "../../../assets/user_images/" + list[i].user.image;
   }
 }

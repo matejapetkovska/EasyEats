@@ -14,18 +14,22 @@ import org.springframework.web.multipart.MultipartFile
 class UserController(private val userService: UserService) {
 
     @PutMapping("/{id}")
-    fun editUserProfile(@PathVariable id: Long, @RequestBody updatedUser: User, principal: Principal): ResponseEntity<User> {
-        val user=userService.updateUser(id, updatedUser, principal)
+    fun editUserProfile(
+        @PathVariable id: Long,
+        @RequestBody updatedUser: User,
+        principal: Principal
+    ): ResponseEntity<User> {
+        val user = userService.updateUser(id, updatedUser, principal)
         return ResponseEntity.ok(user)
     }
 
     @GetMapping("/token")
-    fun getUserFromToken(@RequestParam token: String): User?{
+    fun getUserFromToken(@RequestParam token: String): User? {
         return userService.getUserFromToken(token)
     }
 
     @PutMapping("/profilepicture/{user_id}")
-    fun updateImageField(@PathVariable user_id: Long, @RequestParam image: MultipartFile): ResponseEntity<User>{
+    fun updateImageField(@PathVariable user_id: Long, @RequestParam image: MultipartFile): ResponseEntity<User> {
         val user = userService.updateImageField(user_id, image)
         return ResponseEntity.ok(user)
     }

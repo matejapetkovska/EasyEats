@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { User } from '../models/user';
-import { Observable } from 'rxjs';
-import {HttpClient } from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {User} from '../models/user';
+import {Observable} from 'rxjs';
+import {HttpClient} from "@angular/common/http";
 
 const USER_KEY = 'auth-user';
 
@@ -17,7 +17,7 @@ export class UserService {
     return !!user;
   }
 
-  getUserFromToken(token: String | null): Observable<User>{
+  getUserFromToken(token: String | null): Observable<User> {
     return this.http.get<User>(`http://localhost:8081/api/user/token?token=${token}`)
   }
 
@@ -33,7 +33,7 @@ export class UserService {
     });
   }
 
-  changeProfilePicture(user: User, formData: FormData): Observable<User>{
+  changeProfilePicture(user: User, formData: FormData): Observable<User> {
     return this.http.put<User>(`http://localhost:8081/api/user/profilepicture/${user.id}`, formData)
   }
 

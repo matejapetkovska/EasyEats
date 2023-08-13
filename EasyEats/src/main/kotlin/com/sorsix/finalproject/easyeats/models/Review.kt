@@ -3,8 +3,8 @@ package com.sorsix.finalproject.easyeats.models
 import jakarta.persistence.*
 
 @Entity
-@Table(name="reviews")
-class Review (
+@Table(name = "reviews")
+class Review(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +20,6 @@ class Review (
     @ManyToOne
     val recipe: Recipe?
 
-) { constructor() : this(0, 0, "", null, null) {}
+) {
+    constructor() : this(0, 0, "", null, null) {}
 }

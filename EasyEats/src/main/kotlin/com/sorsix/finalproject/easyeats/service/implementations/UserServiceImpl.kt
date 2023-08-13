@@ -2,9 +2,6 @@ package com.sorsix.finalproject.easyeats.service.implementations
 
 import com.sorsix.finalproject.easyeats.configurations.JwtService
 import com.sorsix.finalproject.easyeats.models.User
-import com.sorsix.finalproject.easyeats.models.enumerations.Role
-import com.sorsix.finalproject.easyeats.models.exception.InvalidArgumentsException
-import com.sorsix.finalproject.easyeats.models.exception.InvalidPasswordException
 import com.sorsix.finalproject.easyeats.models.exception.*
 import com.sorsix.finalproject.easyeats.repository.UserRepository
 import com.sorsix.finalproject.easyeats.service.UserService
@@ -22,8 +19,10 @@ import kotlin.io.path.exists
 
 
 @Service
-class UserServiceImpl(val repository: UserRepository,
-                      val jwtService: JwtService, val passwordEncoder: PasswordEncoder) : UserService {
+class UserServiceImpl(
+    val repository: UserRepository,
+    val jwtService: JwtService, val passwordEncoder: PasswordEncoder
+) : UserService {
 
     override fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$")
@@ -52,7 +51,7 @@ class UserServiceImpl(val repository: UserRepository,
         val existingUser = repository.findById(userId)
             .orElseThrow { EmailNotFoundException() }
 
-        if(updatedUser.passw!=existingUser.passw){
+        if (updatedUser.passw != existingUser.passw) {
             existingUser.apply {
                 passw = passwordEncoder.encode(updatedUser.passw)
             }
@@ -60,9 +59,9 @@ class UserServiceImpl(val repository: UserRepository,
         existingUser.apply {
             first_name = updatedUser.first_name
             last_name = updatedUser.last_name
-            userName=updatedUser.userName
+            userName = updatedUser.userName
             email = updatedUser.email
-            role=updatedUser.role
+            role = updatedUser.role
             image = updatedUser.image
         }
 
@@ -85,12 +84,12 @@ class UserServiceImpl(val repository: UserRepository,
         }
         Files.copy(image.inputStream, Paths.get(imageFilePath.toString()))
 
-        if(user.image != "default_profile_picture.jpg") {
+        if (user.image != "default_profile_picture.jpg") {
             val file = File("src\\main\\Frontend\\EasyEats\\src\\assets\\user_images\\" + user.image)
             file.delete()
         }
 
-        user.image=imageName
+        user.image = imageName
         return repository.save(user)
     }
 

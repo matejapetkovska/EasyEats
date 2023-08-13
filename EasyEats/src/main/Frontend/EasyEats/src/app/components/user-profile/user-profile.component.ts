@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {User} from "../../models/user";
 import {UserService} from "../../services/UserService";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Recipe} from "src/app/models/recipe";
 import {RecipeService} from "src/app/services/recipe-service.service";
 
@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit {
 
   recipes: Recipe[] | undefined
 
-  recipeId= ''
+  recipeId = ''
 
   errorMessage = ''
 
@@ -30,20 +30,19 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private userService: UserService,
               private router: Router,
-              private recipeService: RecipeService,
-              private route: ActivatedRoute) {
+              private recipeService: RecipeService) {
   }
 
   ngOnInit(): void {
     this.getUserFromToken()
   }
 
-  getUserFromToken(){
+  getUserFromToken() {
     const token = localStorage.getItem('token')
     this.userService.getUserFromToken(token).subscribe({
       next: (user) => {
         this.user = user
-        this.user.image="../../../assets/user_images/"+user.image
+        this.user.image = "../../../assets/user_images/" + user.image
       },
       error: () => {
         console.log("error in getting user from token")
@@ -55,7 +54,7 @@ export class UserProfileComponent implements OnInit {
     this.isEditMode = !this.isEditMode;
 
     if (this.isEditMode) {
-      this.editedUser = { ...this.user };
+      this.editedUser = {...this.user};
     }
   }
 
@@ -66,7 +65,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.updateUser(this.editedUser, token).subscribe(
       (updatedUser) => {
         if (updatedUser) {
-          this.user = { ...this.editedUser };
+          this.user = {...this.editedUser};
           this.isEditMode = false;
         }
       },
@@ -75,8 +74,6 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
-
-
 
   onClickViewPosts() {
     this.recipeService.getRecipesByUserId(this.user?.id)
@@ -118,12 +115,12 @@ export class UserProfileComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     const formData = new FormData()
     console.log(this.user)
-    if(this.user != null && this.selectedFile != null){
+    if (this.user != null && this.selectedFile != null) {
       formData.append("image", this.selectedFile)
       this.userService.changeProfilePicture(this.user, formData).subscribe({
         next: (user) => {
           this.user = user
-          this.user.image="../../../assets/user_images/"+user.image
+          this.user.image = "../../../assets/user_images/" + user.image
         },
         error: () => {
           console.log("error in changing profile picture")

@@ -3,8 +3,8 @@ package com.sorsix.finalproject.easyeats.models
 import jakarta.persistence.*
 
 @Entity
-@Table(name="ingredients")
-class Ingredient (
+@Table(name = "ingredients")
+class Ingredient(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,5 +16,6 @@ class Ingredient (
 
     val measurementUnit: String,
 
-    ){ constructor() : this(0, "", 0, "") {}
+    ) {
+    constructor() : this(0, "", 0, "") {}
 }

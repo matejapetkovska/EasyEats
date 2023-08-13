@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 class SubCategoryController(private val subCategoryService: SubCategoryService) {
 
     @GetMapping()
-    fun getAllSubCategories(): List<SubCategory>{
+    fun getAllSubCategories(): List<SubCategory> {
         return subCategoryService.getAllSubcategories()
     }
 }

@@ -6,7 +6,7 @@ import com.sorsix.finalproject.easyeats.service.RecipeDetailsService
 import org.springframework.stereotype.Service
 
 @Service
-class RecipeDetailsServiceImpl(private val recipeDetailsRepository: RecipeDetailsRepository): RecipeDetailsService {
+class RecipeDetailsServiceImpl(private val recipeDetailsRepository: RecipeDetailsRepository) : RecipeDetailsService {
 
     override fun getRecipeById(recipe_id: String): Recipe? {
         val recipeIdLong = recipe_id.toLongOrNull()

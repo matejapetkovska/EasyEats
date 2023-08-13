@@ -5,16 +5,17 @@ import com.sorsix.finalproject.easyeats.models.dto.RecipeReviewDto
 import com.sorsix.finalproject.easyeats.service.RecipeDetailsService
 import com.sorsix.finalproject.easyeats.service.ReviewService
 import com.sorsix.finalproject.easyeats.service.UserService
-import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/recipe")
 @CrossOrigin(origins = ["http://localhost:4200"])
-class RecipeDetailsController(private val recipeDetailsService: RecipeDetailsService,
-                              private val reviewService: ReviewService,
-                              private val userService: UserService) {
+class RecipeDetailsController(
+    private val recipeDetailsService: RecipeDetailsService,
+    private val reviewService: ReviewService,
+    private val userService: UserService
+) {
 
     @GetMapping("/{recipe_id}")
     fun getRecipeWithReview(@PathVariable recipe_id: String): RecipeReviewDto? {
@@ -32,10 +33,12 @@ class RecipeDetailsController(private val recipeDetailsService: RecipeDetailsSer
     }
 
     @PostMapping("/{recipe_id}")
-    fun addReview(@PathVariable recipe_id: String,
-                  @RequestParam comment: String,
-                  @RequestParam rating: Int,
-                  @RequestParam user_id: Long): ResponseEntity<Any> {
+    fun addReview(
+        @PathVariable recipe_id: String,
+        @RequestParam comment: String,
+        @RequestParam rating: Int,
+        @RequestParam user_id: Long
+    ): ResponseEntity<Any> {
         val user = userService.getUserFromId(user_id)
             ?: return ResponseEntity.badRequest().body(Error("Error in saving review. Please log in first."))
         val recipe = recipeDetailsService.getRecipeById(recipe_id)
