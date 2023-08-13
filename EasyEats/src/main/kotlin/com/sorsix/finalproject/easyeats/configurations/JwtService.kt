@@ -18,33 +18,33 @@ class JwtService {
 
     val SECRET_KEY = "563CB9B3E9ED1498C7AC6A6C7D0C37E2F5B16162B54A8981B1599D59B0373A07\n"
 
-    fun extractUsername(token: String): String{
+    fun extractUsername(token: String): String {
         return extractClaim(token, Claims::getSubject)
     }
 
-    fun <T> extractClaim(token: String, claimResolver: (Claims) -> T): T{
+    fun <T> extractClaim(token: String, claimResolver: (Claims) -> T): T {
         val claims = this.extractAllClaims(token)
         return claimResolver.invoke(claims)
     }
 
-    fun generateToken(userDetails: UserDetails): String{
+    fun generateToken(userDetails: UserDetails): String {
         return this.generateToken(HashMap(), userDetails)
     }
 
-    fun isTokenValid(token: String, userDetails: UserDetails): Boolean{
+    fun isTokenValid(token: String, userDetails: UserDetails): Boolean {
         val username = this.extractUsername(token)
         return username == userDetails.username && !isTokenExpired(token)
     }
 
-    fun isTokenExpired(token: String): Boolean{
+    fun isTokenExpired(token: String): Boolean {
         return extractExpiration(token).before(Date())
     }
 
-    fun extractExpiration(token: String): Date{
+    fun extractExpiration(token: String): Date {
         return extractClaim(token, Claims::getExpiration)
     }
 
-    fun generateToken(extraClaims: Map<String, Any>, userDetails: UserDetails): String{
+    fun generateToken(extraClaims: Map<String, Any>, userDetails: UserDetails): String {
         return Jwts
             .builder()
             .setClaims(extraClaims)
@@ -55,7 +55,7 @@ class JwtService {
             .compact()
     }
 
-    fun extractAllClaims(token: String): Claims{
+    fun extractAllClaims(token: String): Claims {
         return Jwts
             .parserBuilder()
             .setSigningKey(getSignInKey())

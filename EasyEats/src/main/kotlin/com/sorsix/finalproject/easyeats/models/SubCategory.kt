@@ -3,8 +3,8 @@ package com.sorsix.finalproject.easyeats.models
 import jakarta.persistence.*
 
 @Entity
-@Table(name="sub_categories")
-class SubCategory (
+@Table(name = "sub_categories")
+class SubCategory(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,5 +14,6 @@ class SubCategory (
 
     val description: String
 
-    ){ constructor() : this(0, "", "") {}
+) {
+    constructor() : this(0, "", "") {}
 }

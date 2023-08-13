@@ -9,9 +9,9 @@ import {Router} from "@angular/router";
   templateUrl: './main-header.component.html',
   styleUrls: ['./main-header.component.css']
 })
-export class MainHeaderComponent implements OnInit{
+export class MainHeaderComponent implements OnInit {
 
-  username: string='';
+  username: string = '';
   user: User | undefined;
 
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {
@@ -21,7 +21,7 @@ export class MainHeaderComponent implements OnInit{
     this.getUserFromToken()
   }
 
-  getUserFromToken(){
+  getUserFromToken() {
     const token = localStorage.getItem('token')
     this.userService.getUserFromToken(token).subscribe({
       next: (user) => {

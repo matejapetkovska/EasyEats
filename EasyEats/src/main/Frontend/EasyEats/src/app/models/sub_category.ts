@@ -1,5 +1,5 @@
-export interface SubCategory{
-    id: Number;
-    name: String;
-    description: String;
+export interface SubCategory {
+  id: Number;
+  name: String;
+  description: String;
 }

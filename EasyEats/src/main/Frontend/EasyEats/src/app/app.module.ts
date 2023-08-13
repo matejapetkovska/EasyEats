@@ -10,14 +10,14 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SignupComponent} from "./components/signup/signup.component";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './components/login/login.component';
-import { MainHeaderComponent } from './components/main-header/main-header.component';
-import { SingleCategoryComponent } from './components/single-category/single-category.component';
-import { AllRecipesComponent } from './components/all-recipes/all-recipes.component';
+import {MainHeaderComponent} from './components/main-header/main-header.component';
+import {SingleCategoryComponent} from './components/single-category/single-category.component';
+import {AllRecipesComponent} from './components/all-recipes/all-recipes.component';
 import {RecipeComponent} from "./components/recipe/recipe.component";
-import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { EditRecipeComponent } from './components/edit-recipe/edit-recipe.component';
-import { AuthInterceptor } from './services/AuthInterceptor';
+import {AddRecipeComponent} from './components/add-recipe/add-recipe.component';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {EditRecipeComponent} from './components/edit-recipe/edit-recipe.component';
+import {AuthInterceptor} from './services/AuthInterceptor';
 
 
 @NgModule({

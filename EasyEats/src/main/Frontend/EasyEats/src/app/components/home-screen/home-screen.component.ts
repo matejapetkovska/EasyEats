@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from '../../models/category';
 import {CategoryService} from '../../services/category-service.service';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,7 +13,7 @@ export class HomeScreenComponent implements OnInit {
 
   categories: Category[] | undefined
 
-  constructor(private categoryService: CategoryService,  private router: Router) {
+  constructor(private categoryService: CategoryService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -29,9 +29,9 @@ export class HomeScreenComponent implements OnInit {
       });
   }
 
-  addPathToImages(list: Category[]){
-    for(let i=0; i<list.length; i++){
-      list[i].image="../../assets/images/"+list[i].image;
+  addPathToImages(list: Category[]) {
+    for (let i = 0; i < list.length; i++) {
+      list[i].image = "../../assets/images/" + list[i].image;
     }
   }
 }

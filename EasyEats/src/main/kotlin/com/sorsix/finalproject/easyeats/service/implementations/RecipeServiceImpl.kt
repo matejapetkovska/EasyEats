@@ -133,7 +133,11 @@ class RecipeServiceImpl(
                 if (existingIngredient != null) {
                     savedIngredient = existingIngredient
                 } else {
-                    savedIngredient = ingredientService.saveIngredient(ingredient.name, ingredient.quantity, ingredient.measurementUnit)
+                    savedIngredient = ingredientService.saveIngredient(
+                        ingredient.name,
+                        ingredient.quantity,
+                        ingredient.measurementUnit
+                    )
                 }
                 recipe.get().ingredients.add(savedIngredient)
             }

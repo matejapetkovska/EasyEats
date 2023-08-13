@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
-import { Recipe } from 'src/app/models/recipe';
-import { RecipeService } from 'src/app/services/recipe-service.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs';
+import {Recipe} from 'src/app/models/recipe';
+import {RecipeService} from 'src/app/services/recipe-service.service';
 
 @Component({
   selector: 'app-all-recipes',
@@ -15,26 +15,29 @@ export class AllRecipesComponent implements OnInit {
 
   queryText = new FormControl("");
 
-  constructor(private recipeService: RecipeService){ }
+  showSearch = false;
+
+  constructor(private recipeService: RecipeService) {
+  }
 
   ngOnInit(): void {
     this.getAllRecipes();
   }
 
-  getAllRecipes(){
+  getAllRecipes() {
     this.recipeService.getAllRecipes()
       .subscribe({
         next: (recipes) => {
-            this.recipes = recipes;
-            this.addPathToImages(this.recipes)
+          this.recipes = recipes;
+          this.addPathToImages(this.recipes)
         },
         error: () => {
           console.error('error in fetching recipes');
         }
-    });
+      });
   }
 
-  search(){
+  search() {
     this.queryText.valueChanges.pipe(
       debounceTime(400),
       distinctUntilChanged(),
@@ -45,10 +48,14 @@ export class AllRecipesComponent implements OnInit {
     });
   }
 
-  addPathToImages(list: Recipe[]){
-    for(let i=0; i<list.length; i++){
-      list[i].image="../../../assets/recipe_images/"+list[i].image;
+  addPathToImages(list: Recipe[]) {
+    for (let i = 0; i < list.length; i++) {
+      list[i].image = "../../../assets/recipe_images/" + list[i].image;
     }
+  }
+
+  toggleSearch() {
+    this.showSearch = !this.showSearch;
   }
 
 }

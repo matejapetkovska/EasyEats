@@ -1,46 +1,63 @@
+h1, h2, h3 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
 .recipe {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.edit-btn {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-}
-
-.recipe-details {
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-  width: 80%;
-  gap: 5em;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  padding: 20px;
 }
 
 .recipe-title {
-  font-size: 60px;
-  color: var(--red-color);
-  text-shadow: 2px 2px #000000;
-  font-family: 'Pacifico', cursive;
+  font-size: 36px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.recipe-image {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-info {
   margin: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
-img {
-  border-radius: 15px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin-bottom: 40px;
+.ingredients {
+  border-right: 1px solid #ccc;
+  padding-right: 20px;
+  margin-right: 20px;
 }
 
-span {
-  font-size: 25px;
-  font-weight: bold;
-  color: var(--green-color);
+.steps {
+  padding-right: 20px;
+  margin-right: 20px;
 }
 
-li {
+.ingredient-list {
   list-style-type: "\1F374";
+  padding-left: 15px;
+}
+
+.ingredient-list li {
+  padding-right: 15px;
+  margin-bottom: 5px;
 }
 
 .steps {
@@ -48,87 +65,75 @@ li {
 }
 
 .reviews {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.review {
   display: flex;
-  flex-direction: column;
-  justify-items: center;
-  margin-left: 150px;
-}
-
-.single-review {
-  border-bottom: 2px solid lightgrey;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
   margin-bottom: 20px;
-  width: 90%;
-  padding-bottom: 5px;
 }
 
-.user {
+.profile-picture {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-name {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
 }
 
-.review-details {
-  padding-left: 25px;
+.rating {
+  color: #fdd50f;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.comment {
+  color: #666;
+  margin-top: 10px;
 }
 
 .add-review {
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  margin-left: 150px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
-.form {
-  display: flex;
-  width: 30%;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-top: 10px;
-  margin-bottom: 25px;
-}
-
-label {
-  line-height: 25px;
-  margin-bottom: 10px;
-  font-size: 18px;
-}
-
-input {
-  flex: 0 0 100px;
-  padding: 3px;
-  border: 2px solid var(--green-color);
-  border-radius: 5px;
-}
-
-input:focus {
-  color: var(--green-color);
+.form label {
+  display: block;
+  margin-bottom: 5px;
   font-weight: bold;
-  outline-color: var(--red-color);
+}
+
+textarea, input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 button {
-  width: 75px;
-  font-size: 18px;
-  border: 2px solid var(--white);
+  background-color: #444;
+  color: #fff;
+  border: none;
   border-radius: 5px;
-  background-color: var(--red-color);
-  color: var(--white);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
-  transition: transform 300ms ease-in-out;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  cursor: pointer;
-  transform: scale(1.1);
+  background-color: #666;
 }
-
-.profile_picture{
-  height: 30px;
-  width: 30px;
-}
-
-.user_name{
-  margin-top: -70px;
-  margin-left: 40px;
-  margin-bottom: 5px;
-}
-

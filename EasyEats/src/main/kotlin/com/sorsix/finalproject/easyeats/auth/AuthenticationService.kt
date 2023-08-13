@@ -11,21 +11,21 @@ import com.sorsix.finalproject.easyeats.models.exception.InvalidPasswordExceptio
 import com.sorsix.finalproject.easyeats.repository.UserRepository
 import jakarta.servlet.http.HttpServletRequest
 import lombok.RequiredArgsConstructor
-import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 @RequiredArgsConstructor
-class AuthenticationService(private val repository: UserRepository,
-                            private val passwordEncoder: PasswordEncoder,
-                            private val jwtService: JwtService,
-                            private val authenticationManager: AuthenticationManager) {
+class AuthenticationService(
+    private val repository: UserRepository,
+    private val passwordEncoder: PasswordEncoder,
+    private val jwtService: JwtService,
+    private val authenticationManager: AuthenticationManager
+) {
 
     fun register(request: RegisterRequest): AuthenticationResponse {
 
@@ -75,111 +75,29 @@ class AuthenticationService(private val repository: UserRepository,
 
     }
 
-
-//    fun authenticate(request: AuthenticationRequest): AuthenticationResponse {
-//        authenticationManager.authenticate(
-//            UsernamePasswordAuthenticationToken(
-//                request.email,
-//                request.password
-//            )
-//        )
-//        val user = repository.findByEmail(request.email)
-//        if (user == null){
-//            throw UsernameNotFoundException("")
-//        }
-//
-//        val jwtToken = jwtService.generateToken(user)
-//        val refreshToken = jwtService.generateRefreshToken(user)
-//
-//        revokeAllUserTokens(user)
-//        saveUserToken(user, jwtToken)
-//
-//        return AuthenticationResponse.builder()
-//            .accessToken(jwtToken)
-//            .refreshToken(refreshToken)
-//            .build()
-//    }
-//
-//    private fun saveUserToken(user: User, jwtToken: String) {
-//        val token = Token.builder()
-//            .user(user)
-//            .token(jwtToken)
-//            .tokenType(TokenType.BEARER)
-//            .expired(false)
-//            .revoked(false)
-//            .build()
-//        tokenRepository.save(token)
-//    }
-//
-//    private fun revokeAllUserTokens(user: User) {
-//        val validUserTokens = tokenRepository.findAllValidTokenByUser(user.id)
-//        if (validUserTokens.isEmpty())
-//            return
-//
-//        validUserTokens.forEach { token ->
-//            token.expired = true
-//            token.revoked = true
-//        }
-//
-//        tokenRepository.saveAll(validUserTokens)
-//    }
-//
-//    @Throws(IOException::class)
-//    fun refreshToken(request: HttpServletRequest, response: HttpServletResponse) {
-//        val authHeader = request.getHeader(HttpHeaders.AUTHORIZATION)
-//        val refreshToken: String
-//        val userEmail: String?
-//        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-//            return
-//        }
-//        refreshToken = authHeader.substring(7)
-//        userEmail = jwtService.extractUsername(refreshToken)
-//
-//        if (userEmail != null) {
-//            val user = repository.findByEmail(userEmail)
-//                .orElseThrow()
-//
-//            if (jwtService.isTokenValid(refreshToken, user)) {
-//                val accessToken = jwtService.generateToken(user)
-//                revokeAllUserTokens(user)
-//                saveUserToken(user, accessToken)
-//
-//                val authResponse = AuthenticationResponse.builder()
-//                    .accessToken(accessToken)
-//                    .refreshToken(refreshToken)
-//                    .build()
-//
-//                val objectMapper = ObjectMapper()
-//                objectMapper.writeValue(response.getOutputStream(), authResponse)
-//            }
-//        }
-//    }
-
-
-
-     fun isValidEmail(email: String): Boolean {
+    fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$")
         return email.matches(emailRegex)
     }
 
-     fun isValidUsername(username: String): Boolean {
+    fun isValidUsername(username: String): Boolean {
         val usernameRegex = Regex("^[a-zA-Z0-9.,'\\-?]+\$")
         return username.matches(usernameRegex)
     }
 
-     fun doesUsernameExist(username: String): Boolean {
+    fun doesUsernameExist(username: String): Boolean {
         return repository.findByUserName(username) != null
     }
 
-     fun doesEmailExist(email: String): Boolean {
+    fun doesEmailExist(email: String): Boolean {
         return repository.findByEmail(email) != null
     }
 
-     fun getLoggedInUser(request: HttpServletRequest): User? {
+    fun getLoggedInUser(request: HttpServletRequest): User? {
         return request.session.getAttribute("user") as? User
     }
 
-     fun updateUser(updatedUser: User): User {
+    fun updateUser(updatedUser: User): User {
         val existingUser = repository.findById(updatedUser.id)
             .orElseThrow { com.sorsix.finalproject.easyeats.models.exception.EmailNotFoundException() }
 
@@ -193,7 +111,7 @@ class AuthenticationService(private val repository: UserRepository,
         return repository.save(existingUser)
     }
 
-     fun loadUserByUsername(username: String?): UserDetails {
+    fun loadUserByUsername(username: String?): UserDetails {
         val user = repository.findByUserName(username)
         if (user == null) {
             throw com.sorsix.finalproject.easyeats.models.exception.EmailNotFoundException()
@@ -211,15 +129,12 @@ class AuthenticationService(private val repository: UserRepository,
         )
     }
 
-
-
-
-private fun generateRandomImageName(): String {
-    val sb = StringBuilder()
-    for (i in 0..5) {
-        val rand = listOf(('a'..'z'), ('A'..'Z')).flatten().random()
-        sb.append(rand)
+    private fun generateRandomImageName(): String {
+        val sb = StringBuilder()
+        for (i in 0..5) {
+            val rand = listOf(('a'..'z'), ('A'..'Z')).flatten().random()
+            sb.append(rand)
+        }
+        return sb.toString()
     }
-    return sb.toString()
-}
 }

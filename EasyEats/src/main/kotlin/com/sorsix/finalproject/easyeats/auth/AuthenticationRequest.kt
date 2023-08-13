@@ -15,4 +15,4 @@ class AuthenticationRequest(
 
     val password: String
 
-) { }
+) {}

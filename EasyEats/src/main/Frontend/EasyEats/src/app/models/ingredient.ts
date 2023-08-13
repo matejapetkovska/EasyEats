@@ -1,5 +1,5 @@
-export interface Ingredient{
-    name: String;
-    quantity: Number;
-    measurementUnit: String;
+export interface Ingredient {
+  name: String;
+  quantity: Number;
+  measurementUnit: String;
 }

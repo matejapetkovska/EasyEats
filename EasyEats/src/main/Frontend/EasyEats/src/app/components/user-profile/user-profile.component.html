@@ -31,13 +31,13 @@
     </div>
   </div>
 
-  <div *ngIf="isPostMode && editedUser && recipes?.length">
+  <div *ngIf="isPostMode && user && recipes?.length">
     <div class="modal">
       <div class="modal-container">
         <header class="modal-container-header">
-          <img ngSrc="{{editedUser.image}}" width="100" height="100">
+          <img ngSrc="{{user.image}}" width="100" height="100">
           <h1 class="modal-container-title">
-            Recipes posted by <span class="username">{{editedUser.userName}}</span>
+            Recipes posted by <span class="username">{{user.userName}}</span>
           </h1>
         </header>
         <section class="modal-container-body">
@@ -51,8 +51,11 @@
             </div>
           </div>
         </section>
-        <footer class="modal-container-footer">
+        <footer class="edit-profile-btns-container modal-container-footer">
           <button class="modal-btns" (click)="togglePost()">Close</button>
+          <a [routerLink]="['/addrecipe']">
+            <button class="modal-btns">Add a recipe</button>
+          </a>
         </footer>
       </div>
     </div>
@@ -91,7 +94,7 @@
               placeholder="Username"/>
           </div>
         </div>
-          <div class="right-col">
+        <div class="right-col">
           <div class="edit-item">
             <input [(ngModel)]="editedUser.email" placeholder="Email" readonly id="email"/>
           </div>

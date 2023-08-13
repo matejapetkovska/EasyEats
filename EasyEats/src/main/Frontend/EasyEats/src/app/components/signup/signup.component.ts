@@ -1,11 +1,8 @@
 import {Component} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from "@angular/router";
-import {User} from "../../models/user";
-import {UserService} from "../../services/UserService";
-import {NgForm} from "@angular/forms";
-import { RegisterRequest } from 'src/app/models/registerRequest';
-import { AuthService } from 'src/app/services/AuthService';
+import {RegisterRequest} from 'src/app/models/registerRequest';
+import {AuthService} from 'src/app/services/AuthService';
 
 @Component({
   selector: 'app-signup',
@@ -14,24 +11,26 @@ import { AuthService } from 'src/app/services/AuthService';
 })
 export class SignupComponent {
 
-  request : RegisterRequest ={
-    firstName:"",
-    lastName:"",
-    email:"",
-    username:"",
-    password:"",
+  request: RegisterRequest = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
   }
 
-  errorMessage:String ="";
-  constructor(private authService: AuthService, private router: Router){}
+  errorMessage: String = "";
 
-  onSubmit(){
+  constructor(private authService: AuthService, private router: Router) {
+  }
+
+  onSubmit() {
     this.authService.register(this.request).subscribe({
-      next:(response) => {
+      next: (response) => {
         localStorage.setItem('token', response.token);
         this.router.navigate(['home'])
       },
-      error:(error: HttpErrorResponse) =>{
+      error: (error: HttpErrorResponse) => {
         console.log("error in logging in")
         this.errorMessage = error.error.message;
       }

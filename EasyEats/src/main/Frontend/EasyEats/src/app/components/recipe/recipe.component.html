@@ -3,47 +3,53 @@
 <main *ngIf="recipeReview">
   <div class="recipe">
     <h1 class="recipe-title">{{recipeReview.recipe.title}}</h1>
+    <p>Published by <b>{{recipeReview.recipe.user.userName}}</b></p>
     <div class="recipe-details">
-      <img ngSrc="{{recipeReview.recipe.image}}" width="300" height="350">
+      <img src="{{recipeReview.recipe.image}}" alt="{{recipeReview.recipe.title}}" class="recipe-image">
       <div class="recipe-info">
         <div class="ingredients">
-          <span>Ingredients:</span>
-          <ul *ngFor="let ingredient of recipeReview.recipe.ingredients">
-            <li>{{ingredient.quantity}}{{ingredient.measurementUnit}} {{ingredient.name}}</li>
+          <h2>Ingredients</h2>
+          <ul class="ingredient-list">
+            <li *ngFor="let ingredient of recipeReview.recipe.ingredients">
+              {{ingredient.quantity}}{{ingredient.measurementUnit}} {{ingredient.name}}
+            </li>
           </ul>
         </div>
         <div class="steps">
-          <span>How to make it:</span>
-          <div>{{recipeReview.recipe.description}}</div>
+          <h2>How to Make It</h2>
+          <p class="description">{{recipeReview.recipe.description}}</p>
         </div>
       </div>
     </div>
   </div>
   <div class="reviews">
-    <span>Reviews</span>
-    <div *ngFor="let review of recipeReview.reviews" class="single-review">
+    <h2>Reviews</h2>
+    <div *ngFor="let review of recipeReview.reviews" class="review">
       <div class="user">
-        <img src="{{ review.user.image }}" class="profile_picture">
-        <div class="user_name">{{ review.user.first_name }}</div>
+        <img src="{{ review.user.image }}" alt="{{ review.user.first_name }}" class="profile-picture">
+        <div class="user-name">{{ review.user.first_name }}</div>
       </div>
       <div class="review-details">
-        <div><u>Rating:</u> {{ review.rating }}/5</div>
-        <div>{{ review.comment }}</div>
+        <div class="rating">Rating: {{ review.rating }}/5</div>
+        <p class="comment">{{ review.comment }}</p>
       </div>
+    </div>
+    <div *ngIf="recipeReview.reviews.length==0">
+      <p>No reviews have been added yet.</p>
     </div>
   </div>
   <div class="add-review">
-    <span>Add your review</span>
+    <h2>Add Your Review</h2>
     <form enctype="multipart/form-data" class="form">
       <label>
-        Your opinion:
-        <input placeholder="Comment" required [(ngModel)]="comment" name="title">
+        Your Opinion:
+        <textarea placeholder="Comment" required [(ngModel)]="comment" name="comment"></textarea>
       </label>
       <label>
         Rating:
-        <input placeholder="/5" required [(ngModel)]="rating" name="description" aria-required="true">
+        <input type="number" placeholder="1-5" min="1" max="5" required [(ngModel)]="rating" name="rating">
       </label>
-      <button (click)="onAddReview()">Add</button>
+      <button (click)="onAddReview()">Add Review</button>
     </form>
   </div>
 </main>

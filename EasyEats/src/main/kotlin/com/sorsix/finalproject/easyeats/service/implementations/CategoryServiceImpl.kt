@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class CategoryServiceImpl(private val categoryRepository: CategoryRepository): CategoryService {
+class CategoryServiceImpl(private val categoryRepository: CategoryRepository) : CategoryService {
 
     override fun getAllCategories(): List<Category> {
         return categoryRepository.findAll()

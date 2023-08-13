@@ -3,8 +3,8 @@ package com.sorsix.finalproject.easyeats.models
 import jakarta.persistence.*
 
 @Entity
-@Table(name="categories")
-class Category (
+@Table(name = "categories")
+class Category(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +17,6 @@ class Category (
 
     val image: String,
 
-){ constructor() : this(0, "", "", "") {}
+    ) {
+    constructor() : this(0, "", "", "") {}
 }

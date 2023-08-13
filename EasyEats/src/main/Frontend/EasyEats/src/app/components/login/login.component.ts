@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/AuthService";
-import { LoginRequest } from 'src/app/models/loginRequest';
+import {LoginRequest} from 'src/app/models/loginRequest';
 import {HttpErrorResponse} from "@angular/common/http";
 
 
@@ -13,11 +13,11 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class LoginComponent {
 
   request: LoginRequest = {
-    email:"",
-    password:""
+    email: "",
+    password: ""
   }
 
-  errorMessage:String ="";
+  errorMessage: String = "";
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.isAuthenticated$().subscribe((authenticated) => {
@@ -27,13 +27,13 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     this.authService.login(this.request).subscribe({
-      next:(response) => {
+      next: (response) => {
         localStorage.setItem('token', response.token);
         this.router.navigate(['home'])
       },
-      error:(error: HttpErrorResponse) =>{
+      error: (error: HttpErrorResponse) => {
         console.log("error in logging in")
         this.errorMessage = error.error.message;
       }

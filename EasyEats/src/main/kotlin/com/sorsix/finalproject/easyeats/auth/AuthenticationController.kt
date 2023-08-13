@@ -17,10 +17,10 @@ class AuthenticationController(private val service: AuthenticationService) {
     data class ErrorResponse(val message: String)
 
     @PostMapping("/register")
-    fun register(@RequestBody request: RegisterRequest): ResponseEntity<Any>{
+    fun register(@RequestBody request: RegisterRequest): ResponseEntity<Any> {
         try {
             if (request.username.isBlank() || request.email.isBlank() || request.password.isBlank() ||
-                  request.firstName.isBlank() || request.lastName.isBlank()
+                request.firstName.isBlank() || request.lastName.isBlank()
             ) {
                 val errorMessage = "Please fill in all required fields."
                 return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
@@ -36,7 +36,7 @@ class AuthenticationController(private val service: AuthenticationService) {
                 return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
 
-            if(service.doesUsernameExist(request.username) && service.doesEmailExist(request.email)){
+            if (service.doesUsernameExist(request.username) && service.doesEmailExist(request.email)) {
                 val errorMessage = "Username and Email already exists."
                 return ResponseEntity.badRequest().body(ErrorResponse(errorMessage))
             }
@@ -62,7 +62,7 @@ class AuthenticationController(private val service: AuthenticationService) {
     }
 
     @PostMapping("/authenticate")
-    fun authenticate(@RequestBody request: AuthenticationRequest): ResponseEntity<Any>{
+    fun authenticate(@RequestBody request: AuthenticationRequest): ResponseEntity<Any> {
 
         if (request.email.isNullOrEmpty() || request.password.isNullOrEmpty()) {
             val errorResponse = ErrorResponse("Please fill in all required fields.")

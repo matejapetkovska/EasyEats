@@ -21,18 +21,11 @@
       </label>
       <label>
         Password:
-        <input type="password" placeholder="Password" required [(ngModel)]="request.password" name="password" aria-required="true">
+        <input type="password" placeholder="Password" required [(ngModel)]="request.password" name="password"
+               aria-required="true">
       </label>
 
-
-      <!-- <label>
-        Profile picture:
-        <input type="file" required (change)="onFileChange($event)" accept="image/*">
-      </label> -->
-
-
-
-       <div *ngIf="errorMessage" class="error-message">
+      <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
 

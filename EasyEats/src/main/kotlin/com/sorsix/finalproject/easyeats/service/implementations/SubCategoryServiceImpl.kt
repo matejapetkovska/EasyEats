@@ -7,7 +7,7 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
-class SubCategoryServiceImpl(private val subCategoryRepository: SubCategoryRepository): SubCategoryService {
+class SubCategoryServiceImpl(private val subCategoryRepository: SubCategoryRepository) : SubCategoryService {
 
     override fun getAllSubcategories(): List<SubCategory> {
         return subCategoryRepository.findAll()
