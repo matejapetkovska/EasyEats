@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/recipes")
-@CrossOrigin(origins = ["http://localhost:4200"])
 class RecipesController(
     private val recipeService: RecipeService,
     private val userService: UserService

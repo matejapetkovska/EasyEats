@@ -26,6 +26,11 @@ class RecipeServiceImpl(
     private val ingredientRepository: IngredientRepository,
     private val reviewService: ReviewService
 ) : RecipeService {
+
+    override fun getRecipeById(recipe_id: String): Recipe? {
+        val recipeIdLong = recipe_id.toLongOrNull()
+        return recipeIdLong?.let { this.recipeRepository.findRecipeById(it) }
+    }
     override fun getAllRecipesByCategory(category_id: String): List<Recipe>? {
         val categoryIdLong = category_id.toLongOrNull()
         if (categoryIdLong != null) {
