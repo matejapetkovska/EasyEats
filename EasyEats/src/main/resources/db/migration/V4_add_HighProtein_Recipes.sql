@@ -6,10 +6,10 @@ values ('2023-08-11 10:10:10',
         'Scrambled Eggs with Cottage Cheese', 1, 5, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (18, 13),
-       (18, 14),
-       (18, 15),
-       (18, 16);
+VALUES (33, 34),
+       (33, 35),
+       (33, 36),
+       (33, 37);
 
 -- Breakfast
 insert into recipes(date, description, image, title, sub_category_id, category_id, user_id)
@@ -19,12 +19,12 @@ values ('2023-08-11 10:10:10',
         'Peanut Butter Banana Smoothie', 1, 5, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (19, 17),
-       (19, 18),
-       (19, 19),
-       (19, 20),
-       (19, 21),
-       (19, 22);
+VALUES (34, 38),
+       (34, 39),
+       (34, 40),
+       (34, 41),
+       (34, 42),
+       (34, 43);
 
 -- Brunch 2
 insert into recipes(date, description, image, title, sub_category_id, category_id, user_id)
@@ -35,12 +35,12 @@ values ('2023-08-11 10:10:10',
         'BLT Egg Sandwich', 2, 5, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (20, 23),
-       (20, 24),
-       (20, 25),
-       (20, 26),
-       (20, 27),
-       (20, 28);
+VALUES (35, 44),
+       (35, 45),
+       (35, 46),
+       (35, 47),
+       (35, 48),
+       (35, 49);
 
 
 -- Lunch 3
@@ -51,12 +51,12 @@ values ('2023-08-11 10:10:10',
         'High-Protein Burger', 3, 5, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (21, 29),
-       (21, 30),
-       (21, 31),
-       (21, 32),
-       (21, 33),
-       (21, 34);
+VALUES (36, 50),
+       (36, 51),
+       (36, 52),
+       (36, 53),
+       (36, 54),
+       (36, 55);
 
 -- Dinner 4
 insert into recipes(date, description, image, title, sub_category_id, category_id, user_id)
@@ -66,12 +66,12 @@ values ('2023-08-11 10:10:10',
         'Quick Pasta with Spinach and Tomatoes', 4, 5, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (22, 35),
-       (22, 36),
-       (22, 37),
-       (22, 38),
-       (22, 39),
-       (22, 40);
+VALUES (37, 56),
+       (37, 57),
+       (37, 58),
+       (37, 59),
+       (37, 60),
+       (37, 61);
 
 -- Soups and salads 5
 insert into recipes(date, description, image, title, sub_category_id, category_id, user_id)
@@ -81,11 +81,11 @@ values ('2023-08-11 10:10:10',
         'Caesar Salad', 5, 5, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (23, 41),
-       (23, 42),
-       (23, 43),
-       (23, 44),
-       (23, 45);
+VALUES (38, 62),
+       (38, 63),
+       (38, 64),
+       (38, 65),
+       (38, 66);
 
 -- Desserts 6
 insert into recipes(date, description, image, title, sub_category_id, category_id, user_id)
@@ -96,12 +96,12 @@ values ('2023-08-11 10:10:10',
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
 VALUES
-       (24, 46),
-       (24, 47),
-       (24, 48),
-       (24, 49),
-       (24, 50),
-       (24, 51);
+       (39, 67),
+       (39, 68),
+       (39, 69),
+       (39, 70),
+       (39, 71),
+       (39, 72);
 
 insert into recipes(date, description, image, title, sub_category_id, category_id, user_id)
 values ('2023-08-11 10:10:10',
@@ -110,7 +110,7 @@ values ('2023-08-11 10:10:10',
         'Protein Peanut Butter Cups', 6, 5, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (25, 52),
-       (25, 53),
-       (25, 54),
-       (25, 55);
+VALUES (40, 73),
+       (40, 74),
+       (40, 75),
+       (40, 76);

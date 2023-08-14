@@ -6,6 +6,8 @@ import org.springframework.web.multipart.MultipartFile
 
 
 interface RecipeService {
+
+    fun getRecipeById(recipe_id: String): Recipe?
     fun getAllRecipesByCategory(category_id: String): List<Recipe>?
 
     fun getAllRecipesByCategoryAndSubCategory(category_id: String, subCategory_id: String): List<Recipe>?

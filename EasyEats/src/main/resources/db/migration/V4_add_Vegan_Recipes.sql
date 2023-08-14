@@ -6,13 +6,13 @@ values ('2023-08-11 10:10:10',
         'Vegan Wrap', 2, 2, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (26, 56),
-       (26, 57),
-       (26, 58),
-       (26, 59),
-       (26, 60),
-       (26, 61),
-       (26, 62);
+VALUES (41, 77),
+       (41, 78),
+       (41, 79),
+       (41, 80),
+       (41, 81),
+       (41, 82),
+       (41, 83);
 
 -- Lunch 3
 insert into recipes(date, description, image, title, sub_category_id, category_id, user_id)
@@ -22,8 +22,8 @@ values ('2023-08-11 10:10:10',
         'Tomato Basil Pasta', 3, 2, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (27, 63),
-       (27, 64);
+VALUES (42, 84),
+       (42, 85);
 
 -- Dessert 3
 insert into recipes(date, description, image, title, sub_category_id, category_id, user_id)
@@ -33,11 +33,11 @@ values ('2023-08-11 10:10:10',
         'Vegan Waffles', 6, 2, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (28, 65),
-       (28, 66),
-       (28, 67),
-       (28, 68),
-       (28, 69);
+VALUES (43, 86),
+       (43, 87),
+       (43, 88),
+       (43, 89),
+       (43, 90);
 
 
 -- Dessert 3
@@ -48,9 +48,9 @@ values ('2023-08-11 10:10:10',
         'Raspberry chia pudding', 6, 2, 21);
 
 INSERT INTO recipes_ingredients (recipe_id, ingredients_id)
-VALUES (29, 70),
-       (29, 71),
-       (29, 72),
-       (29, 73),
-       (29, 74),
-       (29, 75);
+VALUES (44, 91),
+       (44, 92),
+       (44, 93),
+       (44, 94),
+       (44, 95),
+       (44, 96);

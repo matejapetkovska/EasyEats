@@ -20,16 +20,13 @@ import org.springframework.stereotype.Service
 
 @Service
 @RequiredArgsConstructor
-class AuthenticationService(
-    private val repository: UserRepository,
-    private val passwordEncoder: PasswordEncoder,
-    private val jwtService: JwtService,
-    private val authenticationManager: AuthenticationManager
-) {
+class AuthenticationService(private val repository: UserRepository,
+                            private val passwordEncoder: PasswordEncoder,
+                            private val jwtService: JwtService,
+                            private val authenticationManager: AuthenticationManager) {
 
     fun register(request: RegisterRequest): AuthenticationResponse {
-
-        if (request.username.isNullOrEmpty() || request.password.isNullOrEmpty() || request.email.isNullOrEmpty() || request.firstName.isNullOrEmpty() || request.lastName.isNullOrEmpty()) {
+        if (request.username.isEmpty() || request.password.isEmpty() || request.email.isEmpty() || request.firstName.isEmpty() || request.lastName.isEmpty()) {
             throw InvalidArgumentsException()
         }
 
@@ -50,18 +47,14 @@ class AuthenticationService(
         repository.save(user)
         val jwtToken = jwtService.generateToken(user)
         return AuthenticationResponse(jwtToken)
-
-
     }
 
     fun authenticate(request: AuthenticationRequest): AuthenticationResponse {
-
-        if (request.email.isNullOrEmpty() || request.password.isNullOrEmpty()) {
+        if (request.email.isEmpty() || request.password.isEmpty()) {
             throw InvalidArgumentsException()
         }
 
         val user: User = repository.findByEmail(request.email) ?: throw EmailNotFoundException()
-
 
         if (passwordEncoder.matches(request.password, user.password)) {
             authenticationManager.authenticate(
@@ -72,17 +65,11 @@ class AuthenticationService(
         } else {
             throw InvalidPasswordException()
         }
-
     }
 
     fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$")
         return email.matches(emailRegex)
-    }
-
-    fun isValidUsername(username: String): Boolean {
-        val usernameRegex = Regex("^[a-zA-Z0-9.,'\\-?]+\$")
-        return username.matches(usernameRegex)
     }
 
     fun doesUsernameExist(username: String): Boolean {
@@ -93,13 +80,9 @@ class AuthenticationService(
         return repository.findByEmail(email) != null
     }
 
-    fun getLoggedInUser(request: HttpServletRequest): User? {
-        return request.session.getAttribute("user") as? User
-    }
-
     fun updateUser(updatedUser: User): User {
         val existingUser = repository.findById(updatedUser.id)
-            .orElseThrow { com.sorsix.finalproject.easyeats.models.exception.EmailNotFoundException() }
+            .orElseThrow { EmailNotFoundException() }
 
         existingUser.first_name = updatedUser.first_name
         existingUser.last_name = updatedUser.last_name
@@ -111,30 +94,4 @@ class AuthenticationService(
         return repository.save(existingUser)
     }
 
-    fun loadUserByUsername(username: String?): UserDetails {
-        val user = repository.findByUserName(username)
-        if (user == null) {
-            throw com.sorsix.finalproject.easyeats.models.exception.EmailNotFoundException()
-        }
-        val authorities = mutableListOf<SimpleGrantedAuthority>()
-
-        if (user != null) {
-            authorities.add(SimpleGrantedAuthority("ROLE_${user.role.name}"))
-        }
-
-        return org.springframework.security.core.userdetails.User(
-            user?.username,
-            user?.password,
-            authorities
-        )
-    }
-
-    private fun generateRandomImageName(): String {
-        val sb = StringBuilder()
-        for (i in 0..5) {
-            val rand = listOf(('a'..'z'), ('A'..'Z')).flatten().random()
-            sb.append(rand)
-        }
-        return sb.toString()
-    }
 }

@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = ["http://localhost:4200"], allowCredentials = "true")
 class UserController(private val userService: UserService) {
 
     @PutMapping("/{id}")
