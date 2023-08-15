@@ -26,7 +26,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter:2.5.5")
     implementation("org.springframework.boot:spring-boot-starter-security:2.5.5")
     implementation ("javax.xml.bind:jaxb-api:2.3.0")
-    //implementation("com.auth0:java-jwt:3.18.1")
     implementation("org.projectlombok:lombok:1.18.26")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
@@ -37,15 +36,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation:3.1.1")
     implementation("org.flywaydb:flyway-core")
 
-//    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.7.1")
-
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.rest-assured:rest-assured:5.3.1")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-//        freeCompilerArgs += "-Xjsr305=strict"
         var freeCompilerArgs: String? = "-Xjsr305=strict"
         jvmTarget = "17"
     }
