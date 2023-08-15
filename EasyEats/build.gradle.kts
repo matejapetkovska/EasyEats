@@ -38,6 +38,7 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.rest-assured:rest-assured:5.3.1")
+    implementation(kotlin("stdlib"))
 }
 
 tasks.withType<KotlinCompile> {
