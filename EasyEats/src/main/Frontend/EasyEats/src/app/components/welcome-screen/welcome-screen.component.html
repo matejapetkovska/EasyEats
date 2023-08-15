@@ -7,7 +7,6 @@
     <div class="phrase">
       The only cooking app you will ever need!
     </div>
-    <button *ngIf="!isLoggedIn" class="sign-up" (click)="redirectToSignUp()">Start cooking now!</button>
-    <button *ngIf="isLoggedIn" class="sign-up" (click)="redirectToHomePage()">Start cooking now!</button>
+    <button class="sign-up" (click)="redirectToSignUp()">Start cooking now!</button>
   </main>
 </div>
